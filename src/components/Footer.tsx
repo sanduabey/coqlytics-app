@@ -1,3 +1,3 @@
 export default function Footer() {
-  return <p> Built by @Vktor</p>
+  return <p className="text-gray-400"> Built by @Vktor</p>
 }

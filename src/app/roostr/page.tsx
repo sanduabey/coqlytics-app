@@ -1,3 +1,5 @@
-export default function RoostrPage () {
-  return <h2> Roostr Page </h2>
+import PageHeading from '@/components/PageHeading'
+
+export default function RoostrPage() {
+  return <PageHeading> Roostr Page </PageHeading>
 }

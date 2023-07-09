@@ -2,8 +2,13 @@ import Link from 'next/link'
 
 export default function NavBar() {
   return (
-    <nav>
-      <ul className="flex gap-4">
+    <nav className="flex flex-row">
+      <div className="basis-1/5 justify-start text-purple-400">
+        {' '}
+        <Link href="/">Coqlytics.xyz</Link>{' '}
+      </div>
+
+      <ul className="basis-4/5 flex gap-5 justify-end">
         <li className="text-blue-300 hover:underline">
           <Link href="chikn"> Chikn</Link>
         </li>

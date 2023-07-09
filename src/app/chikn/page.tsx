@@ -1,3 +1,5 @@
+import PageHeading from '@/components/PageHeading'
+
 export default function ChiknPage() {
-  return <h2> Chikn Page </h2>
+  return <PageHeading> Chikn Page </PageHeading>
 }

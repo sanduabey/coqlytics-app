@@ -1,3 +1,5 @@
-export default function ItemPage () {
-  return <h2> Item Page </h2>
+import PageHeading from '@/components/PageHeading'
+
+export default function ItemPage() {
+  return <PageHeading> Item Page </PageHeading>
 }

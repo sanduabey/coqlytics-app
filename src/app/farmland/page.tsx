@@ -1,3 +1,5 @@
-export default function FarmLandPage () {
-  return <h2> Farmland Page </h2>
+import PageHeading from '@/components/PageHeading'
+
+export default function FarmLandPage() {
+  return <PageHeading> Farmland Page </PageHeading>
 }

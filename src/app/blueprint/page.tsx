@@ -1,3 +1,5 @@
+import PageHeading from '@/components/PageHeading'
+
 export default function BluePrintPage() {
-  return <h2> BluePrint Page </h2>
+  return <PageHeading> BluePrint Page </PageHeading>
 }
