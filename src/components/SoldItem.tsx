@@ -12,7 +12,7 @@ type SoldItemProps = {
 
 export default function SoldItem(props: SoldItemProps) {
   return (
-    <li className="flex gap-4 items-center text-white">
+    <li className="flex gap-4 items-center text-white p-2">
       <Image
         src={props.image}
         alt="Image of sold NFT"
@@ -24,7 +24,7 @@ export default function SoldItem(props: SoldItemProps) {
         {props.nftType} #{props.tokenId}
       </span>
       <span> {props.kg} Kg</span>
-      <span> {props.soldAt} Sold at</span>
+      <span>Sold at {props.soldAt} </span>
       <span> {props.price} AVAX</span>
     </li>
   )

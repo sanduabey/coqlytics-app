@@ -1,3 +1,7 @@
+import getDb from '@/utils/database'
+import { ObjectId } from 'mongodb'
+
+const chiknCollName: string = 'chikn-sales'
 const DUMMY_LATEST_SALES = [
   {
     id: 1,
@@ -25,6 +29,59 @@ const DUMMY_LATEST_SALES = [
   },
 ]
 
+// interface ChiknSale {
+//   _id:ObjectId;
+//   soldAt: string;
+//   token: number;
+//   salePrice: number;
+//   rarity: string;
+//   kg : number
+// }
+
+async function getLatestChiknsSold(limit: number) {
+  try {
+    const db = await getDb()
+
+    let result = await db
+      .collection(chiknCollName)
+      .find(
+        {},
+        {
+          sort: { lastSoldDate: -1 },
+          limit: limit,
+          projection: {
+            _id: 1,
+            token: 1,
+            lastSoldDate: 1,
+            salePrice: 1,
+            kg: 1,
+            rarity: 1,
+          },
+        }
+      )
+      .toArray()
+
+    // let resultsToSend = await result.toArray()
+
+    // console.log(result)
+
+    let transformedResults = result.map((item: any) => ({
+      id: item._id,
+      chiknId: item.token,
+      kg: item.kg,
+      price: item.salePrice,
+      soldAt: item.lastSoldDate,
+      rarity: item.rarity,
+    }))
+
+    return transformedResults
+  } catch (error) {
+    throw error
+  }
+}
+
 export async function GET(request: Request) {
-  return new Response(JSON.stringify({ data: DUMMY_LATEST_SALES }))
+  console.log('HERE')
+  let result = await getLatestChiknsSold(10)
+  return new Response(JSON.stringify({ data: result }))
 }

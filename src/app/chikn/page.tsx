@@ -46,11 +46,12 @@ export default async function ChiknPage() {
     throw new Error('Failed to fetch chikn data')
   }
   const jsonResponse = await response.json()
-
+  // console.log(jsonResponse)
   return (
     <>
-      <PageHeading> Chikn Page </PageHeading>
+      <PageHeading> Chikn Marketplace Stats </PageHeading>
       <section>
+        <PageHeading>Latest Chikns Sales</PageHeading>
         <ul>
           {jsonResponse.data.map((item: chiknSaleDoc) => (
             <SoldItem
