@@ -3,9 +3,8 @@ import Link from 'next/link'
 export default function NavBar() {
   return (
     <nav className="flex">
-      <div className="basis-1/5 justify-start text-purple-400">
-        {' '}
-        <Link href="/">Coqlytics.xyz</Link>{' '}
+      <div className="basis-1/5 justify-start text-white">
+        <Link href="/">Coqlytics.xyz</Link>
       </div>
 
       <ul className="basis-4/5 flex gap-5 justify-end text-blue-300">
