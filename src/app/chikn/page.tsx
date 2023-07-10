@@ -48,9 +48,9 @@ export default async function ChiknPage() {
   return (
     <>
       <PageHeading> Chikn Marketplace Stats </PageHeading>
-      <section>
+      <section className="bg-chiknpurple">
         <PageHeading>Latest Chikns Sales</PageHeading>
-        <ul>
+        <ul className="p-3">
           {jsonResponse.data.map((item: chiknSaleDoc) => (
             <SoldItem
               key={item.id}
