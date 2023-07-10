@@ -1,8 +1,6 @@
 import PageHeading from '@/components/PageHeading'
 import SoldItem from '@/components/SoldItem'
 
-// chikn thumbdail url : https://api.chikn.farm/api/chikn/thumb/123',
-
 // const DUMMY_LATEST_SALES = [
 //   {
 //     id: 1,

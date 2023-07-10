@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+// const colors = require('tailwindcss/colors')
+
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -11,6 +14,13 @@ module.exports = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      colors: {
+        chiknpurple: {
+          dark: '#191a32',
+          DEFAULT: '#2a2c54',
+          light: 'rgb(29, 30, 58)',
+        },
       },
     },
   },
