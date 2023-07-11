@@ -16,20 +16,28 @@ type Ref = HTMLLIElement
 const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
   const { date: soldDate, time: soldTime } = ISODateToDateAndTime(props.soldAt)
 
+  // function chiknClickHandler(id:number):void {
+
+  // }
+
+  const chiknClickHandler = (chiknId: number) => {
+    window.open(`https://chikn.farm/chikn/${chiknId}`)
+  }
+
   return (
     <li
       className="flex gap-3 text-white p-3 bg-chiknpurple-dark rounded-md m-3 "
       ref={ref}
     >
-      <div className="flex-wrap">
+      <div className="flex-wrap cursor-pointer">
         <Image
           src={props.image}
           alt="Image of sold NFT"
           width={150}
           height={150}
+          onClick={chiknClickHandler.bind(null, props.tokenId)}
         />
       </div>
-
       <div className="flex flex-col flex-grow justify-center pl-4 pr-4">
         <div className="text-xl flex flex-wrap justify-between ">
           <div className="">Chikn #{props.tokenId}</div>
