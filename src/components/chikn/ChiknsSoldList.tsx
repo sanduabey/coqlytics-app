@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react'
-import SoldItem from '../SoldItem'
+import SoldItem from './SoldChiknItem'
 import { useInfiniteQuery } from 'react-query'
 
 type chiknSaleDoc = {
