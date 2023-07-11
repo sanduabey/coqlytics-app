@@ -1,3 +1,4 @@
+import { ISODateToDateAndTime } from '@/utils/helpers'
 import Image from 'next/image'
 import React from 'react'
 
@@ -15,24 +16,36 @@ type SoldItemProps = {
 type Ref = HTMLLIElement
 
 const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
+  const { date: soldDate, time: soldTime } = ISODateToDateAndTime(props.soldAt)
+
   return (
     <li
-      className="flex gap-4 items-center text-white p-3 bg-chiknpurple-dark rounded-md m-3"
+      className="flex gap-3 text-white p-3 bg-chiknpurple-dark rounded-md m-3 "
       ref={ref}
     >
-      <Image
-        src={props.image}
-        alt="Image of sold NFT"
-        width={100}
-        height={100}
-      />
+      <div className="flex-wrap">
+        <Image
+          src={props.image}
+          alt="Image of sold NFT"
+          width={150}
+          height={150}
+        />
+      </div>
 
-      <span>
-        {props.nftType} #{props.tokenId}
-      </span>
-      <span> {props.kg} Kg</span>
-      <span>Sold at {props.soldAt} </span>
-      <span> {props.price} AVAX</span>
+      <div className="flex flex-col flex-grow justify-center pl-4 pr-4">
+        <div className="text-xl flex flex-wrap justify-between ">
+          <div className="">
+            {props.nftType} #{props.tokenId}
+          </div>
+          <div className=""> {props.price} AVAX</div>
+          <div className=""> {props.kg} Kg</div>
+        </div>
+        <div className="text-xs pt-2">
+          <div className="">
+            Sold {soldDate} @ {soldTime}
+          </div>
+        </div>
+      </div>
     </li>
   )
 })
