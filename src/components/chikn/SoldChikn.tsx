@@ -3,8 +3,6 @@ import Image from 'next/image'
 import React from 'react'
 
 type SoldItemProps = {
-  // ref: HTMLElement | null
-  nftType: string
   image: string
   tokenId: number
   kg: number
@@ -34,9 +32,7 @@ const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
 
       <div className="flex flex-col flex-grow justify-center pl-4 pr-4">
         <div className="text-xl flex flex-wrap justify-between ">
-          <div className="">
-            {props.nftType} #{props.tokenId}
-          </div>
+          <div className="">Chikn #{props.tokenId}</div>
           <div className=""> {props.price} AVAX</div>
           <div className=""> {props.kg} Kg</div>
         </div>

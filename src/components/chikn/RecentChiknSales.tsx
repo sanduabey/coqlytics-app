@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react'
-import SoldItem from './SoldChiknItem'
+import SoldChikn from './SoldChikn'
 import { useInfiniteQuery } from 'react-query'
 
 type chiknSaleDoc = {
@@ -68,10 +68,9 @@ const ChiknsSold = () => {
     return page.map((item: chiknSaleDoc, index: number) => {
       if (index === page.length - 1) {
         return (
-          <SoldItem
+          <SoldChikn
             ref={lastSoldItemRef}
             key={item.id}
-            nftType="chikn"
             image={`https://api.chikn.farm/api/chikn/thumb/${item.chiknId}`}
             tokenId={item.chiknId}
             price={item.price}
@@ -81,9 +80,8 @@ const ChiknsSold = () => {
         )
       }
       return (
-        <SoldItem
+        <SoldChikn
           key={item.id}
-          nftType="chikn"
           image={`https://api.chikn.farm/api/chikn/thumb/${item.chiknId}`}
           tokenId={item.chiknId}
           price={item.price}
