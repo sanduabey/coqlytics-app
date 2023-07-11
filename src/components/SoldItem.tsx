@@ -1,6 +1,8 @@
 import Image from 'next/image'
+import React from 'react'
 
 type SoldItemProps = {
+  // ref: HTMLElement | null
   nftType: string
   image: string
   tokenId: number
@@ -10,9 +12,14 @@ type SoldItemProps = {
   children?: React.ReactNode
 }
 
-export default function SoldItem(props: SoldItemProps) {
+type Ref = HTMLLIElement
+
+const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
   return (
-    <li className="flex gap-4 items-center text-white p-3 bg-chiknpurple-dark rounded-md m-3">
+    <li
+      className="flex gap-4 items-center text-white p-3 bg-chiknpurple-dark rounded-md m-3"
+      ref={ref}
+    >
       <Image
         src={props.image}
         alt="Image of sold NFT"
@@ -28,4 +35,7 @@ export default function SoldItem(props: SoldItemProps) {
       <span> {props.price} AVAX</span>
     </li>
   )
-}
+})
+SoldItem.displayName = 'SoldItem'
+
+export default SoldItem

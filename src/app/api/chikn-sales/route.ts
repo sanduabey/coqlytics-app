@@ -1,47 +1,16 @@
 import getDb from '@/utils/database'
 import { ObjectId } from 'mongodb'
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 const chiknCollName: string = 'chikn-sales'
-// const DUMMY_LATEST_SALES = [
-//   {
-//     id: 1,
-//     chiknId: 123,
-//     soldAt: '2023-04-07T19:34:58.000Z',
-//     price: 36.95,
-//     kg: 42,
-//     rarity: 'nice',
-//   },
-//   {
-//     id: 2,
-//     chiknId: 124,
-//     soldAt: '2023-04-17T19:34:58.000Z',
-//     price: 95,
-//     kg: 48,
-//     rarity: 'common',
-//   },
-//   {
-//     id: 3,
-//     chiknId: 235,
-//     soldAt: '2023-04-07T19:34:58.000Z',
-//     price: 369,
-//     kg: 112,
-//     rarity: 'rare',
-//   },
-// ]
 
-// interface ChiknSale {
-//   _id:ObjectId;
-//   soldAt: string;
-//   token: number;
-//   salePrice: number;
-//   rarity: string;
-//   kg : number
-// }
-
-async function getLatestChiknsSold(limit: number) {
+async function getLatestChiknsSold(pageNumber: number = 0) {
   try {
     const db = await getDb()
+
+    let itemsPerPage = 10
+    let skip = pageNumber * itemsPerPage
+    let limit = itemsPerPage
 
     let result = await db
       .collection(chiknCollName)
@@ -49,6 +18,7 @@ async function getLatestChiknsSold(limit: number) {
         {},
         {
           sort: { lastSoldDate: -1 },
+          skip: skip,
           limit: limit,
           projection: {
             _id: 1,
@@ -61,10 +31,6 @@ async function getLatestChiknsSold(limit: number) {
         }
       )
       .toArray()
-
-    // let resultsToSend = await result.toArray()
-
-    // console.log(result)
 
     let transformedResults = result.map((item: any) => ({
       id: item._id,
@@ -82,6 +48,13 @@ async function getLatestChiknsSold(limit: number) {
 }
 
 export async function GET(request: NextRequest) {
-  let result = await getLatestChiknsSold(10)
-  return new Response(JSON.stringify({ data: result }))
+  const { searchParams } = new URL(request.url)
+  const pageNo = searchParams.get('pageNo')
+
+  // console.log('pageNumber:', pageNo)
+
+  let result = await getLatestChiknsSold(Number(pageNo))
+
+  // return new Response(JSON.stringify({ data: result }))
+  return NextResponse.json({ data: result })
 }
