@@ -62,19 +62,21 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
 
-  // const _from = searchParams.get('from');
-  // const _to = searchParams.get('to')
+  const _from = searchParams.get('from')
+  const _to = searchParams.get('to')
 
-  // const fromDate = new Date(_from);
+  console.log(_to)
 
-  let now = new Date()
-  let pastDate = new Date()
-  pastDate.setDate(pastDate.getDate() - 30)
+  if (_from === null || _to === null) {
+    return NextResponse.json(
+      { error: 'Bad Request! "from" and "to" query params needed.' },
+      { status: 400 }
+    )
+  }
 
-  console.log(now)
-  console.log(pastDate)
-
-  let result = await getChiknSalesByDate(pastDate, now)
+  let fromDate = new Date(_from)
+  let toDate = new Date(_to)
+  let result = await getChiknSalesByDate(fromDate, toDate)
 
   return NextResponse.json({ data: result })
 }
