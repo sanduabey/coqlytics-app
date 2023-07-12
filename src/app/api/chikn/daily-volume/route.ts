@@ -57,10 +57,10 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
     //data transformation
 
     const timeZeroed = result.map((dailyData: any) => {
-      let zerodDate = new Date(dailyData.lastBlockTimestamp)
-      zerodDate.setUTCHours(0, 0, 0)
+      let timezerodDate = new Date(dailyData.lastBlockTimestamp)
+      timezerodDate.setUTCHours(0, 0, 0)
       return {
-        date: zerodDate,
+        date: timezerodDate,
         count: dailyData.count,
         volumeAVAX: dailyData.volumeAVAX,
       }
@@ -70,8 +70,8 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
 
     // const volArray = result.map((dailyData: any) => dailyData.volumeAVAX)
 
-    const datesArr = getDatesArray(from, to)
-    console.log(datesArr)
+    const allDatesArr = getDatesArray(from, to)
+    console.log(allDatesArr)
 
     // console.log('Length:', result.length)
     // console.log('volArr:', volArray)

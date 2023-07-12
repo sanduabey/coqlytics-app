@@ -1,5 +1,9 @@
 import { ApexOptions } from 'apexcharts'
-import Chart from 'react-apexcharts'
+// import Chart from 'react-apexcharts'
+
+// https://github.com/apexcharts/react-apexcharts/issues/240
+import dynamic from 'next/dynamic'
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 async function getChiknDailyVolumeData(from: Date, to: Date) {
   const response = await fetch(
@@ -79,12 +83,14 @@ const ChiknVolChart = () => {
   }
 
   return (
-    <Chart
-      options={options}
-      series={DUMMY_DATA.series}
-      type="bar"
-      width="600"
-    />
+    <>
+      <Chart
+        options={options}
+        series={DUMMY_DATA.series}
+        type="bar"
+        width="600"
+      />
+    </>
   )
 }
 export default ChiknVolChart
