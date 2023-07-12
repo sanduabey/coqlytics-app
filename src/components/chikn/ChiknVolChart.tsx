@@ -5,12 +5,12 @@ const ChiknVolChart = () => {
   const DUMMY_DATA = {
     series: [
       {
-        name: 'Website Blog',
+        name: 'Volume AVAX',
         type: 'column',
         data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160],
       },
       {
-        name: 'Social Media',
+        name: 'Count',
         type: 'line',
         data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16],
       },
@@ -26,7 +26,7 @@ const ChiknVolChart = () => {
       width: [0, 4],
     },
     title: {
-      text: 'Traffic Sources',
+      text: 'Chikn Sales',
     },
     dataLabels: {
       enabled: true,
@@ -52,13 +52,13 @@ const ChiknVolChart = () => {
     yaxis: [
       {
         title: {
-          text: 'Website Blog',
+          text: 'Volume AVAX',
         },
       },
       {
         opposite: true,
         title: {
-          text: 'Social Media',
+          text: 'Count',
         },
       },
     ],

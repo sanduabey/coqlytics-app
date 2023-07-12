@@ -22,7 +22,7 @@ async function getChiknSales(pageNumber: number) {
   return _response.data
 }
 
-const ChiknsSold = () => {
+const RecentChiknSales = () => {
   const {
     fetchNextPage,
     hasNextPage,
@@ -95,4 +95,4 @@ const ChiknsSold = () => {
   return <ul className="p-3"> {chiknSalesContent} </ul>
 }
 
-export default ChiknsSold
+export default RecentChiknSales

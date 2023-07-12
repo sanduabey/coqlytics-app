@@ -26,7 +26,7 @@ const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
 
   return (
     <li
-      className="flex gap-3 text-white p-3 bg-chiknpurple-dark rounded-md m-3 "
+      className="flex gap-3 text-white p-3 bg-chiknpurple-dark rounded-md m-2 "
       ref={ref}
     >
       <div className="flex-wrap cursor-pointer">

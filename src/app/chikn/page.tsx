@@ -15,7 +15,7 @@ export default function ChiknPage() {
       <section className="bg-gray-200 flex justify-center">
         <ChiknVolChart />
       </section>
-      <section className="bg-chiknpurple">
+      <section className="bg-chiknpurple pt-4">
         <PageHeading>Latest Chikns Sales</PageHeading>
         <RecentChiknSales />
       </section>
