@@ -12,7 +12,7 @@ type chiknSaleDoc = {
 }
 async function getChiknSales(pageNumber: number) {
   const response = await fetch(
-    `http://localhost:3000/api/chikn-sales?pageNo=${pageNumber}`
+    `http://localhost:3000/api/chikn/recent-sales?pageNo=${pageNumber}`
   )
 
   if (!response.ok) {

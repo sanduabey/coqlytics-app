@@ -48,3 +48,18 @@ export function ISODateToDateAndTime(isoDate: string): {
 
   return { date: formattedDate, time: formattedTime }
 }
+
+//returns an array of all dates between to and from dates.
+export function getDatesArray(from: Date, to: Date) {
+  const dateArray: Date[] = []
+
+  let current = from
+
+  while (current <= to) {
+    dateArray.push(new Date(current))
+    current.setDate(current.getDate() + 1)
+  }
+
+  // console.log(dateArray, dateArray.length)
+  return dateArray
+}

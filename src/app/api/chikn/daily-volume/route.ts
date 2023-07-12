@@ -1,4 +1,5 @@
 import getDb from '@/utils/database'
+import { getDatesArray } from '@/utils/helpers'
 import { NextRequest, NextResponse } from 'next/server'
 
 const collName: string = 'chikn-sales'
@@ -52,6 +53,28 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
         },
       ])
       .toArray()
+
+    //data transformation
+
+    const timeZeroed = result.map((dailyData: any) => {
+      let zerodDate = new Date(dailyData.lastBlockTimestamp)
+      zerodDate.setUTCHours(0, 0, 0)
+      return {
+        date: zerodDate,
+        count: dailyData.count,
+        volumeAVAX: dailyData.volumeAVAX,
+      }
+    })
+
+    console.log(timeZeroed)
+
+    // const volArray = result.map((dailyData: any) => dailyData.volumeAVAX)
+
+    const datesArr = getDatesArray(from, to)
+    console.log(datesArr)
+
+    // console.log('Length:', result.length)
+    // console.log('volArr:', volArray)
 
     return result
   } catch (error) {

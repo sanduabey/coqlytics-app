@@ -1,6 +1,20 @@
 import { ApexOptions } from 'apexcharts'
 import Chart from 'react-apexcharts'
 
+async function getChiknDailyVolumeData(from: Date, to: Date) {
+  const response = await fetch(
+    `http://localhost:3000/api/chikn/daily-volume?from=${from}&to=${to}`
+  )
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch Daily Chikn Volume Data')
+  }
+
+  const _response = await response.json()
+
+  return _response.data
+}
+
 const ChiknVolChart = () => {
   const DUMMY_DATA = {
     series: [
