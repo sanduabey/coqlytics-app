@@ -62,7 +62,7 @@ const RecentChiknSales = () => {
   )
 
   if (status === 'error')
-    return <p className="center">Error : {error?.message}</p>
+    return <p className="center">Error : {error.message}</p>
 
   const chiknSalesContent = data?.pages.map((page) => {
     return page.map((item: chiknSaleDoc, index: number) => {

@@ -66,10 +66,7 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
       }
     })
 
-    // console.log(timeZeroed)
-
     const allDatesArr = getDatesArray(from, to)
-    // console.log(allDatesArr)
 
     const volumeArr = allDatesArr.map((date) => {
       let found = timeZeroed.find(
@@ -82,7 +79,6 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
         return 0
       }
     })
-    // console.log('Volu Arr:', volumeArr)
 
     const countArr = allDatesArr.map((date) => {
       let found = timeZeroed.find(
@@ -95,18 +91,14 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
         return 0
       }
     })
-    // console.log('Count Arr:', countArr)
 
     const dateLabelsArr = allDatesArr.map((date) => formatDateToDDMMMYYYY(date))
-    // console.log('Date Labels Arr:', dateLabelsArr)
 
     const _result = {
       dateLabels: dateLabelsArr,
       counts: countArr,
       volumes: volumeArr,
     }
-
-    // console.log(_result)
 
     return _result
   } catch (error) {
@@ -119,8 +111,6 @@ export async function GET(request: NextRequest) {
 
   const _from = searchParams.get('from')
   const _to = searchParams.get('to')
-
-  // console.log(_to)
 
   if (_from === null || _to === null) {
     return NextResponse.json(

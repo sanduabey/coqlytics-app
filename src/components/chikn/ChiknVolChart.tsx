@@ -68,6 +68,7 @@ const ChiknVolChart = () => {
         title: {
           text: 'Volume AVAX',
         },
+        decimalsInFloat: 0,
       },
       {
         opposite: true,
@@ -75,6 +76,7 @@ const ChiknVolChart = () => {
           text: 'Count',
         },
         max: 50,
+        decimalsInFloat: 0,
       },
     ],
   }
