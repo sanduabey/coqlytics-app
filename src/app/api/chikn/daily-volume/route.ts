@@ -1,5 +1,5 @@
 import getDb from '@/utils/database'
-import { getDatesArray } from '@/utils/helpers'
+import { formatDateToDDMMMYYYY, getDatesArray } from '@/utils/helpers'
 import { NextRequest, NextResponse } from 'next/server'
 
 const collName: string = 'chikn-sales'
@@ -66,17 +66,49 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
       }
     })
 
-    console.log(timeZeroed)
-
-    // const volArray = result.map((dailyData: any) => dailyData.volumeAVAX)
+    // console.log(timeZeroed)
 
     const allDatesArr = getDatesArray(from, to)
-    console.log(allDatesArr)
+    // console.log(allDatesArr)
 
-    // console.log('Length:', result.length)
-    // console.log('volArr:', volArray)
+    const volumeArr = allDatesArr.map((date) => {
+      let found = timeZeroed.find(
+        (element: any) => element.date.getTime() === date.getTime()
+      )
 
-    return result
+      if (found) {
+        return found.volumeAVAX
+      } else {
+        return 0
+      }
+    })
+    // console.log('Volu Arr:', volumeArr)
+
+    const countArr = allDatesArr.map((date) => {
+      let found = timeZeroed.find(
+        (element: any) => element.date.getTime() === date.getTime()
+      )
+
+      if (found) {
+        return found.count
+      } else {
+        return 0
+      }
+    })
+    // console.log('Count Arr:', countArr)
+
+    const dateLabelsArr = allDatesArr.map((date) => formatDateToDDMMMYYYY(date))
+    // console.log('Date Labels Arr:', dateLabelsArr)
+
+    const _result = {
+      dateLabels: dateLabelsArr,
+      counts: countArr,
+      volumes: volumeArr,
+    }
+
+    // console.log(_result)
+
+    return _result
   } catch (error) {
     throw error
   }
@@ -88,7 +120,7 @@ export async function GET(request: NextRequest) {
   const _from = searchParams.get('from')
   const _to = searchParams.get('to')
 
-  console.log(_to)
+  // console.log(_to)
 
   if (_from === null || _to === null) {
     return NextResponse.json(

@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react'
 import SoldChikn from './SoldChikn'
-import { useInfiniteQuery } from 'react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 
 type chiknSaleDoc = {
   id: string
@@ -31,7 +31,7 @@ const RecentChiknSales = () => {
     status,
     error,
   } = useInfiniteQuery(
-    'chiknsales',
+    ['chiknsales'],
     ({ pageParam = 0 }) => getChiknSales(pageParam),
     {
       getNextPageParam: (lastPage, allPages) => {

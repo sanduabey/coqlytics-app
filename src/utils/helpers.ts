@@ -53,6 +53,9 @@ export function ISODateToDateAndTime(isoDate: string): {
 export function getDatesArray(from: Date, to: Date) {
   const dateArray: Date[] = []
 
+  from.setUTCHours(0, 0, 0)
+  to.setUTCHours(0, 0, 0)
+
   let current = from
 
   while (current <= to) {
@@ -62,4 +65,28 @@ export function getDatesArray(from: Date, to: Date) {
 
   // console.log(dateArray, dateArray.length)
   return dateArray
+}
+
+export function formatDateToDDMMMYYYY(date: Date): string {
+  if (date !== undefined) {
+    var myDate = new Date(date)
+    var month = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ][myDate.getMonth()]
+    var formattedDate: string =
+      myDate.getDate() + ' ' + month + ' ' + myDate.getFullYear()
+    return formattedDate
+  }
+  return ''
 }
