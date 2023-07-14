@@ -2,7 +2,6 @@ import { ApexOptions } from 'apexcharts'
 import { useQuery } from '@tanstack/react-query'
 
 import dynamic from 'next/dynamic'
-import { isQueryKey } from 'react-query/types/core/utils'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 async function getChiknDailyVolumeData(from: Date, to: Date) {

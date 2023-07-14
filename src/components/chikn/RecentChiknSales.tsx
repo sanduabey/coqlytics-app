@@ -61,8 +61,7 @@ const RecentChiknSales = () => {
     [isFetchingNextPage, fetchNextPage, hasNextPage]
   )
 
-  if (status === 'error')
-    return <p className="center">Error : {error.message}</p>
+  if (status === 'error') return <p className="center">Error Fetching Data</p>
 
   const chiknSalesContent = data?.pages.map((page) => {
     return page.map((item: chiknSaleDoc, index: number) => {
