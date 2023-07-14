@@ -79,10 +79,6 @@ const ChiknVolChart = () => {
     ],
   }
 
-  return (
-    // <QueryClientProvider client={queryClient} contextSharing={true}>
-    <Chart options={options} series={series} type="bar" width="600" />
-    // {/* </QueryClientProvider> */}
-  )
+  return <Chart options={options} series={series} type="bar" width="600" />
 }
 export default ChiknVolChart
