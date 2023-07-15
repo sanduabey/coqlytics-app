@@ -49,17 +49,17 @@ const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
         />
       </div>
       <div className="flex grow pl-4 pr-4">
-        <div className="flex flex-col gap-2 justify-center text-xl ">
+        <div className="flex flex-col gap-2 justify-center text-xl w-1/2">
           <div className="">
             Chikn #{props.tokenId} ({props.rarity})
           </div>
-          <div className=""> {props.price} AVAX</div>
           <div className=""> {props.kg} Kg</div>
+          <div className=""> {props.price} AVAX</div>
           <div className="text-xs">
             Sold {soldDate} @ {soldTime} UTC
           </div>
         </div>
-        <div className="flex grow text-md pt-2 justify-end">
+        <div className="flex grow text-md pt-2 justify-start">
           <div className="flex-col text-sm">
             <div># Traits : {props.numOfTraits}</div>
             {props.head !== '' && <div>Head: {props.head}</div>}
