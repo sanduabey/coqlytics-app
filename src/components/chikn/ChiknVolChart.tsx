@@ -80,6 +80,10 @@ const ChiknVolChart = () => {
     ],
   }
 
-  return <Chart options={options} series={series} type="bar" width="600" />
+  return (
+    <div className="grow p-6">
+      <Chart options={options} series={series} type="bar" width="100%" />
+    </div>
+  )
 }
 export default ChiknVolChart
