@@ -9,6 +9,7 @@ type chiknSaleDoc = {
   kg: number
   soldAt: string
   tokenId: number
+  rarity: string
 }
 async function getChiknSales(pageNumber: number) {
   const response = await fetch(
@@ -75,6 +76,7 @@ const RecentChiknSales = () => {
             price={item.price}
             kg={item.kg}
             soldAt={item.soldAt}
+            rarity={item.rarity}
           />
         )
       }
@@ -86,6 +88,7 @@ const RecentChiknSales = () => {
           price={item.price}
           kg={item.kg}
           soldAt={item.soldAt}
+          rarity={item.rarity}
         />
       )
     })

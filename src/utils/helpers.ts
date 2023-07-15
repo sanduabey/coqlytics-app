@@ -6,10 +6,10 @@ export function ISODateToDateAndTime(isoDate: string): {
 
   const yyyy = dateObj.getFullYear()
   let mm = dateObj.getMonth() + 1
-  let dd = dateObj.getDate()
-  let hr = dateObj.getHours()
-  let min = dateObj.getMinutes()
-  let sec = dateObj.getSeconds()
+  let dd = dateObj.getUTCDate()
+  let hr = dateObj.getUTCHours()
+  let min = dateObj.getUTCMinutes()
+  let sec = dateObj.getUTCSeconds()
 
   let _dd: string
   let _mm: string

@@ -8,6 +8,7 @@ type SoldItemProps = {
   kg: number
   soldAt: string
   price: number
+  rarity: string
   children?: React.ReactNode
 }
 
@@ -40,13 +41,15 @@ const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
       </div>
       <div className="flex flex-col flex-grow justify-center pl-4 pr-4">
         <div className="text-xl flex flex-wrap justify-between ">
-          <div className="">Chikn #{props.tokenId}</div>
+          <div className="">
+            Chikn #{props.tokenId} ({props.rarity})
+          </div>
           <div className=""> {props.price} AVAX</div>
           <div className=""> {props.kg} Kg</div>
         </div>
         <div className="text-xs pt-2">
           <div className="">
-            Sold {soldDate} @ {soldTime}
+            Sold {soldDate} @ {soldTime} UTC
           </div>
         </div>
       </div>

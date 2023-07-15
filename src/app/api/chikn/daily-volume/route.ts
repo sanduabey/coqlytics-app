@@ -8,6 +8,8 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
   try {
     const db = await getDb()
 
+    // console.log(from, to)
+
     let result = await db
       .collection(collName)
       .aggregate([
@@ -99,6 +101,8 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
       counts: countArr,
       volumes: volumeArr,
     }
+
+    // console.log(_result)
 
     return _result
   } catch (error) {
