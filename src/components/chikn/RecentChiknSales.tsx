@@ -10,6 +10,15 @@ type chiknSaleDoc = {
   soldAt: string
   tokenId: number
   rarity: string
+  head: string
+  neck: string
+  torso: string
+  feet: string
+  tail: string
+  body: string
+  trim: string
+  background: string
+  numOfTraits: number
 }
 async function getChiknSales(pageNumber: number) {
   const response = await fetch(
@@ -77,6 +86,15 @@ const RecentChiknSales = () => {
             kg={item.kg}
             soldAt={item.soldAt}
             rarity={item.rarity}
+            head={item.head}
+            neck={item.neck}
+            torso={item.torso}
+            feet={item.feet}
+            tail={item.tail}
+            body={item.body}
+            trim={item.trim}
+            background={item.background}
+            numOfTraits={item.numOfTraits}
           />
         )
       }
@@ -89,6 +107,15 @@ const RecentChiknSales = () => {
           kg={item.kg}
           soldAt={item.soldAt}
           rarity={item.rarity}
+          head={item.head}
+          neck={item.neck}
+          torso={item.torso}
+          feet={item.feet}
+          tail={item.tail}
+          body={item.body}
+          trim={item.trim}
+          background={item.background}
+          numOfTraits={item.numOfTraits}
         />
       )
     })

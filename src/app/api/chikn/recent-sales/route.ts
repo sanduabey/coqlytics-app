@@ -27,6 +27,15 @@ async function getLatestChiknsSold(pageNumber: number = 0) {
             salePrice: 1,
             kg: 1,
             rarity: 1,
+            head: 1,
+            neck: 1,
+            torso: 1,
+            feet: 1,
+            tail: 1,
+            body: 1,
+            trim: 1,
+            background: 1,
+            _numOfTraits: 1,
           },
         }
       )
@@ -39,6 +48,15 @@ async function getLatestChiknsSold(pageNumber: number = 0) {
       price: item.salePrice,
       soldAt: item.lastSoldDate,
       rarity: item.rarity,
+      head: item.head,
+      neck: item.neck,
+      torso: item.torso,
+      feet: item.feet,
+      tail: item.tail,
+      body: item.body,
+      trim: item.trim,
+      background: item.background,
+      numOfTraits: item._numOfTraits,
     }))
 
     return transformedResults

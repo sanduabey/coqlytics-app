@@ -9,6 +9,15 @@ type SoldItemProps = {
   soldAt: string
   price: number
   rarity: string
+  head: string
+  neck: string
+  torso: string
+  feet: string
+  tail: string
+  body: string
+  trim: string
+  background: string
+  numOfTraits: number
   children?: React.ReactNode
 }
 
@@ -39,17 +48,30 @@ const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
           onClick={chiknClickHandler.bind(null, props.tokenId)}
         />
       </div>
-      <div className="flex flex-col flex-grow justify-center pl-4 pr-4">
-        <div className="text-xl flex flex-wrap justify-between ">
+      <div className="flex grow pl-4 pr-4">
+        <div className="flex flex-col gap-2 justify-center text-xl ">
           <div className="">
             Chikn #{props.tokenId} ({props.rarity})
           </div>
           <div className=""> {props.price} AVAX</div>
           <div className=""> {props.kg} Kg</div>
-        </div>
-        <div className="text-xs pt-2">
-          <div className="">
+          <div className="text-xs">
             Sold {soldDate} @ {soldTime} UTC
+          </div>
+        </div>
+        <div className="flex grow text-md pt-2 justify-end">
+          <div className="flex-col text-sm">
+            <div># Traits : {props.numOfTraits}</div>
+            {props.head !== '' && <div>Head: {props.head}</div>}
+            {props.neck !== '' && <div>Neck: {props.neck}</div>}
+            {props.torso !== '' && <div>Torso: {props.torso}</div>}
+            {props.feet !== '' && <div>Feet: {props.feet}</div>}
+            {props.tail !== '' && <div>Tail: {props.tail}</div>}
+            {props.body !== '' && <div>Body: {props.body}</div>}
+            {props.trim !== '' && <div>Trim: {props.trim}</div>}
+            {props.background !== '' && (
+              <div>Background: {props.background}</div>
+            )}
           </div>
         </div>
       </div>
