@@ -81,7 +81,7 @@ const ChiknVolChart = () => {
   }
 
   return (
-    <div className="grow p-6">
+    <div className="grow p-6 max-w-6xl">
       <Chart options={options} series={series} type="bar" width="100%" />
     </div>
   )

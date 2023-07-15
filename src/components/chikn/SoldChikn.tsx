@@ -36,15 +36,15 @@ const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
 
   return (
     <li
-      className="flex gap-3 text-white p-3 bg-chiknpurple-dark rounded-md m-2 "
+      className="flex text-white p-3 bg-chiknpurple-dark rounded-md m-2 max-w-5xl ml-auto mr-auto"
       ref={ref}
     >
-      <div className="flex-wrap cursor-pointer">
+      <div className=" cursor-pointer">
         <Image
           src={props.image}
           alt="Image of sold NFT"
-          width={150}
-          height={150}
+          width={200}
+          height={200}
           onClick={chiknClickHandler.bind(null, props.tokenId)}
         />
       </div>
@@ -56,21 +56,21 @@ const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
           <div className=""> {props.kg} Kg</div>
           <div className=""> {props.price} AVAX</div>
           <div className="text-xs">
-            Sold {soldDate} @ {soldTime} UTC
+            Sold on {soldDate} @ {soldTime} UTC
           </div>
         </div>
         <div className="flex grow text-md pt-2 justify-start">
           <div className="flex-col text-sm">
-            <div># Traits : {props.numOfTraits}</div>
-            {props.head !== '' && <div>Head: {props.head}</div>}
-            {props.neck !== '' && <div>Neck: {props.neck}</div>}
-            {props.torso !== '' && <div>Torso: {props.torso}</div>}
-            {props.feet !== '' && <div>Feet: {props.feet}</div>}
-            {props.tail !== '' && <div>Tail: {props.tail}</div>}
-            {props.body !== '' && <div>Body: {props.body}</div>}
-            {props.trim !== '' && <div>Trim: {props.trim}</div>}
+            <div className="text-lg"># Traits : {props.numOfTraits}</div>
+            {props.head !== '' && <div>head : {props.head}</div>}
+            {props.neck !== '' && <div>neck : {props.neck}</div>}
+            {props.torso !== '' && <div>torso : {props.torso}</div>}
+            {props.feet !== '' && <div>feet : {props.feet}</div>}
+            {props.tail !== '' && <div>tail : {props.tail}</div>}
+            {props.body !== '' && <div>body : {props.body}</div>}
+            {props.trim !== '' && <div>trim : {props.trim}</div>}
             {props.background !== '' && (
-              <div>Background: {props.background}</div>
+              <div>background : {props.background}</div>
             )}
           </div>
         </div>
