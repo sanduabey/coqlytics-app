@@ -43,6 +43,9 @@ const ChiknVolChart = () => {
       data: data.counts,
     },
   ]
+
+  const maxCount = Math.max(...data.counts)
+
   const options: ApexOptions = {
     chart: {
       height: 350,
@@ -74,7 +77,7 @@ const ChiknVolChart = () => {
         title: {
           text: 'Count',
         },
-        max: 50,
+        max: maxCount * 3,
         decimalsInFloat: 0,
       },
     ],
