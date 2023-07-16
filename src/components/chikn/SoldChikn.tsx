@@ -66,7 +66,7 @@ const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
         <div className="flex grow text-md pt-2 justify-start">
           <div className="flex-col text-sm">
             <div className="text-lg">
-              # Traits : {props.soldChiknData.numOfTraits}
+              {props.soldChiknData.numOfTraits} traits
             </div>
             {props.soldChiknData.head !== '' && (
               <div>head : {props.soldChiknData.head}</div>
