@@ -68,6 +68,8 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
       }
     })
 
+    // console.log(timeZeroed)
+
     const allDatesArr = getDatesArray(from, to)
 
     const volumeArr = allDatesArr.map((date) => {
@@ -81,6 +83,8 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
         return 0
       }
     })
+
+    // console.log(volumeArr.length)
 
     const countArr = allDatesArr.map((date) => {
       let found = timeZeroed.find(
@@ -96,6 +100,7 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
 
     const dateLabelsArr = allDatesArr.map((date) => formatDateToDDMMMYYYY(date))
 
+    // console.log(dateLabelsArr.length)
     const _result = {
       dateLabels: dateLabelsArr,
       counts: countArr,

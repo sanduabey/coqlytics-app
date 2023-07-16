@@ -63,7 +63,11 @@ const ChiknVolChart = () => {
     },
     labels: data.dateLabels,
     xaxis: {
-      type: 'datetime',
+      // type: 'datetime',
+      labels: {
+        show: true,
+        rotate: -45,
+      },
     },
     yaxis: [
       {
