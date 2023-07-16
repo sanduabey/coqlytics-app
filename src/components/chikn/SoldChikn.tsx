@@ -3,28 +3,32 @@ import Image from 'next/image'
 import React from 'react'
 
 type SoldItemProps = {
-  image: string
-  tokenId: number
-  kg: number
-  soldAt: string
-  price: number
-  rarity: string
-  head: string
-  neck: string
-  torso: string
-  feet: string
-  tail: string
-  body: string
-  trim: string
-  background: string
-  numOfTraits: number
+  soldChiknData: {
+    image: string
+    tokenId: number
+    kg: number
+    soldAt: string
+    price: number
+    rarity: string
+    head: string
+    neck: string
+    torso: string
+    feet: string
+    tail: string
+    body: string
+    trim: string
+    background: string
+    numOfTraits: number
+  }
   children?: React.ReactNode
 }
 
 type Ref = HTMLLIElement
 
 const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
-  const { date: soldDate, time: soldTime } = ISODateToDateAndTime(props.soldAt)
+  const { date: soldDate, time: soldTime } = ISODateToDateAndTime(
+    props.soldChiknData.soldAt
+  )
 
   // function chiknClickHandler(id:number):void {
 
@@ -41,36 +45,52 @@ const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
     >
       <div className=" cursor-pointer">
         <Image
-          src={props.image}
+          src={props.soldChiknData.image}
           alt="Image of sold NFT"
           width={200}
           height={200}
-          onClick={chiknClickHandler.bind(null, props.tokenId)}
+          onClick={chiknClickHandler.bind(null, props.soldChiknData.tokenId)}
         />
       </div>
       <div className="flex grow pl-4 pr-4">
         <div className="flex flex-col gap-2 justify-center text-xl w-1/2">
           <div className="">
-            Chikn #{props.tokenId} ({props.rarity})
+            Chikn #{props.soldChiknData.tokenId} ({props.soldChiknData.rarity})
           </div>
-          <div className=""> {props.kg} Kg</div>
-          <div className=""> {props.price} AVAX</div>
+          <div className=""> {props.soldChiknData.kg} Kg</div>
+          <div className=""> {props.soldChiknData.price} AVAX</div>
           <div className="text-xs">
             Sold on {soldDate} @ {soldTime} UTC
           </div>
         </div>
         <div className="flex grow text-md pt-2 justify-start">
           <div className="flex-col text-sm">
-            <div className="text-lg"># Traits : {props.numOfTraits}</div>
-            {props.head !== '' && <div>head : {props.head}</div>}
-            {props.neck !== '' && <div>neck : {props.neck}</div>}
-            {props.torso !== '' && <div>torso : {props.torso}</div>}
-            {props.feet !== '' && <div>feet : {props.feet}</div>}
-            {props.tail !== '' && <div>tail : {props.tail}</div>}
-            {props.body !== '' && <div>body : {props.body}</div>}
-            {props.trim !== '' && <div>trim : {props.trim}</div>}
-            {props.background !== '' && (
-              <div>background : {props.background}</div>
+            <div className="text-lg">
+              # Traits : {props.soldChiknData.numOfTraits}
+            </div>
+            {props.soldChiknData.head !== '' && (
+              <div>head : {props.soldChiknData.head}</div>
+            )}
+            {props.soldChiknData.neck !== '' && (
+              <div>neck : {props.soldChiknData.neck}</div>
+            )}
+            {props.soldChiknData.torso !== '' && (
+              <div>torso : {props.soldChiknData.torso}</div>
+            )}
+            {props.soldChiknData.feet !== '' && (
+              <div>feet : {props.soldChiknData.feet}</div>
+            )}
+            {props.soldChiknData.tail !== '' && (
+              <div>tail : {props.soldChiknData.tail}</div>
+            )}
+            {props.soldChiknData.body !== '' && (
+              <div>body : {props.soldChiknData.body}</div>
+            )}
+            {props.soldChiknData.trim !== '' && (
+              <div>trim : {props.soldChiknData.trim}</div>
+            )}
+            {props.soldChiknData.background !== '' && (
+              <div>background : {props.soldChiknData.background}</div>
             )}
           </div>
         </div>

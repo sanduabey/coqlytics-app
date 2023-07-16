@@ -75,49 +75,34 @@ const RecentChiknSales = () => {
 
   const chiknSalesContent = data?.pages.map((page) => {
     return page.map((item: chiknSaleDoc, index: number) => {
+      const soldChiknData = {
+        image: `https://api.chikn.farm/api/chikn/thumb/${item.chiknId}`,
+        tokenId: item.chiknId,
+        price: item.price,
+        kg: item.kg,
+        soldAt: item.soldAt,
+        rarity: item.rarity,
+        head: item.head,
+        neck: item.neck,
+        torso: item.torso,
+        feet: item.feet,
+        tail: item.tail,
+        body: item.body,
+        trim: item.trim,
+        background: item.background,
+        numOfTraits: item.numOfTraits,
+      }
+
       if (index === page.length - 1) {
         return (
           <SoldChikn
             ref={lastSoldItemRef}
             key={item.id}
-            image={`https://api.chikn.farm/api/chikn/thumb/${item.chiknId}`}
-            tokenId={item.chiknId}
-            price={item.price}
-            kg={item.kg}
-            soldAt={item.soldAt}
-            rarity={item.rarity}
-            head={item.head}
-            neck={item.neck}
-            torso={item.torso}
-            feet={item.feet}
-            tail={item.tail}
-            body={item.body}
-            trim={item.trim}
-            background={item.background}
-            numOfTraits={item.numOfTraits}
+            soldChiknData={soldChiknData}
           />
         )
       }
-      return (
-        <SoldChikn
-          key={item.id}
-          image={`https://api.chikn.farm/api/chikn/thumb/${item.chiknId}`}
-          tokenId={item.chiknId}
-          price={item.price}
-          kg={item.kg}
-          soldAt={item.soldAt}
-          rarity={item.rarity}
-          head={item.head}
-          neck={item.neck}
-          torso={item.torso}
-          feet={item.feet}
-          tail={item.tail}
-          body={item.body}
-          trim={item.trim}
-          background={item.background}
-          numOfTraits={item.numOfTraits}
-        />
-      )
+      return <SoldChikn key={item.id} soldChiknData={soldChiknData} />
     })
   })
 
