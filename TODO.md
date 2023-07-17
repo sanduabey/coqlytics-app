@@ -2,8 +2,8 @@
 
 ## Basics
 
-- [x] Setup project repos
-- [ ] Setup data collection crons
+- [✓] Setup project repos
+- [x] Setup data collection crons
 - [ ] Data webhooks
 - [ ] Homepage
 - [ ] Chikn
@@ -14,15 +14,15 @@
 
 ## Home Page
 
-- [] Sales volume by NFT collection graph
-- [] Top buyers
-- [] Top sellers
+- [ ] Sales volume by NFT collection graph
+- [ ] Top buyers
+- [ ] Top sellers
 
 ## Chikn Page
 
-- [] Daily Chikn sales volume, sales count chart
-- [] Best value Chikns for sale (value = price - feed - unclaimed egg)
-- [] Latest Chikn sales feed
+- [ ] Daily Chikn sales volume, sales count chart
+- [ ] Best value Chikns for sale (value = price - feed - unclaimed egg)
+- [ ] Latest Chikn sales feed
 
 ## Roostr Page
 
