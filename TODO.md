@@ -58,8 +58,10 @@
 
 - [ ] Daily Item sales volume, count chart
 - [ ] Latest Items sold feed
-- [ ] Top Item sellers
+- [ ] Top Item sellers, sold Items volume , count
 - [ ] Top Items sold by volume, count
 - [ ]
 
-### Single Item Page
+### Per Item Page
+
+- [ ] Daily price, sales volume, counts chart
