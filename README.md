@@ -1,4 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Coqlytics.xyz Project
+
+**Name** : Coqlytics.xyz
+
+**Description** : Tracking [Chikn](https:chikn.farm) marketplace stats and price action.
+
+**Owner** : [@Vktor](https://twitter.com/dr_vktor)
 
 ## Getting Started
 
@@ -32,3 +38,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Project tasks
+
+Project tasks are tracked in ./TODO.md

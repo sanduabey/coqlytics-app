@@ -18,7 +18,7 @@ export default function ChiknPage() {
         </section>
 
         <section className="bg-chiknpurple pt-4">
-          <PageHeading>Latest Chikns Sales</PageHeading>
+          <PageHeading>Latest Chikn Sales</PageHeading>
           <RecentChiknSales />
         </section>
       </QueryClientProvider>
