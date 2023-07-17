@@ -2,6 +2,7 @@ import { ApexOptions } from 'apexcharts'
 import { useQuery } from '@tanstack/react-query'
 
 import dynamic from 'next/dynamic'
+import DateRangePicker from '../utility/DateRangePicker'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 async function getChiknDailyVolumeData(from: Date, to: Date) {
@@ -89,6 +90,9 @@ const ChiknVolChart = () => {
 
   return (
     <div className="grow p-6 max-w-6xl">
+      <div className="flex justify-end">
+        <DateRangePicker name="chiknVolDateRange"></DateRangePicker>
+      </div>
       <Chart options={options} series={series} type="bar" width="100%" />
     </div>
   )

@@ -1,6 +1,6 @@
 'use client'
 
-import PageHeading from '@/components/PageHeading'
+import PageHeading from '@/components/utility/PageHeading'
 
 import ChiknVolChart from '@/components/chikn/ChiknVolChart'
 

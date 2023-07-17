@@ -1,4 +1,4 @@
-import PageHeading from '@/components/PageHeading'
+import PageHeading from '@/components/utility/PageHeading'
 
 export default function ItemPage() {
   return <PageHeading> Item Page </PageHeading>
