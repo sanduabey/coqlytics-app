@@ -7,21 +7,21 @@ export default function NavBar() {
         <Link href="/">Coqlytics.xyz</Link>
       </div>
 
-      <ul className="basis-4/5 flex gap-5 justify-end text-white">
+      <ul className="basis-4/5 flex gap-7 justify-end text-white">
         <li className="hover:underline">
-          <Link href="chikn"> Chikn</Link>
+          <Link href="chikns"> Chikns</Link>
         </li>
         <li className="hover:underline">
-          <Link href="roostr">Roostr</Link>
+          <Link href="roostrs">Roostrs</Link>
         </li>
         <li className="hover:underline">
-          <Link href="farmland"> FarmLand</Link>
+          <Link href="farmlands"> FarmLands</Link>
         </li>
         <li className="hover:underline">
-          <Link href="blueprint">BluePrint </Link>
+          <Link href="blueprints">BluePrints</Link>
         </li>
         <li className="hover:underline">
-          <Link href="item"> Item </Link>
+          <Link href="items"> Items</Link>
         </li>
       </ul>
     </nav>
