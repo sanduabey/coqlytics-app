@@ -32,18 +32,23 @@ export default function NavBar() {
   // console.log(pathname.startsWith('/chikns'))
 
   return (
-    <nav className="flex p-4 bg-chiknpurple">
-      <div className="basis-1/5 justify-start text-white">
-        <Link href="/">Coqlytics.xyz</Link>
+    <nav className="flex pl-4 pr-4 bg-chiknpurple">
+      <div className="basis-1/5 justify-start text-chiknred text-lg font-bold tracking-wide p-4">
+        <Link href="/">Coqlytics.XYZ</Link>
       </div>
 
-      <ul className="basis-4/5 flex gap-7 justify-en">
+      <ul className="basis-4/5 flex gap-4 justify-end">
         {navLinks.map((link) => {
           const isActive = pathname.startsWith(link.href)
 
           return (
             <Link
-              className={isActive ? 'text-red-400' : 'text-white'}
+              className={`p-4 ${
+                isActive
+                  ? 'text-chiknred font-bold  bg-chiknpurple-dark'
+                  : 'text-white'
+              }
+              `}
               href={link.href}
               key={link.name}
             >
