@@ -18,6 +18,7 @@ module.exports = {
       colors: {
         chiknpurple: {
           dark: '#191a32',
+          light: '#62679f',
           DEFAULT: '#2a2c54',
         },
         chiknred: {
