@@ -27,10 +27,17 @@
 
 ## Chikns Page
 
+- [ ] Tabbed sub-page structure
+
+### Market Stats Tab
+
 - [ ] Daily Chikn sales volume, sales count chart
-- [ ] Best value Chikns for sale (value = price - feed - unclaimed egg)
-- [ ] Latest Chikns sold feed
+- [x] Latest Chikns sold feed
 - [ ]
+
+### Chikn Sniper Tab
+
+- [ ] Best value Chikns for sale (value = price - feed - unclaimed egg)
 
 ## Roostrs Page
 
