@@ -59,6 +59,7 @@ export function getDatesArray(from: Date, to: Date) {
   let current = from
 
   while (current <= to) {
+    current.setUTCHours(0, 0, 0)
     dateArray.push(new Date(current))
     current.setDate(current.getDate() + 1)
   }

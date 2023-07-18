@@ -1,11 +1,22 @@
+import { useState } from 'react'
 import DatePicker from 'react-datepicker'
-// import 'react-datepicker/dist/react-datepicker.css'
+import 'react-datepicker/dist/react-datepicker.css'
 
 type DatePickerProps = {
   name: string
+  onDateRangeChange: (from: Date, to: Date) => void
+
+  initFrom: Date
+  initTo: Date
 }
+// const initialToDate = new Date()
+// const initialFromDate = new Date()
+// initialFromDate.setDate(initialToDate.getDate() - 30)
 
 const DateRangePicker = (props: DatePickerProps) => {
+  const [fromDate, setFromDate] = useState(props.initFrom)
+  const [toDate, setToDate] = useState(props.initTo)
+
   return (
     <>
       <div className="p-2">
@@ -24,9 +35,11 @@ const DateRangePicker = (props: DatePickerProps) => {
       <div className="p-2">
         <DatePicker
           className="text-center text-sm rounded-md"
-          selected={new Date()}
-          onChange={(item) => {
-            console.log(item)
+          selected={fromDate}
+          onChange={(selectedFromDate: Date) => {
+            console.log('from:', selectedFromDate)
+            setFromDate(selectedFromDate)
+            props.onDateRangeChange(selectedFromDate, toDate)
           }}
         />
       </div>
@@ -34,9 +47,11 @@ const DateRangePicker = (props: DatePickerProps) => {
       <div className="p-2">
         <DatePicker
           className="text-center text-sm rounded-md"
-          selected={new Date()}
-          onChange={(item) => {
-            console.log(item)
+          selected={toDate}
+          onChange={(selectedToDate: Date) => {
+            console.log('to:', selectedToDate)
+            setToDate(selectedToDate)
+            props.onDateRangeChange(fromDate, selectedToDate)
           }}
         />
       </div>

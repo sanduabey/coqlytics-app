@@ -56,6 +56,8 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
       ])
       .toArray()
 
+    // console.dir(result, { maxArrayLength: null })
+
     //data transformation
 
     const timeZeroed = result.map((dailyData: any) => {
@@ -68,9 +70,11 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
       }
     })
 
-    // console.log(timeZeroed)
+    // console.dir(timeZeroed, { maxArrayLength: null })
 
     const allDatesArr = getDatesArray(from, to)
+
+    // console.dir(allDatesArr, { maxArrayLength: null })
 
     const volumeArr = allDatesArr.map((date) => {
       let found = timeZeroed.find(
@@ -80,11 +84,12 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
       if (found) {
         return found.volumeAVAX
       } else {
+        // console.log('NOT FOUND:', found)
         return 0
       }
     })
 
-    // console.log(volumeArr.length)
+    // console.dir(volumeArr, { maxArrayLength: null })
 
     const countArr = allDatesArr.map((date) => {
       let found = timeZeroed.find(
