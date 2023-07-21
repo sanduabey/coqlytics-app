@@ -6,7 +6,7 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 async function getChiknDailyVolumeData(from: Date, to: Date) {
   const response = await fetch(
-    `http://localhost:3000/api/chikn/daily-volume?from=${from}&to=${to}`
+    `${process.env.HOST}/api/chikn/daily-volume?from=${from}&to=${to}`
   )
 
   if (!response.ok) {

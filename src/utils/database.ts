@@ -29,7 +29,3 @@ export default async function getDb() {
     }
   }
 }
-
-// module.exports = {
-//   getDb,
-// };
