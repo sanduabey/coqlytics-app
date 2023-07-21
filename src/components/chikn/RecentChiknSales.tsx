@@ -1,7 +1,6 @@
 import { useCallback, useRef } from 'react'
 import SoldChikn from './SoldChikn'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { ISODateToDateAndTime } from '@/utils/helpers'
 
 type chiknSaleDoc = {
   id: string
