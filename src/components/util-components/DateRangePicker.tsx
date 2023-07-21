@@ -13,22 +13,77 @@ type DatePickerProps = {
 // const initialFromDate = new Date()
 // initialFromDate.setDate(initialToDate.getDate() - 30)
 
+const GetNowMinusXDate = (x: number): Date => {
+  let now = new Date()
+  let previous = new Date()
+
+  previous.setDate(now.getDate() - x)
+
+  return previous
+}
+
 const DateRangePicker = (props: DatePickerProps) => {
   const [fromDate, setFromDate] = useState(props.initFrom)
   const [toDate, setToDate] = useState(props.initTo)
 
-  const [selectedDropdownOption, setSelectedDropdownOption] = useState('7days')
+  const [selectedDropdownOption, setSelectedDropdownOption] = useState('1month')
   const [isDatePickerEnabled, setIsDatePickerEnabled] = useState(false)
 
   const dropdownChangeHandler = (event: BaseSyntheticEvent) => {
     console.log(event.target.value)
-    setSelectedDropdownOption(event.target.value)
+    let selectedOption = event.target.value
+    setSelectedDropdownOption(selectedOption)
 
-    if (event.target.value === 'custom') {
-      setIsDatePickerEnabled(true)
-    } else {
-      setIsDatePickerEnabled(false)
+    switch (selectedOption) {
+      case '7days':
+        setIsDatePickerEnabled(false)
+        let previous7Date = GetNowMinusXDate(7)
+        setFromDate(previous7Date)
+        setToDate(new Date())
+        props.onDateRangeChange(previous7Date, new Date())
+        break
+
+      case '1month':
+        setIsDatePickerEnabled(false)
+        let previous30Date = GetNowMinusXDate(30)
+        setFromDate(previous30Date)
+        setToDate(new Date())
+        props.onDateRangeChange(previous30Date, new Date())
+        break
+
+      case '3months':
+        setIsDatePickerEnabled(false)
+        let previous90Date = GetNowMinusXDate(90)
+        setFromDate(previous90Date)
+        setToDate(new Date())
+        props.onDateRangeChange(previous90Date, new Date())
+        break
+
+      case '6months':
+        setIsDatePickerEnabled(false)
+        let previous180Date = GetNowMinusXDate(180)
+        setFromDate(previous180Date)
+        setToDate(new Date())
+        props.onDateRangeChange(previous180Date, new Date())
+        break
+
+      // case '1year':
+      //   setIsDatePickerEnabled(false)
+      //   let previous365Date = GetNowMinusXDate(365)
+      //   setFromDate(previous365Date)
+      //   setToDate(new Date())
+      //   props.onDateRangeChange(previous365Date, new Date())
+      //   break
+
+      case 'custom':
+        setIsDatePickerEnabled(true)
     }
+
+    // if (selectedOption === 'custom') {
+    //   setIsDatePickerEnabled(true)
+    // } else {
+    //   setIsDatePickerEnabled(false)
+    // }
   }
 
   return (
@@ -46,7 +101,7 @@ const DateRangePicker = (props: DatePickerProps) => {
             <option value="1month">last month</option>
             <option value="3months">last 3 months</option>
             <option value="6months">last 6 months</option>
-            <option value="1year">last year</option>
+            {/* <option value="1year">last year</option> */}
             <option value="custom">custom</option>
           </select>
         </label>

@@ -14,9 +14,6 @@ export default function ChiknPage() {
     <>
       <QueryClientProvider client={queryClient}>
         <PageHeading> Chikn Marketplace Stats </PageHeading>
-        {/* <section className="bg-gray-200 flex justify-center">
-          <ChiknVolChart />
-        </section> */}
         <ChiknChartSection />
 
         <section className="bg-chiknpurple pt-4">
