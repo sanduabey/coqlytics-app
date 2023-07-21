@@ -31,7 +31,7 @@
 
 ### Market Stats Tab
 
-- [ ] Daily Chikn sales volume, sales count chart
+- [x] Daily Chikn sales volume, sales count chart
 - [x] Latest Chikns sold feed
 - [ ]
 

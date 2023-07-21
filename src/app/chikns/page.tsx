@@ -2,8 +2,6 @@
 
 import PageHeading from '@/components/util-components/PageHeading'
 
-import ChiknVolChart from '@/components/chikn/ChiknVolChart'
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import RecentChiknSales from '@/components/chikn/RecentChiknSales'
 import ChiknChartSection from '@/components/chikn/ChiknChartSection'
