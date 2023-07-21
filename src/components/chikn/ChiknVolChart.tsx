@@ -2,8 +2,6 @@ import { ApexOptions } from 'apexcharts'
 import { useQuery } from '@tanstack/react-query'
 
 import dynamic from 'next/dynamic'
-import DateRangePicker from '../util-components/DateRangePicker'
-import { useState } from 'react'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 async function getChiknDailyVolumeData(from: Date, to: Date) {
@@ -23,37 +21,22 @@ const initialToDate = new Date()
 const initialFromDate = new Date()
 initialFromDate.setDate(initialToDate.getDate() - 30)
 
-const ChiknVolChart = () => {
-  const [fromDate, setFromDate] = useState(initialFromDate)
-  const [toDate, setToDate] = useState(initialToDate)
+type ChiknVolChartProps = {
+  fromDate: Date
+  toDate: Date
+}
 
-  // let now: Date = new Date()
-  // let pastDate: Date = new Date()
-  // pastDate.setDate(pastDate.getDate() - 30)
-
-  // let fromDate: Date = pastDate
-  // let toDate: Date = now
-
-  console.log('HHHHHHH')
-
-  const dateRangeChangeHander = (from: Date, to: Date) => {
-    console.log('FROM', from, 'TO', to)
-    setFromDate(from)
-    setToDate(to)
-    refetch()
-    // fromDate = from
-    // toDate = to
-  }
+const ChiknVolChart = (props: ChiknVolChartProps) => {
   const { isLoading, isError, data, error, refetch } = useQuery({
-    queryKey: ['chiknvolumes', fromDate, toDate],
-    queryFn: () => getChiknDailyVolumeData(fromDate, toDate),
+    queryKey: ['chiknvolumes', props.fromDate, props.toDate],
+    queryFn: () => getChiknDailyVolumeData(props.fromDate, props.toDate),
     // refetchInterval: 0,
   })
 
   if (isError) return <div>failed to load</div>
   if (isLoading) return <div className="">loading...</div>
 
-  console.log(data)
+  // console.log(data)
 
   const series = [
     {
@@ -113,15 +96,6 @@ const ChiknVolChart = () => {
 
   return (
     <div className="grow p-6 max-w-6xl">
-      <div className="flex justify-end">
-        <DateRangePicker
-          name="chiknVolDateRange"
-          onDateRangeChange={dateRangeChangeHander}
-          initFrom={fromDate}
-          initTo={toDate}
-        ></DateRangePicker>
-      </div>
-
       <Chart options={options} series={series} type="bar" width="100%" />
     </div>
   )

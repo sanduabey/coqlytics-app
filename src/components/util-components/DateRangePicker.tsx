@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { BaseSyntheticEvent, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -17,12 +17,31 @@ const DateRangePicker = (props: DatePickerProps) => {
   const [fromDate, setFromDate] = useState(props.initFrom)
   const [toDate, setToDate] = useState(props.initTo)
 
+  const [selectedDropdownOption, setSelectedDropdownOption] = useState('7days')
+  const [isDatePickerEnabled, setIsDatePickerEnabled] = useState(false)
+
+  const dropdownChangeHandler = (event: BaseSyntheticEvent) => {
+    console.log(event.target.value)
+    setSelectedDropdownOption(event.target.value)
+
+    if (event.target.value === 'custom') {
+      setIsDatePickerEnabled(true)
+    } else {
+      setIsDatePickerEnabled(false)
+    }
+  }
+
   return (
     <>
       <div className="p-2">
         <label className="text-sm">
           <span className="pr-2">Range:</span>
-          <select name={props.name} className="rounded-md pl-4 pr-2">
+          <select
+            name={props.name}
+            className="rounded-md pl-4 pr-2"
+            onChange={dropdownChangeHandler}
+            value={selectedDropdownOption}
+          >
             <option value="7days">last 7 days</option>
             <option value="1month">last month</option>
             <option value="3months">last 3 months</option>
@@ -32,6 +51,7 @@ const DateRangePicker = (props: DatePickerProps) => {
           </select>
         </label>
       </div>
+
       <div className="p-2">
         <DatePicker
           className="text-center text-sm rounded-md"
@@ -41,6 +61,7 @@ const DateRangePicker = (props: DatePickerProps) => {
             setFromDate(selectedFromDate)
             props.onDateRangeChange(selectedFromDate, toDate)
           }}
+          disabled={!isDatePickerEnabled}
         />
       </div>
       <div className="pt-3 pb-2 text-sm">to</div>
@@ -53,6 +74,7 @@ const DateRangePicker = (props: DatePickerProps) => {
             setToDate(selectedToDate)
             props.onDateRangeChange(fromDate, selectedToDate)
           }}
+          disabled={!isDatePickerEnabled}
         />
       </div>
       {/* <DatePicker selected={new Date()}></DatePicker> */}
