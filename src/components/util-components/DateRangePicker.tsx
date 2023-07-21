@@ -30,7 +30,6 @@ const DateRangePicker = (props: DatePickerProps) => {
   const [isDatePickerEnabled, setIsDatePickerEnabled] = useState(false)
 
   const dropdownChangeHandler = (event: BaseSyntheticEvent) => {
-    console.log(event.target.value)
     let selectedOption = event.target.value
     setSelectedDropdownOption(selectedOption)
 
@@ -67,30 +66,24 @@ const DateRangePicker = (props: DatePickerProps) => {
         props.onDateRangeChange(previous180Date, new Date())
         break
 
-      // case '1year':
-      //   setIsDatePickerEnabled(false)
-      //   let previous365Date = GetNowMinusXDate(365)
-      //   setFromDate(previous365Date)
-      //   setToDate(new Date())
-      //   props.onDateRangeChange(previous365Date, new Date())
-      //   break
-
       case 'custom':
         setIsDatePickerEnabled(true)
     }
+  }
 
-    // if (selectedOption === 'custom') {
-    //   setIsDatePickerEnabled(true)
-    // } else {
-    //   setIsDatePickerEnabled(false)
-    // }
+  const GetMinFromDate = (): Date => {
+    const minFromDate = new Date()
+
+    minFromDate.setDate(toDate.getDate() - 180)
+
+    return minFromDate
   }
 
   return (
     <>
       <div className="p-2">
         <label className="text-sm">
-          <span className="pr-2">Range:</span>
+          <span className="pr-2">date range:</span>
           <select
             name={props.name}
             className="rounded-md pl-4 pr-2"
@@ -101,7 +94,6 @@ const DateRangePicker = (props: DatePickerProps) => {
             <option value="1month">last month</option>
             <option value="3months">last 3 months</option>
             <option value="6months">last 6 months</option>
-            {/* <option value="1year">last year</option> */}
             <option value="custom">custom</option>
           </select>
         </label>
@@ -112,11 +104,13 @@ const DateRangePicker = (props: DatePickerProps) => {
           className="text-center text-sm rounded-md"
           selected={fromDate}
           onChange={(selectedFromDate: Date) => {
-            console.log('from:', selectedFromDate)
             setFromDate(selectedFromDate)
             props.onDateRangeChange(selectedFromDate, toDate)
           }}
           disabled={!isDatePickerEnabled}
+          maxDate={toDate}
+          minDate={GetMinFromDate()}
+          dateFormat={'dd/MM/yyyy'}
         />
       </div>
       <div className="pt-3 pb-2 text-sm">to</div>
@@ -130,9 +124,10 @@ const DateRangePicker = (props: DatePickerProps) => {
             props.onDateRangeChange(fromDate, selectedToDate)
           }}
           disabled={!isDatePickerEnabled}
+          maxDate={new Date()}
+          dateFormat={'dd/MM/yyyy'}
         />
       </div>
-      {/* <DatePicker selected={new Date()}></DatePicker> */}
     </>
   )
 }

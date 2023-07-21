@@ -11,7 +11,7 @@ const ChiknChartSection = () => {
   const [toDate, setToDate] = useState(initialToDate)
 
   const dateRangeChangeHander = (from: Date, to: Date) => {
-    console.log('FROM', from, 'TO', to)
+    // console.log('FROM', from, 'TO', to)
     setFromDate(from)
     setToDate(to)
   }
