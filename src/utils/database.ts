@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb'
 
-var uri = `${process.env.DB_URI}/${process.env.DB_NAME}`
+var uri = `${process.env.DB_URI}`
 
 var _db: any
 
