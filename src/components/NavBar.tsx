@@ -5,24 +5,24 @@ import { usePathname } from 'next/navigation'
 
 const navLinks = [
   {
-    name: 'Chikns',
-    href: '/chikns',
+    name: 'Chikn',
+    href: '/chikn',
   },
   {
-    name: 'Roostrs',
-    href: '/roostrs',
+    name: 'Roostr',
+    href: '/roostr',
   },
   {
-    name: 'FarmLands',
-    href: '/farmlands',
+    name: 'FarmLand',
+    href: '/farmland',
   },
   {
-    name: 'BluePrints',
-    href: '/blueprints',
+    name: 'BluePrint',
+    href: '/blueprint',
   },
   {
-    name: 'Items',
-    href: '/items',
+    name: 'Item',
+    href: '/item',
   },
 ]
 
