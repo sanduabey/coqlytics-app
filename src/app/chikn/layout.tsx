@@ -23,7 +23,6 @@ export default function ChiknLayout({
 
   return (
     <>
-      Chikn Layout
       <nav className="text-white">
         <ul className="flex gap-4 justify-center">
           {chiknNavLinks.map((link) => {

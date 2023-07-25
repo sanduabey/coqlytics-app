@@ -9,35 +9,56 @@ type ChiknForSaleType = {
   salePrice: number
   eggPerDay: number
   lastClaimedEgg: Date
-  feedBurned: number
+  feedAccumulated: number
+  feedAccumulatedInAVAX: number
   unclaimedEgg: number
+  unclaimedEggInAVAX: number
+  balanceChiknValueInAVAX: number
 }
 
 const EGG_CONTRACT: string | undefined = process.env.EGG_CONTRACT_ADDRESS
 const FEED_CONTRACT: string | undefined = process.env.FEED_CONTRACT_ADDRESS
 
+type TokenPriceType = {
+  tokenName?: string | undefined
+  tokenSymbol?: string | undefined
+  tokenDecimals?: string | undefined
+  nativePrice?:
+    | {
+        value: string
+        decimals: number
+        name: string
+        symbol: string
+        address: string
+      }
+    | undefined
+  usdPrice: number | undefined
+  usdPriceFormatted?: string | undefined
+  exchangeAddress?: string | undefined
+  exchangeName?: string | undefined
+  tokenAddress?: string | undefined
+}
+
+let eggPriceObj: TokenPriceType
+let feedPriceObj: TokenPriceType
+
+let feedPriceInAVAX: number
+let eggPriceInAVAX: number
+
+let chiknsForSale: ChiknForSaleType[]
+
 const getBestVauleChikensForSale = async () => {
-  const response = await fetch(
-    'https://api.chikn.farm/api/chikn/list?page=1&limit=16&filter=forSale=true&projection=token&projection=kg&projection=salePrice&projection=eggPerDay&projection=lastClaimedEgg',
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  )
-  const _response = await response.json()
-
-  let chiknsForSale: ChiknForSaleType[] = _response.data
-
   //get feedburned array from db
   try {
     const db = await getDb()
 
-    const FEED_BURNED_PER_KG = await db
+    const feedBurnedArrayRes = await db
       .collection('configs')
       .findOne({ key: 'cumalativeFEEDBurnedAtChiknKG' })
 
-    console.log(FEED_BURNED_PER_KG)
+    const FEED_BURNED_PER_KG = feedBurnedArrayRes.value
+
+    // console.log(FEED_BURNED_PER_KG)
 
     //get feed/AVAX and egg/AVAX prices
     await Moralis.start({
@@ -50,7 +71,10 @@ const getBestVauleChikensForSale = async () => {
         exchange: 'traderjoe',
         address: EGG_CONTRACT,
       })
-      console.log('EGG', eggPriceRes.raw)
+      // console.log('EGG', eggPriceRes.raw)
+
+      eggPriceObj = eggPriceRes.raw
+      eggPriceInAVAX = Number(eggPriceObj.nativePrice?.value) * 1e-18 //convert to AVAX
     }
 
     if (FEED_CONTRACT !== undefined) {
@@ -59,19 +83,63 @@ const getBestVauleChikensForSale = async () => {
         exchange: 'traderjoe',
         address: FEED_CONTRACT,
       })
-      console.log('FEED', feedPriceRes.raw)
+      // console.log('FEED', feedPriceRes.raw)
+
+      feedPriceObj = feedPriceRes.raw
+      feedPriceInAVAX = Number(feedPriceObj.nativePrice?.value) * 1e-18 //convert to AVAX
+    }
+
+    //get chikns for sale
+    const response = await fetch(
+      'https://api.chikn.farm/api/chikn/list?page=1&limit=1000&filter=forSale=true&projection=token&projection=kg&projection=salePrice&projection=eggPerDay&projection=lastClaimedEgg',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+    const _response = await response.json()
+    chiknsForSale = _response.data
+
+    //calculate feed burned and egg unclaimed and in AVAX, also chiknRealValue in AVAX
+    for (let i = 0; i < chiknsForSale.length; i++) {
+      //feed burned
+      let feedBurned = FEED_BURNED_PER_KG[chiknsForSale[i].kg]
+      chiknsForSale[i].feedAccumulated = feedBurned
+      chiknsForSale[i].feedAccumulatedInAVAX = feedBurned * feedPriceInAVAX
+
+      //egg unclamied
+      let now = new Date()
+      let lastClaimedEgg = new Date(chiknsForSale[i].lastClaimedEgg)
+      let diffTime = now.getTime() - lastClaimedEgg.getTime()
+      let diffDays = diffTime / (1000 * 3600 * 24)
+
+      let unclaimedEgg = diffDays * chiknsForSale[i].eggPerDay
+      chiknsForSale[i].unclaimedEgg = unclaimedEgg
+      chiknsForSale[i].unclaimedEggInAVAX = unclaimedEgg * eggPriceInAVAX
+
+      chiknsForSale[i].balanceChiknValueInAVAX =
+        chiknsForSale[i].salePrice -
+        chiknsForSale[i].feedAccumulatedInAVAX -
+        chiknsForSale[i].unclaimedEggInAVAX
+
+      // console.log(chiknsForSale[i])
     }
   } catch (error) {
     throw error
   }
 
-  //calculate feed burned and egg unclaimed and in AVAX, also chiknRealValue in AVAX
-  for (let i = 0; i < chiknsForSale.length; i++) {}
-
   //sort
+  chiknsForSale.sort((a, b) =>
+    a.balanceChiknValueInAVAX > b.balanceChiknValueInAVAX ? 1 : -1
+  )
+
+  //slite first 100 items
+  let best100ChiknForSale = chiknsForSale.slice(0, 100)
+  // console.log(best100ChiknForSale.length)
 
   // console.log(chiknsForSale)
-  return chiknsForSale
+  return best100ChiknForSale
 }
 
 export async function GET(request: NextRequest) {
