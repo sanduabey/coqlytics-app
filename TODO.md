@@ -28,13 +28,12 @@
 
 ## Chikns Page
 
-- [ ] Tabbed sub-page structure
+- [x] Tabbed sub-page structure
 
 ### Market Stats Tab
 
 - [x] Daily Chikn sales volume, sales count chart
-- [x] Latest Chikns sold feed
-- [ ]
+- [x] Latest 100 Chikns sold feed
 
 ### Chikn Sniper Tab
 
