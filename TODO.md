@@ -13,6 +13,7 @@
 - [x] Item tab and routing
 - [ ] Setup CICD pipelines
 - [ ] Deploy production
+- [ ] Gamified subscription model
 
 ## Home Page
 
@@ -38,6 +39,7 @@
 ### Chikn Sniper Tab
 
 - [ ] Best value Chikns for sale (value = price - feed - unclaimed egg)
+- [ ] Add trait rarity score to value
 
 ## Roostrs Page
 
