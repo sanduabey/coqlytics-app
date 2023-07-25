@@ -34,7 +34,7 @@ export default function NavBar() {
   return (
     <nav className="flex pl-4 pr-4 bg-chiknpurple">
       <div className="basis-1/5 justify-start text-chiknred text-lg font-bold tracking-wide p-4">
-        <Link href="/">Coqlytics.XYZ</Link>
+        <Link href="/">CoQlytics.xyz</Link>
       </div>
 
       <ul className="basis-4/5 flex gap-4 justify-end">
