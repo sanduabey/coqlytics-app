@@ -12,6 +12,7 @@ const nextConfig = {
   },
   env: {
     HOST: process.env.HOST,
+    EGG_CONTRACT_ADDRESS: process.env.EGG_CONTRACT_ADDRESS,
   },
 }
 
