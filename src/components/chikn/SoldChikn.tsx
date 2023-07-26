@@ -2,7 +2,7 @@ import { ISODateToDateAndTime } from '@/utils/helpers'
 import Image from 'next/image'
 import React from 'react'
 
-type SoldItemProps = {
+type SoldChiknProps = {
   soldChiknData: {
     image: string
     tokenId: number
@@ -25,7 +25,7 @@ type SoldItemProps = {
 
 type Ref = HTMLLIElement
 
-const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
+const SoldChikn = React.forwardRef<Ref, SoldChiknProps>((props, ref) => {
   const { date: soldDate, time: soldTime } = ISODateToDateAndTime(
     props.soldChiknData.soldAt
   )
@@ -98,6 +98,6 @@ const SoldItem = React.forwardRef<Ref, SoldItemProps>((props, ref) => {
     </li>
   )
 })
-SoldItem.displayName = 'SoldItem'
+SoldChikn.displayName = 'SoldChikn'
 
-export default SoldItem
+export default SoldChikn

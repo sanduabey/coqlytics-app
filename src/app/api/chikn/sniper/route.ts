@@ -1,7 +1,7 @@
 import getDb from '@/utils/database'
 import { NextRequest, NextResponse } from 'next/server'
 import Moralis from 'moralis'
-import { EvmAddress } from '@moralisweb3/common-evm-utils'
+// import { EvmAddress } from '@moralisweb3/common-evm-utils'
 
 type ChiknForSaleType = {
   token: number
@@ -14,6 +14,18 @@ type ChiknForSaleType = {
   unclaimedEgg: number
   unclaimedEggInAVAX: number
   balanceChiknValueInAVAX: number
+  head: string
+  neck: string
+  torse: string
+  feet: string
+  tail: string
+  body: string
+  trim: string
+  background: string
+  _numOfTraits: number
+  rank: string
+  rarity: string
+  score: number
 }
 
 const EGG_CONTRACT: string | undefined = process.env.EGG_CONTRACT_ADDRESS
@@ -47,6 +59,8 @@ let eggPriceInAVAX: number
 
 let chiknsForSale: ChiknForSaleType[]
 
+let MoralisConn: any = null
+
 const getBestVauleChikensForSale = async () => {
   //get feedburned array from db
   try {
@@ -61,9 +75,11 @@ const getBestVauleChikensForSale = async () => {
     // console.log(FEED_BURNED_PER_KG)
 
     //get feed/AVAX and egg/AVAX prices
-    await Moralis.start({
-      apiKey: process.env.MORALIS_API_KEY,
-    })
+    if (MoralisConn === null) {
+      MoralisConn = await Moralis.start({
+        apiKey: process.env.MORALIS_API_KEY,
+      })
+    }
 
     if (EGG_CONTRACT !== undefined) {
       const eggPriceRes = await Moralis.EvmApi.token.getTokenPrice({
@@ -90,14 +106,38 @@ const getBestVauleChikensForSale = async () => {
     }
 
     //get chikns for sale
-    const response = await fetch(
-      'https://api.chikn.farm/api/chikn/list?page=1&limit=1000&filter=forSale=true&projection=token&projection=kg&projection=salePrice&projection=eggPerDay&projection=lastClaimedEgg',
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    )
+
+    const projections: string[] = [
+      'token',
+      'kg',
+      'salePrice',
+      'eggPerDay',
+      'lastClaimedEgg',
+      'head',
+      'neck',
+      'torso',
+      'feet',
+      'tail',
+      'body',
+      'trim',
+      'background',
+      '_numOfTraits',
+      'rank',
+      'rarity',
+      'score',
+    ]
+    let fetchURL =
+      'https://api.chikn.farm/api/chikn/list?page=1&limit=1000&filter=forSale%3Dtrue' +
+      '&projection=' +
+      projections.join('&projection=')
+
+    // console.log('URL:', fetchURL)
+
+    const response = await fetch(fetchURL, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
     const _response = await response.json()
     chiknsForSale = _response.data
 
