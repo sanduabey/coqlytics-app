@@ -137,6 +137,9 @@ const getBestVauleChikensForSale = async () => {
       headers: {
         'Content-Type': 'application/json',
       },
+      next: {
+        revalidate: 30,
+      },
     })
     const _response = await response.json()
     chiknsForSale = _response.data
@@ -175,7 +178,7 @@ const getBestVauleChikensForSale = async () => {
   )
 
   //slite first 100 items
-  let best100ChiknForSale = chiknsForSale.slice(0, 100)
+  let best100ChiknForSale = chiknsForSale.slice(0, 20)
   // console.log(best100ChiknForSale.length)
 
   // console.log(chiknsForSale)

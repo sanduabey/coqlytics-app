@@ -43,7 +43,7 @@ const SoldChikn = React.forwardRef<Ref, SoldChiknProps>((props, ref) => {
       className="flex text-white p-3 bg-chiknpurple-dark rounded-md m-2 max-w-5xl ml-auto mr-auto"
       ref={ref}
     >
-      <div className=" cursor-pointer">
+      <div className="cursor-pointer">
         <Image
           src={props.soldChiknData.image}
           alt="Image of sold NFT"
