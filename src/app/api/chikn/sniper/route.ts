@@ -16,7 +16,7 @@ type ChiknForSaleType = {
   balanceChiknValueInAVAX: number
   head: string
   neck: string
-  torse: string
+  torso: string
   feet: string
   tail: string
   body: string

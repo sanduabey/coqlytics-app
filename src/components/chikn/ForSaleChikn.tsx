@@ -7,7 +7,7 @@ type ForSaleChiknProps = {
     tokenId: number
     kg: number
     price: number
-    rarity: number
+    rarity: string
     head: string
     neck: string
     torso: string
@@ -19,6 +19,7 @@ type ForSaleChiknProps = {
     numOfTraits: number
     score: number
     rank: string
+    eggPerDay: number
     unclaimedEgg: number
     unclaimedEggInAVAX: number
     feedAccumulated: number
@@ -28,11 +29,11 @@ type ForSaleChiknProps = {
   children?: React.ReactNode
 }
 
-type Ref = HTMLLIElement
+// type Ref = HTMLLIElement
 
-const ForSaleChikn = React.forwardRef<Ref, ForSaleChiknProps>((props, ref) => {
+const ForSaleChikn = (props: ForSaleChiknProps) => {
   return (
-    <li>
+    <li className="flex text-white p-3 bg-chiknpurple-dark rounded-md m-2 max-w-5xl ml-auto mr-auto">
       <div>
         <Image
           src={props.chiknData.image}
@@ -41,10 +42,25 @@ const ForSaleChikn = React.forwardRef<Ref, ForSaleChiknProps>((props, ref) => {
           height={200}
         />
       </div>
-      <div> For Sale Chikn Info</div>
+      <div>
+        <div>Chikn #{props.chiknData.tokenId}</div>
+        <div>
+          {props.chiknData.kg} Kg ({props.chiknData.eggPerDay} $EGG / day)
+        </div>
+        <div>Price: {props.chiknData.price}</div>
+        <div>
+          FEED fed: {props.chiknData.feedAccumulated} (
+          {props.chiknData.feedAccumulatedInAVAX} AVAX)
+        </div>
+        <div>
+          Unclaimed EGG: {props.chiknData.unclaimedEgg} (
+          {props.chiknData.unclaimedEggInAVAX} AVAX)
+        </div>
+        <div>ChiknValue: {props.chiknData.balanceChiknValueInAVAX} AVAX</div>
+        <div></div>
+      </div>
     </li>
   )
-})
-ForSaleChikn.displayName = 'ForSaleChikn'
+}
 
 export default ForSaleChikn
