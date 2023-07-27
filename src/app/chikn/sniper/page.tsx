@@ -1,5 +1,6 @@
 import ForSaleChikn from '@/components/chikn/ForSaleChikn'
 import PageHeading from '@/components/util-components/PageHeading'
+import { numberWithCommas } from '@/utils/helpers'
 
 type ChiknForSaleType = {
   token: number
@@ -62,11 +63,11 @@ export default async function ChiknSniperPage() {
       score: item.score,
       rank: item.rank,
       eggPerDay: item.eggPerDay,
-      unclaimedEgg: item.unclaimedEgg,
-      unclaimedEggInAVAX: item.unclaimedEggInAVAX,
-      feedAccumulated: item.feedAccumulated,
-      feedAccumulatedInAVAX: item.feedAccumulatedInAVAX,
-      balanceChiknValueInAVAX: item.balanceChiknValueInAVAX,
+      unclaimedEgg: item.unclaimedEgg.toFixed(2),
+      unclaimedEggInAVAX: item.unclaimedEggInAVAX.toFixed(2),
+      feedAccumulated: numberWithCommas(item.feedAccumulated),
+      feedAccumulatedInAVAX: item.feedAccumulatedInAVAX.toFixed(2),
+      balanceChiknValueInAVAX: item.balanceChiknValueInAVAX.toFixed(2),
     }
 
     return <ForSaleChikn key={item.token} chiknData={forSaleChiknData} />

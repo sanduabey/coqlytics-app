@@ -20,11 +20,11 @@ type ForSaleChiknProps = {
     score: number
     rank: string
     eggPerDay: number
-    unclaimedEgg: number
-    unclaimedEggInAVAX: number
-    feedAccumulated: number
-    feedAccumulatedInAVAX: number
-    balanceChiknValueInAVAX: number
+    unclaimedEgg: string
+    unclaimedEggInAVAX: string
+    feedAccumulated: string
+    feedAccumulatedInAVAX: string
+    balanceChiknValueInAVAX: string
   }
   children?: React.ReactNode
 }
@@ -47,7 +47,7 @@ const ForSaleChikn = (props: ForSaleChiknProps) => {
         <div>
           {props.chiknData.kg} Kg ({props.chiknData.eggPerDay} $EGG / day)
         </div>
-        <div>Price: {props.chiknData.price}</div>
+        <div>Sale Price: {props.chiknData.price}</div>
         <div>
           FEED fed: {props.chiknData.feedAccumulated} (
           {props.chiknData.feedAccumulatedInAVAX} AVAX)
