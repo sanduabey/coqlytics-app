@@ -43,7 +43,7 @@ const ForSaleChikn = (props: ForSaleChiknProps) => {
       <div className="flex flex-wrap content-center pr-3">
         {props.chiknData.index}
       </div>
-      <div>
+      <div className="cursor-pointer">
         <Image
           src={props.chiknData.image}
           alt="Image of For Sale Chikn"
@@ -52,8 +52,8 @@ const ForSaleChikn = (props: ForSaleChiknProps) => {
           onClick={chiknClickHandler.bind(null, props.chiknData.tokenId)}
         />
       </div>
-      <div className="w-1/2 pl-4 pr-4">
-        <div>Chikn #{props.chiknData.tokenId}</div>
+      <div className="w-1/2 pl-4 pr-4 text-sm">
+        <div className="text-xl">Chikn #{props.chiknData.tokenId}</div>
         <div>
           {props.chiknData.kg} Kg ({props.chiknData.eggPerDay} $EGG / day)
         </div>

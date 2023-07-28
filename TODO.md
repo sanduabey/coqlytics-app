@@ -38,7 +38,8 @@
 ### Chikn Sniper Tab
 
 - [ ] Best value Chikns for sale (value = price - feed - unclaimed egg)
-- [ ] Add trait rarity score to value
+- [ ] Sort by lowest Days to breakeven (highest ROI%)
+- [ ] Sort by unclaimed EGG
 
 ## Roostrs Page
 
