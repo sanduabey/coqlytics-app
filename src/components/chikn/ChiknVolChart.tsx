@@ -28,7 +28,7 @@ type ChiknVolChartProps = {
 
 const ChiknVolChart = (props: ChiknVolChartProps) => {
   const { isLoading, isError, data, error, refetch } = useQuery({
-    queryKey: ['chiknvolumes', props.fromDate, props.toDate],
+    queryKey: ['chiknVolumes', props.fromDate, props.toDate],
     queryFn: () => getChiknDailyVolumeData(props.fromDate, props.toDate),
     // refetchInterval: 0,
   })

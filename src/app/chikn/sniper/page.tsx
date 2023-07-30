@@ -1,85 +1,21 @@
-import ForSaleChikn from '@/components/chikn/ForSaleChikn'
+'use client'
+import ChiknSniperSection from '@/components/chikn/ChiknSniperSection'
 import PageHeading from '@/components/util-components/PageHeading'
-import { numberWithCommas } from '@/utils/helpers'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-type ChiknForSaleType = {
-  token: number
-  kg: number
-  salePrice: number
-  eggPerDay: number
-  lastClaimedEgg: Date
-  feedAccumulated: number
-  feedAccumulatedInAVAX: number
-  unclaimedEgg: number
-  unclaimedEggInAVAX: number
-  balanceChiknValueInAVAX: number
-  head: string
-  neck: string
-  torso: string
-  feet: string
-  tail: string
-  body: string
-  trim: string
-  background: string
-  _numOfTraits: number
-  rank: string
-  rarity: string
-  score: number
-}
+const queryClient = new QueryClient()
 
-const getBestForSaleChikns = async () => {
-  const response = await fetch(`${process.env.HOST}/api/chikn/sniper`)
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch best for sale Chikns')
-  }
-
-  const _response = await response.json()
-
-  // console.log(_response)
-
-  return _response.data
-}
-
-export default async function ChiknSniperPage() {
-  const forSaleChikns = await getBestForSaleChikns() //STOPPED HERER
-
-  const forSaleChiknContent = forSaleChikns.map(
-    (item: ChiknForSaleType, index: number) => {
-      const forSaleChiknData = {
-        index: index + 1,
-        image: `https://api.chikn.farm/api/chikn/thumb/${item.token}`,
-        tokenId: item.token,
-        price: item.salePrice,
-        kg: item.kg,
-        rarity: item.rarity,
-        head: item.head,
-        neck: item.neck,
-        torso: item.torso,
-        feet: item.feet,
-        tail: item.tail,
-        body: item.body,
-        trim: item.trim,
-        background: item.background,
-        numOfTraits: item._numOfTraits,
-        score: item.score,
-        rank: item.rank,
-        eggPerDay: item.eggPerDay,
-        unclaimedEgg: item.unclaimedEgg.toFixed(2),
-        unclaimedEggInAVAX: item.unclaimedEggInAVAX.toFixed(2),
-        feedAccumulated: numberWithCommas(item.feedAccumulated),
-        feedAccumulatedInAVAX: item.feedAccumulatedInAVAX.toFixed(2),
-        balanceChiknValueInAVAX: item.balanceChiknValueInAVAX.toFixed(2),
-      }
-
-      return <ForSaleChikn key={item.token} chiknData={forSaleChiknData} />
-    }
-  )
+export default function ChiknSniperPage() {
+  // const [selectedSortStrategy, setSelectedSortStrategy] =
+  //   useState('chiknOnlyValue')
 
   return (
     <>
-      <PageHeading>Chikn Sniper Page</PageHeading>
-      <ul className="bg-chiknpurple p-3">{forSaleChiknContent}</ul>
+      <QueryClientProvider client={queryClient}>
+        <PageHeading>Chikn Sniper Page</PageHeading>
+
+        <ChiknSniperSection />
+      </QueryClientProvider>
     </>
   )
 }
