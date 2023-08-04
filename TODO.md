@@ -37,9 +37,14 @@
 
 ### Chikn Sniper Tab
 
-- [ ] Best value Chikns for sale (value = price - feed - unclaimed egg)
-- [ ] Sort by lowest Days to breakeven (highest ROI%)
-- [ ] Sort by unclaimed EGG
+- [x] Sort by value Chikns for sale (value = price - feed - unclaimed egg)
+- [x] Sort by unclaimed EGG
+- [x] Sort by AVAXperKG
+- [x] Sort by fastest breakeven full price
+- [x] Sort by fastest breakeven base price
+- [ ] Sort by highest ROI%
+- [ ] Sort by Most Unclaimed EGG & (SalePrice < 50 AVAX)
+- [ ] Sort by Most Unclaimed EGG & (SalePrice < 100 AVAX)
 
 ## Roostrs Page
 

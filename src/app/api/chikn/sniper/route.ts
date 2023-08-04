@@ -8,12 +8,16 @@ type ChiknForSaleType = {
   kg: number
   salePrice: number
   eggPerDay: number
+  eggPerDayInAVAX: number
   lastClaimedEgg: Date
   feedAccumulated: number
   feedAccumulatedInAVAX: number
   unclaimedEgg: number
   unclaimedEggInAVAX: number
-  balanceChiknValueInAVAX: number
+  baseChiknValueInAVAX: number
+  AVAXperKG: number
+  daysToBreakEvenFullValue: number
+  daysToBreakEvenBaseValue: number
   head: string
   neck: string
   torso: string
@@ -61,7 +65,7 @@ let chiknsForSale: ChiknForSaleType[]
 
 let MoralisConn: any = null
 
-const getBestVauleChikensForSale = async () => {
+const getBestVauleChikensForSale = async (sort: string) => {
   //get feedburned array from db
   try {
     const db = await getDb()
@@ -161,32 +165,77 @@ const getBestVauleChikensForSale = async () => {
       chiknsForSale[i].unclaimedEgg = unclaimedEgg
       chiknsForSale[i].unclaimedEggInAVAX = unclaimedEgg * eggPriceInAVAX
 
-      chiknsForSale[i].balanceChiknValueInAVAX =
+      //eggPerDayInAVAX
+      chiknsForSale[i].eggPerDayInAVAX =
+        chiknsForSale[i].eggPerDay * eggPriceInAVAX
+
+      // balanceChiknValue
+      chiknsForSale[i].baseChiknValueInAVAX =
         chiknsForSale[i].salePrice -
         chiknsForSale[i].feedAccumulatedInAVAX -
         chiknsForSale[i].unclaimedEggInAVAX
 
+      //daysToBreakeven
+      chiknsForSale[i].daysToBreakEvenFullValue =
+        chiknsForSale[i].salePrice / chiknsForSale[i].eggPerDayInAVAX
+      chiknsForSale[i].daysToBreakEvenBaseValue =
+        chiknsForSale[i].baseChiknValueInAVAX / chiknsForSale[i].eggPerDayInAVAX
+
+      chiknsForSale[i].AVAXperKG =
+        chiknsForSale[i].salePrice / chiknsForSale[i].kg
       // console.log(chiknsForSale[i])
     }
   } catch (error) {
     throw error
   }
 
-  //sort
-  chiknsForSale.sort((a, b) =>
-    a.balanceChiknValueInAVAX > b.balanceChiknValueInAVAX ? 1 : -1
-  )
+  console.log('SORT ', sort)
+  // sort
+  switch (sort) {
+    case 'chiknBaseValue':
+      chiknsForSale.sort((a, b) =>
+        a.baseChiknValueInAVAX > b.baseChiknValueInAVAX ? 1 : -1
+      )
+      break
+    case 'unclaimedEGG':
+      chiknsForSale.sort((a, b) => (a.unclaimedEgg > b.unclaimedEgg ? -1 : 1))
+      break
+
+    case 'AVAXperKG':
+      chiknsForSale.sort((a, b) => (a.AVAXperKG > b.AVAXperKG ? 1 : -1))
+      break
+    case 'breakevenFullValue':
+      chiknsForSale.sort((a, b) =>
+        a.daysToBreakEvenFullValue > b.daysToBreakEvenFullValue ? 1 : -1
+      )
+      break
+    case 'breakevenBaseValue':
+      chiknsForSale.sort((a, b) =>
+        a.daysToBreakEvenBaseValue > b.daysToBreakEvenBaseValue ? 1 : -1
+      )
+      break
+  }
 
   //slite first 100 items
-  let best100ChiknForSale = chiknsForSale.slice(0, 20)
+  let best100ChiknForSale = chiknsForSale.slice(0, 25)
   // console.log(best100ChiknForSale.length)
 
-  // console.log(chiknsForSale)
+  // console.log('RESULT', best100ChiknForSale)
   return best100ChiknForSale
 }
 
 export async function GET(request: NextRequest) {
-  let result = await getBestVauleChikensForSale()
+  const { searchParams } = new URL(request.url)
+  const sort: string | null = searchParams.get('sort')
+
+  if (sort === null) {
+    return NextResponse.json(
+      { error: 'Bad Request! sort parameter is null' },
+      { status: 400 }
+    )
+  }
+
+  let result = await getBestVauleChikensForSale(sort)
 
   return NextResponse.json({ data: result })
 }

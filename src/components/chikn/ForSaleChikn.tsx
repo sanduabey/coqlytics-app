@@ -25,7 +25,10 @@ type ForSaleChiknProps = {
     unclaimedEggInAVAX: string
     feedAccumulated: string
     feedAccumulatedInAVAX: string
-    balanceChiknValueInAVAX: string
+    baseChiknValueInAVAX: string
+    daysToBreakEvenFullValue: string
+    daysToBreakEvenBaseValue: string
+    AVAXperKG: string
   }
   children?: React.ReactNode
 }
@@ -57,6 +60,7 @@ const ForSaleChikn = (props: ForSaleChiknProps) => {
           {props.chiknData.kg} Kg ({props.chiknData.eggPerDay} $EGG / day)
         </div>
         <div>Sale Price: {props.chiknData.price} AVAX</div>
+        <div>Rank: {props.chiknData.rank}</div>
         <div>
           FEED fed: {props.chiknData.feedAccumulated} (
           {props.chiknData.feedAccumulatedInAVAX} AVAX)
@@ -65,10 +69,14 @@ const ForSaleChikn = (props: ForSaleChiknProps) => {
           Unclaimed EGG: {props.chiknData.unclaimedEgg} (
           {props.chiknData.unclaimedEggInAVAX} AVAX)
         </div>
+        <div>AVAX per KG: {props.chiknData.AVAXperKG}</div>
         <div>
-          Chikn Only Price: {props.chiknData.balanceChiknValueInAVAX} AVAX
+          BreakEven full value: {props.chiknData.daysToBreakEvenFullValue} days
         </div>
-        <div>Rank: {props.chiknData.rank}</div>
+        <div>
+          BreakEven base value: {props.chiknData.daysToBreakEvenBaseValue} days
+        </div>
+        <div>Chikn Base Price: {props.chiknData.baseChiknValueInAVAX} AVAX</div>
       </div>
       <div className="flex grow text-md pt-2 justify-start">
         <div className="flex-col text-sm">

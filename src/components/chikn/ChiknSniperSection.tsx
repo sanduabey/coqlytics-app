@@ -1,6 +1,7 @@
 import { numberWithCommas } from '@/utils/helpers'
 import ForSaleChikn from './ForSaleChikn'
 import { useQuery } from '@tanstack/react-query'
+import { BaseSyntheticEvent, useState } from 'react'
 
 type ChiknForSaleType = {
   token: number
@@ -12,7 +13,10 @@ type ChiknForSaleType = {
   feedAccumulatedInAVAX: number
   unclaimedEgg: number
   unclaimedEggInAVAX: number
-  balanceChiknValueInAVAX: number
+  baseChiknValueInAVAX: number
+  AVAXperKG: number
+  daysToBreakEvenFullValue: number
+  daysToBreakEvenBaseValue: number
   head: string
   neck: string
   torso: string
@@ -27,8 +31,10 @@ type ChiknForSaleType = {
   score: number
 }
 
-const getBestForSaleChikns = async () => {
-  const response = await fetch(`${process.env.HOST}/api/chikn/sniper`)
+const getBestForSaleChikns = async (sortStrategy: string) => {
+  const response = await fetch(
+    `${process.env.HOST}/api/chikn/sniper?sort=${sortStrategy}`
+  )
 
   if (!response.ok) {
     throw new Error('Failed to fetch best for sale Chikns')
@@ -42,11 +48,12 @@ const getBestForSaleChikns = async () => {
 }
 
 const ChiknSniperSection = () => {
-  // const forSaleChikns = await getBestForSaleChikns()
+  const [selectedSortStrategy, setSelectedSortStrategy] =
+    useState('chiknBaseValue')
 
   const { isLoading, isError, data, error, refetch } = useQuery({
-    queryKey: ['chiknSniper'],
-    queryFn: () => getBestForSaleChikns(),
+    queryKey: ['chiknSniper', selectedSortStrategy],
+    queryFn: () => getBestForSaleChikns(selectedSortStrategy),
   })
 
   if (isError) return <div>failed to load</div>
@@ -78,12 +85,22 @@ const ChiknSniperSection = () => {
         unclaimedEggInAVAX: item.unclaimedEggInAVAX.toFixed(2),
         feedAccumulated: numberWithCommas(item.feedAccumulated),
         feedAccumulatedInAVAX: item.feedAccumulatedInAVAX.toFixed(2),
-        balanceChiknValueInAVAX: item.balanceChiknValueInAVAX.toFixed(2),
+        baseChiknValueInAVAX: item.baseChiknValueInAVAX.toFixed(2),
+        AVAXperKG: item.AVAXperKG.toFixed(2),
+        daysToBreakEvenFullValue: item.daysToBreakEvenFullValue.toFixed(0),
+        daysToBreakEvenBaseValue: item.daysToBreakEvenBaseValue.toFixed(0),
       }
 
       return <ForSaleChikn key={item.token} chiknData={forSaleChiknData} />
     }
   )
+
+  const sortStrategyChangeHandler = (event: BaseSyntheticEvent) => {
+    let selectedOption = event.target.value
+
+    setSelectedSortStrategy(selectedOption)
+    // console.log(selectedOption)
+  }
 
   return (
     <section>
@@ -93,13 +110,21 @@ const ChiknSniperSection = () => {
             <span className="text-white">sort by : </span>
             <select
               name="snipeOptions"
-              value="ChiknOnlyValue"
+              value={selectedSortStrategy}
               className="rounded-md pl-4 pr-2"
+              onChange={sortStrategyChangeHandler}
             >
-              <option value="chiknOnlyValue">Chikn Only Value</option>
-              <option value="unclaimedEGG">Unclaimed EGG</option>
+              <option value="chiknBaseValue">
+                Chikn Value - (FEED fed + unclaimed EGG)
+              </option>
+              <option value="unclaimedEGG">Most Unclaimed EGG</option>
               <option value="AVAXperKG">AVAX per KG</option>
-              <option value="bestROI">Best Holding ROI</option>
+              <option value="breakevenFullValue">
+                Fastest Breakeven Full Price
+              </option>
+              <option value="breakevenBaseValue">
+                Fastest Breakeven Base Price
+              </option>
             </select>
           </label>
         </div>
