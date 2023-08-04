@@ -76,8 +76,6 @@ const getBestVauleChikensForSale = async (sort: string) => {
 
     const FEED_BURNED_PER_KG = feedBurnedArrayRes.value
 
-    // console.log(FEED_BURNED_PER_KG)
-
     //get feed/AVAX and egg/AVAX prices
     if (MoralisConn === null) {
       MoralisConn = await Moralis.start({
@@ -189,7 +187,7 @@ const getBestVauleChikensForSale = async (sort: string) => {
     throw error
   }
 
-  console.log('SORT ', sort)
+  // console.log('SORT ', sort)
   // sort
   switch (sort) {
     case 'chiknBaseValue':
@@ -235,7 +233,10 @@ export async function GET(request: NextRequest) {
     )
   }
 
-  let result = await getBestVauleChikensForSale(sort)
-
-  return NextResponse.json({ data: result })
+  try {
+    let result = await getBestVauleChikensForSale(sort)
+    return NextResponse.json({ data: result })
+  } catch (error) {
+    return NextResponse.json({ error: 'Something went wrong' }, { status: 500 })
+  }
 }
