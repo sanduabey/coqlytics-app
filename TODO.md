@@ -28,7 +28,7 @@
 
 ## Chikns Page
 
-- [x] Tabbed sub-page structure
+- [x] Tabbed sub nav menu structure
 
 ### Market Stats Tab
 
@@ -37,21 +37,27 @@
 
 ### Chikn Sniper Tab
 
-- [x] Sort by value Chikns for sale (value = price - feed - unclaimed egg)
+- [x] Sort by Base value Chikns for sale (Base value = price - feed - unclaimed egg)
 - [x] Sort by unclaimed EGG
 - [x] Sort by AVAXperKG
 - [x] Sort by fastest breakeven full price
 - [x] Sort by fastest breakeven base price
-- [ ] Sort by highest ROI%
-- [ ] Sort by Most Unclaimed EGG & (SalePrice < 50 AVAX)
-- [ ] Sort by Most Unclaimed EGG & (SalePrice < 100 AVAX)
+- [ ] Max sale price dropdown
 
 ## Roostrs Page
+
+- [ ] Tabbed sub nav menu structure
+
+### Roostr Market Stats Tab
 
 - [ ] Daily Roostr sales volume, count chart
 - [ ] Best value Roostrs for sale
 - [ ] Latest Roostrs sold feed
 - [ ]
+
+### Roostr Sniper Tab
+
+- [ ] Sort by Base value Roostr
 
 ## FarmLands Page
 

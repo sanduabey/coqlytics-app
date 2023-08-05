@@ -235,7 +235,7 @@ export async function GET(request: NextRequest) {
 
   try {
     let result = await getBestVauleChikensForSale(sort)
-    return NextResponse.json({ data: result })
+    return NextResponse.json({ data: result }, { status: 200 })
   } catch (error) {
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 })
   }
