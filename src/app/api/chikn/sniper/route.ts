@@ -65,7 +65,7 @@ let chiknsForSale: ChiknForSaleType[]
 
 let MoralisConn: any = null
 
-const getBestVauleChikensForSale = async (sort: string) => {
+const getBestVauleChikensForSale = async (sort: string, maxPrice: string) => {
   //get feedburned array from db
   try {
     const db = await getDb()
@@ -187,6 +187,14 @@ const getBestVauleChikensForSale = async (sort: string) => {
     throw error
   }
 
+  // max price filter
+  if (maxPrice !== 'any') {
+    let filteredResults = chiknsForSale.filter(
+      (chikn) => chikn.salePrice <= Number(maxPrice)
+    )
+    chiknsForSale = filteredResults
+  }
+
   // console.log('SORT ', sort)
   // sort
   switch (sort) {
@@ -225,16 +233,19 @@ const getBestVauleChikensForSale = async (sort: string) => {
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const sort: string | null = searchParams.get('sort')
+  const maxPrice: string | null = searchParams.get('maxPrice')
 
-  if (sort === null) {
+  if (sort === null || maxPrice === null) {
     return NextResponse.json(
-      { error: 'Bad Request! sort parameter is null' },
+      {
+        error: 'Bad Request! query parameters (sort , maxPrice) cannot be null',
+      },
       { status: 400 }
     )
   }
 
   try {
-    let result = await getBestVauleChikensForSale(sort)
+    let result = await getBestVauleChikensForSale(sort, maxPrice)
     return NextResponse.json({ data: result }, { status: 200 })
   } catch (error) {
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 })
