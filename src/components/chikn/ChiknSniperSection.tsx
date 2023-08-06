@@ -116,7 +116,7 @@ const ChiknSniperSection = () => {
   return (
     <section>
       <div className="bg-chiknpurple">
-        <div className="flex max-w-6xl">
+        <div className="flex mr-auto ml-auto max-w-6xl">
           <div className="flex-1 flex justify-start p-6">
             <label>
               <span className="text-white">max price : </span>
@@ -130,7 +130,9 @@ const ChiknSniperSection = () => {
                 <option value="40">40 AVAX</option>
                 <option value="50">50 AVAX</option>
                 <option value="60">60 AVAX</option>
+                <option value="70">70 AVAX</option>
                 <option value="80">80 AVAX</option>
+                <option value="90">90 AVAX</option>
                 <option value="100">100 AVAX</option>
                 <option value="150">150 AVAX</option>
                 <option value="200">200 AVAX</option>
