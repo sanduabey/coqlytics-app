@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 
 type ForSaleChiknProps = {
   chiknData: {
@@ -45,21 +46,30 @@ const ForSaleChikn = (props: ForSaleChiknProps) => {
       <div className="flex flex-wrap content-center pr-3">
         {props.chiknData.index}
       </div>
-      <div className="cursor-pointer">
+      <div className="cursor-pointer relative">
         <Image
           src={props.chiknData.image}
           alt="Image of For Sale Chikn"
           width={200}
           height={200}
           onClick={chiknClickHandler.bind(null, props.chiknData.tokenId)}
+          className="rounded-md"
         />
+        <div className="absolute bottom-0 bg-chiknpurple-dark rounded-md p-1 m-2">
+          {props.chiknData.price} AVAX
+        </div>
+        <div className="absolute top-0 right-0">
+          <ArrowTopRightOnSquareIcon className="h-6 w-6 text-chiknpurple-dark m-1 " />
+        </div>
       </div>
       <div className="w-1/2 pl-4 pr-4 text-sm">
-        <div className="text-xl">Chikn #{props.chiknData.tokenId}</div>
-        <div>
-          {props.chiknData.kg} Kg ({props.chiknData.eggPerDay} $EGG / day)
+        <div className="flex">
+          <span className="text-xl">Chikn #{props.chiknData.tokenId}</span>
+          <span className="self-center pl-2">
+            [{props.chiknData.kg} Kg - {props.chiknData.eggPerDay} $EGG / day]
+          </span>
         </div>
-        <div>Sale Price: {props.chiknData.price} AVAX</div>
+
         <div>Rank: {props.chiknData.rank}</div>
         <div>
           FEED fed: {props.chiknData.feedAccumulated} (
