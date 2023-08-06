@@ -29,7 +29,7 @@ const ChiknSniperSection = () => {
               <span className="text-white">max price : </span>
               <select
                 name="maxPrice"
-                className="rounded-md pl-4 pr-2 text-center"
+                className="rounded-md pl-4 pr-2 text-left"
                 value={selectedMaxPrice}
                 onChange={maxPriceChangeHandler}
               >
@@ -57,17 +57,11 @@ const ChiknSniperSection = () => {
                 className="rounded-md pl-4 pr-2"
                 onChange={sortStrategyChangeHandler}
               >
-                <option value="chiknBaseValue">
-                  Chikn Value - (FEED fed + unclaimed EGG)
-                </option>
-                <option value="unclaimedEGG">Most Unclaimed EGG</option>
+                <option value="chiknBaseValue">Chikn Base Value</option>
+                <option value="unclaimedEGG">Unclaimed EGG</option>
                 <option value="AVAXperKG">AVAX per KG</option>
-                <option value="breakevenFullValue">
-                  Fastest Breakeven Full Price
-                </option>
-                <option value="breakevenBaseValue">
-                  Fastest Breakeven Base Price
-                </option>
+                <option value="breakevenFullValue">Breakeven Full Price</option>
+                <option value="breakevenBaseValue">Breakeven Base Price</option>
               </select>
             </label>
           </div>

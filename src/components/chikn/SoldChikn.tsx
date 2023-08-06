@@ -50,6 +50,7 @@ const SoldChikn = React.forwardRef<Ref, SoldChiknProps>((props, ref) => {
           width={200}
           height={200}
           onClick={chiknClickHandler.bind(null, props.soldChiknData.tokenId)}
+          className="rounded-md"
         />
       </div>
       <div className="flex grow pl-4 pr-4">

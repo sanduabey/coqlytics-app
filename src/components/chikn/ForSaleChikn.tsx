@@ -81,12 +81,12 @@ const ForSaleChikn = (props: ForSaleChiknProps) => {
         </div>
         <div>AVAX per KG: {props.chiknData.AVAXperKG}</div>
         <div>
-          BreakEven full value: {props.chiknData.daysToBreakEvenFullValue} days
+          Breakeven(full): {props.chiknData.daysToBreakEvenFullValue} days
         </div>
         <div>
-          BreakEven base value: {props.chiknData.daysToBreakEvenBaseValue} days
+          Breakeven(base): {props.chiknData.daysToBreakEvenBaseValue} days
         </div>
-        <div>Chikn Base Price: {props.chiknData.baseChiknValueInAVAX} AVAX</div>
+        <div>Chikn Base Value: {props.chiknData.baseChiknValueInAVAX} AVAX</div>
       </div>
       <div className="flex grow text-md pt-2 justify-start">
         <div className="flex-col text-sm">
