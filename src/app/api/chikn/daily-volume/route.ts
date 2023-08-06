@@ -21,7 +21,7 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
               },
             },
             token_id: 1,
-            salePrice: 1,
+            soldPrice: { $multiply: [{ $toDouble: '$value' }, 1e-18] },
           },
         },
         {
@@ -46,7 +46,7 @@ const getChiknSalesByDate = async (from: Date, to: Date) => {
               year: { $year: '$block_timestamp' },
             },
             count: { $sum: 1 },
-            volumeAVAX: { $sum: '$salePrice' },
+            volumeAVAX: { $sum: '$soldPrice' },
             lastBlockTimestamp: { $last: '$block_timestamp' },
           },
         },
