@@ -12,12 +12,12 @@ export default function ChiknLayout({
 
   const chiknNavLinks = [
     {
-      name: 'Chikn Market',
-      href: '/chikn',
+      name: 'Roostr Market',
+      href: '/roostr',
     },
     {
-      name: 'Chikn Sniper',
-      href: '/chikn/sniper',
+      name: 'Roostr Sniper',
+      href: '/roostr/sniper',
     },
   ]
 
@@ -42,9 +42,6 @@ export default function ChiknLayout({
               </Link>
             )
           })}
-
-          {/* <Link href="/chikn">Market</Link>
-          <Link href="/chikn/sniper">Sniper</Link> */}
         </ul>
       </nav>
       {children}

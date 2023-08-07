@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import DateRangePicker from '../util-components/DateRangePicker'
-import ChiknVolChart from './ChiknVolChart'
+import RoostrVolChart from './RoostrVolChart'
 
 const initialToDate = new Date()
 const initialFromDate = new Date()
 initialFromDate.setDate(initialToDate.getDate() - 30)
 
-const ChiknChartSection = () => {
+const RoostrVolChartSection = () => {
   const [fromDate, setFromDate] = useState(initialFromDate)
   const [toDate, setToDate] = useState(initialToDate)
 
@@ -27,10 +27,10 @@ const ChiknChartSection = () => {
         ></DateRangePicker>
       </div>
       <div className="flex justify-center">
-        <ChiknVolChart fromDate={fromDate} toDate={toDate} />
+        <RoostrVolChart fromDate={fromDate} toDate={toDate} />
       </div>
     </section>
   )
 }
 
-export default ChiknChartSection
+export default RoostrVolChartSection

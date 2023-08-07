@@ -46,11 +46,11 @@
 
 ## Roostrs Page
 
-- [ ] Tabbed sub nav menu structure
+- [x] Tabbed sub nav menu structure
 
 ### Roostr Market Stats Tab
 
-- [ ] Daily Roostr sales volume, count chart
+- [x] Daily Roostr sales volume, count chart
 - [ ] Best value Roostrs for sale
 - [ ] Latest Roostrs sold feed
 - [ ]

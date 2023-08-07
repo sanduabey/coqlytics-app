@@ -4,13 +4,13 @@ import { useQuery } from '@tanstack/react-query'
 import dynamic from 'next/dynamic'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
-async function getChiknDailyVolumeData(from: Date, to: Date) {
+async function getRoostrDailyVolumeData(from: Date, to: Date) {
   const response = await fetch(
-    `${process.env.HOST}/api/chikn/daily-volume?from=${from}&to=${to}`
+    `${process.env.HOST}/api/roostr/daily-volume?from=${from}&to=${to}`
   )
 
   if (!response.ok) {
-    throw new Error('Failed to fetch Daily Chikn Volume Data')
+    throw new Error('Failed to fetch Daily Roostr Volume Data')
   }
 
   const _response = await response.json()
@@ -21,15 +21,15 @@ const initialToDate = new Date()
 const initialFromDate = new Date()
 initialFromDate.setDate(initialToDate.getDate() - 30)
 
-type ChiknVolChartProps = {
+type RoostrVolChartProps = {
   fromDate: Date
   toDate: Date
 }
 
-const ChiknVolChart = (props: ChiknVolChartProps) => {
+const RoostrVolChart = (props: RoostrVolChartProps) => {
   const { isLoading, isError, data, error, refetch } = useQuery({
-    queryKey: ['chiknVolumes', props.fromDate, props.toDate],
-    queryFn: () => getChiknDailyVolumeData(props.fromDate, props.toDate),
+    queryKey: ['roostrVolumes', props.fromDate, props.toDate],
+    queryFn: () => getRoostrDailyVolumeData(props.fromDate, props.toDate),
     // refetchInterval: 0,
   })
 
@@ -62,7 +62,7 @@ const ChiknVolChart = (props: ChiknVolChartProps) => {
       width: [0, 4],
     },
     title: {
-      text: 'Chikn Sales Volume (AVAX)',
+      text: 'Roostr Sales Volume (AVAX)',
     },
     dataLabels: {
       enabled: true,
@@ -100,4 +100,4 @@ const ChiknVolChart = (props: ChiknVolChartProps) => {
     </div>
   )
 }
-export default ChiknVolChart
+export default RoostrVolChart
