@@ -41,4 +41,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Project tasks
 
-Project tasks are tracked in [a relavive link](TODO.md)
+Project tasks are tracked in [TODO.md](TODO.md)
