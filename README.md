@@ -2,7 +2,7 @@
 
 **Name** : Coqlytics.xyz
 
-**Description** : Tracking [Chikn](https:chikn.farm) marketplace stats and price action.
+**Description** : Tracking [Chikn](https://chikn.farm) marketplace stats and price action.
 
 **Owner** : [@Vktor](https://twitter.com/dr_vktor)
 
