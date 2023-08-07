@@ -1,11 +1,11 @@
 import getDb from '@/utils/database'
 import { NextRequest, NextResponse } from 'next/server'
 
-const chiknCollName: string = 'chikn-sales'
+const chiknCollName: string = 'roostr-sales'
 
 const maxPagesLimit: number = 10
 
-async function getLatestChiknsSold(pageNumber: number = 0) {
+async function getLatestRoostrsSold(pageNumber: number = 0) {
   if (pageNumber > maxPagesLimit) return []
 
   try {
@@ -46,7 +46,7 @@ async function getLatestChiknsSold(pageNumber: number = 0) {
 
     let transformedResults = result.map((item: any) => ({
       id: item._id,
-      chiknId: item.token,
+      roostrId: item.token,
       kg: item.kg,
       price: item.salePrice,
       soldAt: item.lastSoldDate,
@@ -74,7 +74,7 @@ export async function GET(request: NextRequest) {
 
   // console.log('pageNumber:', pageNo)
 
-  let result = await getLatestChiknsSold(Number(pageNo))
+  let result = await getLatestRoostrsSold(Number(pageNo))
 
   // return new Response(JSON.stringify({ data: result }))
   return NextResponse.json({ data: result })

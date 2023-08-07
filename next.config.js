@@ -8,6 +8,12 @@ const nextConfig = {
         port: '',
         pathname: '/api/chikn/thumb/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'api.chikn.farm',
+        port: '',
+        pathname: '/api/roostr/thumb/**',
+      },
     ],
   },
   env: {

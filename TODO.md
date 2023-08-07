@@ -15,6 +15,14 @@
 - [ ] Deploy production
 - [ ] Gamified subscription model
 
+## Data Crons
+
+- [ ] Chikn sales data collection
+- [ ] Roostr sales data collection
+- [ ] FL sales data collection
+- [ ] BluePrint sales data collection
+- [ ] Items sales data collection
+
 ## Home Page
 
 - [ ] Sales volume by NFT collection graph
@@ -51,12 +59,12 @@
 ### Roostr Market Stats Tab
 
 - [x] Daily Roostr sales volume, count chart
-- [ ] Best value Roostrs for sale
-- [ ] Latest Roostrs sold feed
+- [x] Latest Roostrs sold feed
 - [ ]
 
 ### Roostr Sniper Tab
 
+- [ ] Best value Roostrs for sale
 - [ ] Sort by Base value Roostr
 
 ## FarmLands Page
