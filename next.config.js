@@ -26,6 +26,12 @@ const nextConfig = {
         port: '',
         pathname: '/blueprint/thumbnail/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'chikn-farm.sfo3.cdn.digitaloceanspaces.com',
+        port: '',
+        pathname: '/blueprint/onchain/thumbnail/**',
+      },
     ],
   },
   env: {

@@ -1,8 +1,8 @@
 import { useCallback, useRef } from 'react'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import SoldBlueprint from './SoldBlueprint'
+import SoldItem from './SoldItem'
 
-type BlueprintSaleDoc = {
+type ItemSaleDoc = {
   id: string
   tokenId: string
   name: string
@@ -21,19 +21,19 @@ type BlueprintSaleDoc = {
     itemLimit: number
   }
 }
-async function getBlueprintSales(pageNumber: number) {
+async function getItemSales(pageNumber: number) {
   const response = await fetch(
-    `${process.env.HOST}/api/blueprint/recent-sales?pageNo=${pageNumber}`
+    `${process.env.HOST}/api/item/recent-sales?pageNo=${pageNumber}`
   )
 
   if (!response.ok) {
-    throw new Error('Failed to fetch Blueprint data')
+    throw new Error('Failed to fetch Items data')
   }
   const _response = await response.json()
   return _response.data
 }
 
-const RecentBlueprintSalesList = () => {
+const RecentItemSalesList = () => {
   const {
     fetchNextPage,
     hasNextPage,
@@ -42,8 +42,8 @@ const RecentBlueprintSalesList = () => {
     status,
     error,
   } = useInfiniteQuery(
-    ['blueprintsales'],
-    ({ pageParam = 0 }) => getBlueprintSales(pageParam),
+    ['itemsales'],
+    ({ pageParam = 0 }) => getItemSales(pageParam),
     {
       getNextPageParam: (lastPage, allPages) => {
         return lastPage.length ? allPages.length + 1 : undefined
@@ -74,38 +74,34 @@ const RecentBlueprintSalesList = () => {
 
   if (status === 'error') return <p className="center">Error Fetching Data</p>
 
-  const blueprintSalesContent = data?.pages.map((page) => {
-    return page.map((item: BlueprintSaleDoc, index: number) => {
-      let urlPartsArray = item.thumbnail.split('/')
-      let urlLastPart = urlPartsArray[urlPartsArray.length - 1].slice(0, -4)
-
-      const soldBlueprintData = {
+  const itemSalesContent = data?.pages.map((page) => {
+    return page.map((item: ItemSaleDoc, index: number) => {
+      const soldItemData = {
         image: item.thumbnail,
         tokenId: item.tokenId,
         price: Math.round(item.price * 100) / 100,
         soldAt: item.soldAt,
         name: item.name,
         description: item.description,
-        url: `https://chikn.farm/blueprint/${item.properties.base}_${item.properties.token}_${urlLastPart}`,
         tier: item.properties.itemTier,
+        usage: item.properties.usage,
+        maxUsage: item.properties.maximumUsage,
       }
 
       if (index === page.length - 1) {
         return (
-          <SoldBlueprint
+          <SoldItem
             ref={lastSoldItemRef}
             key={item.id}
-            soldBlueprintData={soldBlueprintData}
+            soldItemData={soldItemData}
           />
         )
       }
-      return (
-        <SoldBlueprint key={item.id} soldBlueprintData={soldBlueprintData} />
-      )
+      return <SoldItem key={item.id} soldItemData={soldItemData} />
     })
   })
 
-  return <ul className="p-3"> {blueprintSalesContent} </ul>
+  return <ul className="p-3"> {itemSalesContent} </ul>
 }
 
-export default RecentBlueprintSalesList
+export default RecentItemSalesList
