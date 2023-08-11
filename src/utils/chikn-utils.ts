@@ -1,7 +1,15 @@
 import getDb from './database'
 import { formatDateToDDMMMYYYY, getDatesArray } from './helpers'
+import Moralis from 'moralis'
+import { EvmChain } from '@moralisweb3/common-evm-utils'
+// require('dotenv').config()
+const axios = require('axios')
 
+//Chikn
+const nft: string = 'Chikn'
 const collName: string = 'chikn-sales'
+const nftDataAPIURI: string = 'https://api.chikn.farm/api/chikn/details'
+const address: string = process.env.CHIKN_CONTRACT_ADDRESS as string
 
 export const getChiknSalesByDate = async (from: Date, to: Date) => {
   try {
@@ -114,6 +122,125 @@ export const getChiknSalesByDate = async (from: Date, to: Date) => {
     // console.log(_result)
 
     return _result
+  } catch (error) {
+    throw error
+  }
+}
+
+let skipCount: number = 0
+let maxSkipsToBreak: number = 25
+
+export const downloadAllNFTSalesFromContract = async () => {
+  await Moralis.start({
+    apiKey: process.env.MORALIS_API_KEY,
+    // ...and any other configuration
+  })
+
+  console.log(`Initiating download of ${nft} sales data from  ${address}`)
+
+  const chain = EvmChain.AVALANCHE
+
+  let cursor: any = undefined
+  let loopCount: number = 0
+  let soldCount: number = 0
+  // let toBlock:number = 13469922;
+  //add min block number from db toBlock to start from that block
+
+  while (true) {
+    loopCount++
+    console.log(`Loop # ${loopCount}`)
+
+    let response = await Moralis.EvmApi.nft.getNFTContractTransfers({
+      address,
+      chain,
+      cursor: cursor,
+      limit: 100,
+      // 'toBlock': toBlock,
+    })
+
+    let transfers = response.toJSON()
+    // console.log(transfers);
+
+    let pagesize: number = Number(transfers.page_size)
+
+    for (let i = 0; i < pagesize; i++) {
+      //if value is 0, its a nft mint event. skip..
+      // console.log(transfers.result[i]);
+      if (
+        transfers.result[i] == undefined ||
+        transfers.result[i].value == '0'
+      ) {
+        // console.log(`Skipping..`);
+        continue
+      }
+      soldCount++
+
+      let transferData: any = transfers.result[i]
+      let valueSold: any = Number(transfers.result[i].value) * 1e-18 //converted to AVAX
+
+      // console.log(transfers.result[i]);
+      // if (nft == "Roostr") valueSold = transfers.result[i].salePrice;
+
+      try {
+        let nftDataRes = await axios.get(
+          `${nftDataAPIURI}/${transfers.result[i].token_id}`
+        )
+
+        let nftData = nftDataRes.data
+        // console.log(nftData);
+
+        let docToSave = { ...transferData, ...nftData, collectedAt: new Date() }
+
+        console.log(
+          `${soldCount}) ${nft} #${nftData.token} (${nftData.kg}kg - ${nftData.rarity}) sold for ${valueSold} AVAX on ${transfers.result[i].block_timestamp}`
+        )
+
+        // console.log(docToSave);
+
+        saveSaleToDb(docToSave)
+      } catch (error) {
+        throw error
+      }
+    }
+
+    cursor = transfers.cursor
+
+    console.log(transfers.result[1].block_timestamp)
+
+    //BREAKING WHILE LOOP
+    if (cursor == null) {
+      console.log(`All NFT transfered collected. Breaking WHILE loop.`)
+      break
+    }
+    if (skipCount >= maxSkipsToBreak) {
+      console.log(
+        `Max skip depth ${maxSkipsToBreak} reached. Breaking WHILE loop.`
+      )
+      break
+    }
+  }
+
+  console.log('DONE')
+  return 'DONE'
+}
+
+async function saveSaleToDb(nftTransferData: any) {
+  try {
+    const db = await getDb()
+    let doc = await db
+      .collection(collName)
+      .findOne({ transaction_hash: nftTransferData.transaction_hash })
+
+    if (doc) {
+      // console .log(doc);
+      skipCount++
+      console.log(`record found : ${doc._id}, skipping..`)
+    } else {
+      let result = await db.collection(collName).insertOne(nftTransferData)
+      skipCount = 0
+      console.log(`Savedddd. ${result.insertedId}`)
+      // console.log(result);
+    }
   } catch (error) {
     throw error
   }
