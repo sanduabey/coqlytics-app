@@ -3,14 +3,14 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-export default function ChiknLayout({
+export default function RoostrLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   const pathname = usePathname()
 
-  const chiknNavLinks = [
+  const roostrNavLinks = [
     {
       name: 'Roostr Market',
       href: '/roostr',
@@ -25,7 +25,7 @@ export default function ChiknLayout({
     <>
       <nav className="text-white">
         <ul className="flex gap-4 justify-center">
-          {chiknNavLinks.map((link) => {
+          {roostrNavLinks.map((link) => {
             const isActive = pathname.endsWith(link.href)
 
             return (
