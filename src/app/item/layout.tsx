@@ -3,21 +3,21 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-export default function BlueprintLayout({
+export default function ItemLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   const pathname = usePathname()
 
-  const blueprintNavLinks = [
+  const itemNavLinks = [
     {
-      name: 'Blueprint Market',
-      href: '/blueprint',
+      name: 'Item Market',
+      href: '/item',
     },
     {
-      name: 'Blueprint Sniper',
-      href: '/blueprint/sniper',
+      name: 'Item Sniper',
+      href: '/item/sniper',
     },
   ]
 
@@ -25,7 +25,7 @@ export default function BlueprintLayout({
     <>
       <nav className="text-white">
         <ul className="flex gap-4 justify-center">
-          {blueprintNavLinks.map((link) => {
+          {itemNavLinks.map((link) => {
             const isActive = pathname.endsWith(link.href)
 
             return (
