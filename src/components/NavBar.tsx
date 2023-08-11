@@ -13,11 +13,11 @@ const navLinks = [
     href: '/roostr',
   },
   {
-    name: 'FarmLand',
+    name: 'Farmland',
     href: '/farmland',
   },
   {
-    name: 'BluePrint',
+    name: 'Blueprint',
     href: '/blueprint',
   },
   {
