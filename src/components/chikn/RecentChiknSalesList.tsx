@@ -78,7 +78,7 @@ const RecentChiknSalesList = () => {
       const soldChiknData = {
         image: `https://api.chikn.farm/api/chikn/thumb/${item.chiknId}`,
         tokenId: item.chiknId,
-        price: item.price,
+        price: Math.round(item.price * 100) / 100,
         kg: item.kg,
         soldAt: item.soldAt,
         rarity: item.rarity,

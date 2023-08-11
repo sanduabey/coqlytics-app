@@ -6,11 +6,15 @@ type SoldFarmlandProps = {
   soldFarmlandData: {
     image: string
     tokenId: number
-    size: number
+    size: string
     soldAt: string
     price: number
     rarity: string
-    numOfResources: number
+    bigness: string
+    multiplier: number
+    score: number
+    tiles: Object[]
+    // numOfResources: number
   }
   children?: React.ReactNode
 }
@@ -48,7 +52,7 @@ const SoldFarmland = React.forwardRef<Ref, SoldFarmlandProps>((props, ref) => {
       <div className="flex grow pl-4 pr-4">
         <div className="flex flex-col gap-2 justify-center text-xl w-1/2">
           <div className="">
-            Roostr #{props.soldFarmlandData.tokenId} (
+            Farmland #{props.soldFarmlandData.tokenId} (
             {props.soldFarmlandData.rarity})
           </div>
           <div className=""> Size {props.soldFarmlandData.size}</div>

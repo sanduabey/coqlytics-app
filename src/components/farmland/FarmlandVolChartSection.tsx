@@ -20,7 +20,7 @@ const FarmlandVolChartSection = () => {
     <section className="bg-gray-200">
       <div className="flex justify-end max-w-6xl p-6 ml-auto mr-auto">
         <DateRangePicker
-          name="chiknVolDateRange"
+          name="farmlandVolDateRange"
           onDateRangeChange={dateRangeChangeHander}
           initFrom={fromDate}
           initTo={toDate}

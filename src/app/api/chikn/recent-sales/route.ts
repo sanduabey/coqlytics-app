@@ -27,7 +27,7 @@ async function getLatestChiknsSold(pageNumber: number = 0) {
             _id: 1,
             token: 1,
             lastSoldDate: 1,
-            salePrice: 1,
+            salePrice: { $multiply: [{ $toDouble: '$value' }, 1e-18] },
             kg: 1,
             rarity: 1,
             head: 1,

@@ -1,7 +1,7 @@
 import getDb from '@/utils/database'
 import { NextRequest, NextResponse } from 'next/server'
 
-const chiknCollName: string = 'roostr-sales'
+const collName: string = 'roostr-sales'
 
 const maxPagesLimit: number = 10
 
@@ -16,7 +16,7 @@ async function getLatestRoostrsSold(pageNumber: number = 0) {
     let limit = itemsPerPage
 
     let result = await db
-      .collection(chiknCollName)
+      .collection(collName)
       .find(
         {},
         {
@@ -27,7 +27,7 @@ async function getLatestRoostrsSold(pageNumber: number = 0) {
             _id: 1,
             token: 1,
             lastSoldDate: 1,
-            salePrice: 1,
+            salePrice: { $multiply: [{ $toDouble: '$value' }, 1e-18] },
             kg: 1,
             rarity: 1,
             head: 1,

@@ -28,7 +28,7 @@ type FarmlandVolChartProps = {
 
 const FarmlandVolChart = (props: FarmlandVolChartProps) => {
   const { isLoading, isError, data, error, refetch } = useQuery({
-    queryKey: ['roostrVolumes', props.fromDate, props.toDate],
+    queryKey: ['farmlandVolumes', props.fromDate, props.toDate],
     queryFn: () => getFarmlandDailyVolumeData(props.fromDate, props.toDate),
     // refetchInterval: 0,
   })

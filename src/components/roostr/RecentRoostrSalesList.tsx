@@ -26,7 +26,7 @@ async function getRoostrSales(pageNumber: number) {
   )
 
   if (!response.ok) {
-    throw new Error('Failed to fetch chikn data')
+    throw new Error('Failed to fetch Roostr data')
   }
   const _response = await response.json()
   return _response.data
@@ -78,7 +78,7 @@ const RecentRoostrSalesList = () => {
       const soldRoostrData = {
         image: `https://api.chikn.farm/api/roostr/thumb/${item.roostrId}`,
         tokenId: item.roostrId,
-        price: item.price,
+        price: Math.round(item.price * 100) / 100,
         kg: item.kg,
         soldAt: item.soldAt,
         rarity: item.rarity,
