@@ -1,9 +1,9 @@
 import getDb from './database'
 import { formatDateToDDMMMYYYY, getDatesArray } from './helpers'
 
-const collName: string = 'chikn-sales'
+const collName: string = 'bp-sales'
 
-export const getChiknSalesByDate = async (from: Date, to: Date) => {
+export const getBlueprintSalesByDate = async (from: Date, to: Date) => {
   try {
     const db = await getDb()
 

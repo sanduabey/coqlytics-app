@@ -26,11 +26,7 @@ const SoldFarmland = React.forwardRef<Ref, SoldFarmlandProps>((props, ref) => {
     props.soldFarmlandData.soldAt
   )
 
-  // function chiknClickHandler(id:number):void {
-
-  // }
-
-  const chiknClickHandler = (tokenId: number) => {
+  const imageClickHandler = (tokenId: number) => {
     window.open(`https://chikn.farm/roostr/${tokenId}`)
   }
 
@@ -45,7 +41,7 @@ const SoldFarmland = React.forwardRef<Ref, SoldFarmlandProps>((props, ref) => {
           alt="Image of sold NFT"
           width={200}
           height={200}
-          onClick={chiknClickHandler.bind(null, props.soldFarmlandData.tokenId)}
+          onClick={imageClickHandler.bind(null, props.soldFarmlandData.tokenId)}
           className="rounded-md"
         />
       </div>

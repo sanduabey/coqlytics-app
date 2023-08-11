@@ -1,34 +1,39 @@
 import { useCallback, useRef } from 'react'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import SoldFarmland from './SoldFarmland'
-// import SoldRoostr from './SoldRoostr'
+import SoldBlueprint from './SoldBlueprint'
 
-type FarmlandSaleDoc = {
+type BlueprintSaleDoc = {
   id: string
-  farmId: number
+  tokenId: string
+  name: string
+  description: string
   price: number
-  size: number
   soldAt: string
-  tokenId: number
-  rarity: string
-  bigness: string
-  multiplier: number
-  score: number
-  tiles: Object[]
+  thumbnail: string
+  properties: {
+    token: string
+    base: string
+    index: string
+    usage: number
+    maximumUsage: number
+    resourceCost: Object
+    itemTier: string
+    itemLimit: number
+  }
 }
-async function getFarmlandSales(pageNumber: number) {
+async function getBlueprintSales(pageNumber: number) {
   const response = await fetch(
-    `${process.env.HOST}/api/farmland/recent-sales?pageNo=${pageNumber}`
+    `${process.env.HOST}/api/blueprint/recent-sales?pageNo=${pageNumber}`
   )
 
   if (!response.ok) {
-    throw new Error('Failed to fetch Farmland data')
+    throw new Error('Failed to fetch Blueprint data')
   }
   const _response = await response.json()
   return _response.data
 }
 
-const RecentFarmlandSalesList = () => {
+const RecentBlueprintSalesList = () => {
   const {
     fetchNextPage,
     hasNextPage,
@@ -38,7 +43,7 @@ const RecentFarmlandSalesList = () => {
     error,
   } = useInfiniteQuery(
     ['farmlandsales'],
-    ({ pageParam = 0 }) => getFarmlandSales(pageParam),
+    ({ pageParam = 0 }) => getBlueprintSales(pageParam),
     {
       getNextPageParam: (lastPage, allPages) => {
         return lastPage.length ? allPages.length + 1 : undefined
@@ -69,35 +74,38 @@ const RecentFarmlandSalesList = () => {
 
   if (status === 'error') return <p className="center">Error Fetching Data</p>
 
-  const farmlandSalesContent = data?.pages.map((page) => {
-    return page.map((item: FarmlandSaleDoc, index: number) => {
-      const soldFarmlandData = {
-        image: `https://api.chikn.farm/api/farmland/thumb/${item.farmId}`,
-        tokenId: item.farmId,
+  const blueprintSalesContent = data?.pages.map((page) => {
+    return page.map((item: BlueprintSaleDoc, index: number) => {
+      let urlPartsArray = item.thumbnail.split('/')
+      let urlLastPart = urlPartsArray[urlPartsArray.length - 1].slice(-4)
+
+      const soldBlueprintData = {
+        image: item.thumbnail,
+        tokenId: item.tokenId,
         price: Math.round(item.price * 100) / 100,
-        size: item.size,
         soldAt: item.soldAt,
-        rarity: item.rarity,
-        bigness: item.bigness,
-        multiplier: item.multiplier,
-        score: item.score,
-        tiles: item.tiles,
+        name: item.name,
+        description: item.description,
+        url: `https://chikn.farm/blueprint/${item.properties.base}_${item.properties.token}_${urlLastPart}`,
+        tier: item.properties.itemTier,
       }
 
       if (index === page.length - 1) {
         return (
-          <SoldFarmland
+          <SoldBlueprint
             ref={lastSoldItemRef}
             key={item.id}
-            soldFarmlandData={soldFarmlandData}
+            soldBlueprintData={soldBlueprintData}
           />
         )
       }
-      return <SoldFarmland key={item.id} soldFarmlandData={soldFarmlandData} />
+      return (
+        <SoldBlueprint key={item.id} soldBlueprintData={soldBlueprintData} />
+      )
     })
   })
 
-  return <ul className="p-3"> {farmlandSalesContent} </ul>
+  return <ul className="p-3"> {blueprintSalesContent} </ul>
 }
 
-export default RecentFarmlandSalesList
+export default RecentBlueprintSalesList
