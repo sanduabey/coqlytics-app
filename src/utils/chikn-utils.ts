@@ -128,9 +128,9 @@ export const getChiknSalesByDate = async (from: Date, to: Date) => {
 }
 
 let skipCount: number = 0
-let maxSkipsToBreak: number = 25
+let maxSkipsToBreak: number = 10
 
-export const downloadAllNFTSalesFromContract = async () => {
+export const startChiknDataCron = async () => {
   await Moralis.start({
     apiKey: process.env.MORALIS_API_KEY,
     // ...and any other configuration

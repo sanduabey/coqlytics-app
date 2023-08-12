@@ -1,4 +1,4 @@
-import { startChiknDataCron } from '@/utils/chikn-utils'
+import { startRoostrDataCron } from '@/utils/roostr-utils'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
@@ -11,11 +11,11 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const res = await startChiknDataCron()
+    const res = await startRoostrDataCron()
 
     if (res === 'DONE') {
       return NextResponse.json(
-        { message: 'Chikn data cron successfully finished.' },
+        { message: 'Roostr data cron successfully finished.' },
         { status: 200 }
       )
     } else {
