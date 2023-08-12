@@ -127,7 +127,7 @@ export const getRoostrSalesByDate = async (from: Date, to: Date) => {
 }
 
 let skipCount: number = 0
-let maxSkipsToBreak: number = 10
+const maxSkipsToBreak: number = 10
 
 export const startRoostrDataCron = async () => {
   await Moralis.start({

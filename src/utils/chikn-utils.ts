@@ -128,7 +128,7 @@ export const getChiknSalesByDate = async (from: Date, to: Date) => {
 }
 
 let skipCount: number = 0
-let maxSkipsToBreak: number = 10
+const maxSkipsToBreak: number = 10
 
 export const startChiknDataCron = async () => {
   await Moralis.start({

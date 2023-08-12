@@ -1,7 +1,13 @@
 import getDb from './database'
 import { formatDateToDDMMMYYYY, getDatesArray } from './helpers'
+import Moralis from 'moralis'
+import { EvmChain } from '@moralisweb3/common-evm-utils'
+const axios = require('axios')
 
+const nft: string = 'Farmland'
 const collName: string = 'farmland-sales'
+const nftDataAPIURI: string = 'https://api.chikn.farm/api/farmland/details'
+const address: string = process.env.FARMLAND_CONTRACT_ADDRESS as string
 
 export const getFarmlandSalesByDate = async (from: Date, to: Date) => {
   try {
@@ -115,6 +121,162 @@ export const getFarmlandSalesByDate = async (from: Date, to: Date) => {
 
     return _result
   } catch (error) {
+    throw error
+  }
+}
+
+let skipCount: number = 0
+const maxSkipsToBreak: number = 10
+
+export const startFarmlandDataCron = async () => {
+  await Moralis.start({
+    apiKey: process.env.MORALIS_API_KEY,
+    // ...and any other configuration
+  })
+
+  console.log(`Initiating download of ${nft} sales data from  ${address}`)
+
+  const chain = EvmChain.AVALANCHE
+
+  let cursor: any = undefined
+  let loopCount: number = 0
+  let soldCount: number = 0
+  // let toBlock:number = 25676100;
+
+  while (true) {
+    loopCount++
+    console.log(`Loop # ${loopCount}`)
+
+    const response = await Moralis.EvmApi.nft.getNFTContractTransfers({
+      address,
+      chain,
+      cursor: cursor,
+      limit: 100,
+      // 'toBlock': toBlock,
+    })
+
+    let transfers = response.toJSON()
+    // console.log(transfers);
+
+    let pagesize: number = Number(transfers.page_size)
+
+    let nftTranferCount: number = 0
+
+    for (let i = 0; i < pagesize; i++) {
+      //if value is 0, its a nft mint event. skip..
+      // console.log(transfers.result[i]);
+      if (
+        transfers.result[i] == undefined ||
+        transfers.result[i].value == '0'
+      ) {
+        // console.log(`Skipping..`);
+        continue
+      }
+      nftTranferCount++
+
+      // console.log(`NFT transfer # ${nftTranferCount} count in Loop ${loopCount}`);
+      // console.log(transfers.result[i]);
+
+      let tokenId = transfers.result[i].token_id
+      let valueSold: any = Number(transfers.result[i].value) * 1e-18 //converted to AVAX
+
+      let nftMetaDataResponse = await Moralis.EvmApi.nft.getNFTMetadata({
+        address,
+        chain,
+        tokenId,
+      })
+      let nftMetaData: any = nftMetaDataResponse?.toJSON()
+
+      // console.log(nftMetaData);
+
+      if (nftMetaData) {
+        let tokenUri = nftMetaData?.token_uri
+
+        //   console.log(`TokenURI: ${tokenUri}`);
+        //   console.log(nftMetaData);
+
+        try {
+          //Get Farmland data
+          let nftDataRes = await axios.get(tokenUri)
+
+          soldCount++
+
+          console.log(
+            `${soldCount}) Sold ${nftDataRes.data.name} ${nft} for ${valueSold} AVAX on ${transfers.result[i].block_timestamp}`
+          )
+
+          let transferData: any = transfers.result[i]
+
+          //renaming key of metadata object
+          nftMetaData['block_number_metadata'] = nftMetaData['block_number']
+          delete nftMetaData['block_number']
+
+          let nftData: any = nftDataRes.data
+          // console.log(nftData);
+          //Get Farmland tiles details
+
+          let tilesDatailsRes = await axios.get(`${nftDataAPIURI}/${tokenId}`)
+          let tilesData = tilesDatailsRes.data
+
+          // console.log(tilesData);
+          // console.dir(tilesData, { depth: null, colors: true });
+
+          let docToSave = {
+            ...transferData,
+            ...nftMetaData,
+            ...nftData,
+            ...tilesData,
+            collectedAt: new Date(),
+          }
+
+          // console.dir(docToSave);
+
+          saveSaleToDb(docToSave)
+        } catch (error: any) {
+          //handle errors
+          console.log(`Error hitting ${error.host}`)
+          // throw error;
+        }
+      }
+    }
+
+    cursor = transfers.cursor
+
+    console.log(transfers.result[1].block_timestamp)
+
+    //BREAKING WHILE LOOP
+    if (cursor == null) {
+      console.log(`All NFT transfered collected. Breaking WHILE loop.`)
+      break
+    }
+    if (skipCount >= maxSkipsToBreak) {
+      console.log(`Max skip depth reached. Breaking WHILE loop.`)
+      break
+    }
+  }
+
+  console.log('DONE')
+  return 'DONE'
+}
+
+async function saveSaleToDb(nftTransferData: any) {
+  try {
+    const db = await getDb()
+    let doc = await db
+      .collection(collName)
+      .findOne({ transaction_hash: nftTransferData.transaction_hash })
+
+    if (doc) {
+      // console .log(doc);
+      skipCount++
+      console.log(`record found : ${doc._id}, skipping..`)
+    } else {
+      let result = await db.collection(collName).insertOne(nftTransferData)
+      skipCount = 0
+      console.log(`Savedddd. ${result.insertedId}`)
+      // console.log(result);
+    }
+  } catch (error: any) {
     throw error
   }
 }
