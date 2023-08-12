@@ -187,13 +187,8 @@ export const startFarmlandDataCron = async () => {
       })
       let nftMetaData: any = nftMetaDataResponse?.toJSON()
 
-      // console.log(nftMetaData);
-
       if (nftMetaData) {
         let tokenUri = nftMetaData?.token_uri
-
-        //   console.log(`TokenURI: ${tokenUri}`);
-        //   console.log(nftMetaData);
 
         try {
           //Get Farmland data
@@ -231,7 +226,14 @@ export const startFarmlandDataCron = async () => {
 
           // console.dir(docToSave);
 
-          saveSaleToDb(docToSave)
+          let result = await saveSaleToDb(docToSave)
+          //immediate break while loop
+          if (result === 'MAX_SKIP_REACHED') {
+            console.log(
+              `Max skip depth ${maxSkipsToBreak} reached. Breaking WHILE loop.`
+            )
+            break
+          }
         } catch (error: any) {
           //handle errors
           console.log(`Error hitting ${error.host}`)
@@ -269,16 +271,20 @@ async function saveSaleToDb(nftTransferData: any) {
       .findOne({ transaction_hash: nftTransferData.transaction_hash })
 
     if (doc) {
-      // console .log(doc);
       skipCount++
       console.log(`record found : ${doc._id}, skipping..`)
+
+      if (skipCount >= maxSkipsToBreak) {
+        return 'MAX_SKIP_REACHED'
+      }
+      return 'SKIPPED'
     } else {
       let result = await db.collection(collName).insertOne(nftTransferData)
       skipCount = 0
       console.log(`Savedddd. ${result.insertedId}`)
-      // console.log(result);
+      return 'SAVED'
     }
-  } catch (error: any) {
+  } catch (error) {
     throw error
   }
 }
