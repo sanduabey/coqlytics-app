@@ -240,7 +240,9 @@ export const startBlueprintDataCron = async () => {
       break
     }
     if (skipCount >= maxSkipsToBreak) {
-      console.log(`Max skip depth reached. Breaking WHILE loop.`)
+      console.log(
+        `Max skip depth ${maxSkipsToBreak} reached. Breaking WHILE loop.`
+      )
       break
     }
   }
