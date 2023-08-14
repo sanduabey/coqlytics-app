@@ -24,6 +24,9 @@ module.exports = {
         chiknred: {
           DEFAULT: '#df3f3d',
         },
+        chikngold: {
+          DEFAULT: '#FFD700',
+        },
       },
     },
   },

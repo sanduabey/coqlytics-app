@@ -32,7 +32,11 @@ const SoldFarmland = React.forwardRef<Ref, SoldFarmlandProps>((props, ref) => {
 
   return (
     <li
-      className="flex text-white p-3 bg-chiknpurple-dark rounded-md m-2 max-w-5xl ml-auto mr-auto"
+      className={`flex text-white p-3 bg-chiknpurple-dark rounded-md m-2 max-w-5xl ml-auto mr-auto ${
+        props.soldFarmlandData.rarity
+          ? 'border-solid border-chikngold border-2'
+          : ''
+      } `}
       ref={ref}
     >
       <div className="cursor-pointer">
@@ -47,20 +51,25 @@ const SoldFarmland = React.forwardRef<Ref, SoldFarmlandProps>((props, ref) => {
       </div>
       <div className="flex grow pl-4 pr-4">
         <div className="flex flex-col gap-2 justify-center text-xl w-1/2">
-          <div className="">
+          <div
+            className={props.soldFarmlandData.rarity ? 'text-chikngold' : ''}
+          >
             Farmland #{props.soldFarmlandData.tokenId}
             {props.soldFarmlandData.rarity &&
               ` (${props.soldFarmlandData.rarity})`}{' '}
             - {props.soldFarmlandData.bigness}
           </div>
-          <div className=""> {props.soldFarmlandData.price} AVAX</div>
-          <div className="">
+          <div> {props.soldFarmlandData.price} AVAX</div>
+          <div>
             {' '}
             bigness: {props.soldFarmlandData.size} (
             {props.soldFarmlandData.multiplier}x)
           </div>
-          <div className=""> score: {props.soldFarmlandData.score} </div>
-          <div className="text-xs">
+          <div> score: {props.soldFarmlandData.score} </div>
+          <div
+            className={`text-xs 
+              `}
+          >
             Sold on {soldDate} @ {soldTime} UTC
           </div>
         </div>
