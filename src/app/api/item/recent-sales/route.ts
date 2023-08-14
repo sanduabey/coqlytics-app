@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const collName: string = 'item-sales'
 
-const maxPagesLimit: number = 10
+const maxPagesLimit: number = 50
 
 async function getLatestItemSold(pageNumber: number = 0) {
   if (pageNumber > maxPagesLimit) return []

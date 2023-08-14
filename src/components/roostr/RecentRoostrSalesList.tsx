@@ -45,7 +45,7 @@ const RecentRoostrSalesList = () => {
     ({ pageParam = 0 }) => getRoostrSales(pageParam),
     {
       getNextPageParam: (lastPage, allPages) => {
-        return lastPage.length ? allPages.length + 1 : undefined
+        return lastPage.length ? allPages.length : undefined
       },
     }
   )

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const chiknCollName: string = 'chikn-sales'
 
-const maxPagesLimit: number = 10
+const maxPagesLimit: number = 50
 
 async function getLatestChiknsSold(pageNumber: number = 0) {
   if (pageNumber > maxPagesLimit) return []

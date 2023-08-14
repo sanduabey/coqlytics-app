@@ -46,7 +46,7 @@ const RecentBlueprintSalesList = () => {
     ({ pageParam = 0 }) => getBlueprintSales(pageParam),
     {
       getNextPageParam: (lastPage, allPages) => {
-        return lastPage.length ? allPages.length + 1 : undefined
+        return lastPage.length ? allPages.length : undefined
       },
     }
   )

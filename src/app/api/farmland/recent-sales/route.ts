@@ -3,9 +3,10 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const collName: string = 'farmland-sales'
 
-const maxPagesLimit: number = 10
+const maxPagesLimit: number = 50
 
 async function getLatestFarmlandSold(pageNumber: number = 0) {
+  // console.log('page:', pageNumber)
   if (pageNumber > maxPagesLimit) return []
 
   try {
@@ -20,13 +21,13 @@ async function getLatestFarmlandSold(pageNumber: number = 0) {
       .find(
         {},
         {
-          sort: { lastSoldDate: -1 },
+          sort: { block_timestamp: -1 },
           skip: skip,
           limit: limit,
           projection: {
             _id: 1,
             token: 1,
-            lastSoldDate: 1,
+            block_timestamp: 1,
             salePrice: { $multiply: [{ $toDouble: '$value' }, 1e-18] },
             size: 1,
             rarity: 1,
@@ -46,7 +47,7 @@ async function getLatestFarmlandSold(pageNumber: number = 0) {
       farmId: item.token,
       kg: item.kg,
       price: item.salePrice,
-      soldAt: item.lastSoldDate,
+      soldAt: item.block_timestamp,
       size: item.size,
       rarity: item.rarity,
       bigness: item.bigness,

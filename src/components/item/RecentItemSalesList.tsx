@@ -46,7 +46,7 @@ const RecentItemSalesList = () => {
     ({ pageParam = 0 }) => getItemSales(pageParam),
     {
       getNextPageParam: (lastPage, allPages) => {
-        return lastPage.length ? allPages.length + 1 : undefined
+        return lastPage.length ? allPages.length : undefined
       },
     }
   )

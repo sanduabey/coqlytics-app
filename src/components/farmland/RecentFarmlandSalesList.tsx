@@ -7,7 +7,7 @@ type FarmlandSaleDoc = {
   id: string
   farmId: number
   price: number
-  size: number
+  size: string
   soldAt: string
   tokenId: number
   rarity: string
@@ -41,7 +41,7 @@ const RecentFarmlandSalesList = () => {
     ({ pageParam = 0 }) => getFarmlandSales(pageParam),
     {
       getNextPageParam: (lastPage, allPages) => {
-        return lastPage.length ? allPages.length + 1 : undefined
+        return lastPage.length ? allPages.length : undefined
       },
     }
   )
