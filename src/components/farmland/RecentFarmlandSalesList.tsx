@@ -80,7 +80,7 @@ const RecentFarmlandSalesList = () => {
         rarity: item.rarity,
         bigness: item.bigness,
         multiplier: item.multiplier,
-        score: item.score,
+        score: Math.round(item.score * 10) / 10,
         tiles: item.tiles,
       }
 
