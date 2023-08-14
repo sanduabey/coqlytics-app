@@ -33,6 +33,7 @@
 - [ ] Top FarmLand sales
 - [ ] Top BluePrint sales
 - [ ] Top Item sales
+- [ ] Unique buyers vs Unique sellers chart
 
 ## Chikns Page
 
@@ -66,28 +67,50 @@
 
 - [ ] Best value Roostrs for sale
 - [ ] Sort by Base value Roostr
+- [ ] Cheapest Roostrs with N of X traits (eg. 3 emptys, 2 tungsten)
 
 ## FarmLands Page
 
-- [ ] Daily FarmLand sales volume, count chart
+- [x] Tabbed sub nav menu structure
+
+### Farmland Market Stats Tab
+
+- [x] Daily FarmLand sales volume, count chart
+- [x] Latest FL sold feed
+- [ ]
+
+### Farmland Sniper Tab
+
 - [ ] Best value FarmLands for sale
-- [ ] Latest FL sold feed
-- [ ]
-- [ ]
+- [ ] Find farmlands with N of X tiles (eg. 9 empty tiles, 3 thungsten)
 
 ## BluePrints Page
 
-- [ ] Daily BluePrint sales volume, count chart
-- [ ] Latest BluePrints sold feed
+- [x] Tabbed sub nav menu structure
+
+## Blueprint market Stats Tab
+
+- [x] Daily BluePrint sales volume, count chart
+- [x] Latest BluePrints sold feed
 - [ ]
+
+## Blueprint Sniper Tab
+
 - [ ]
 
 ## Items Page
 
-- [ ] Daily Item sales volume, count chart
-- [ ] Latest Items sold feed
+- [x] Tabbed sub nav menu structure
+
+### Item Market Stats Tab
+
+- [x] Daily Item sales volume, count chart
+- [x] Latest Items sold feed
 - [ ] Top Item sellers, sold Items volume , count
 - [ ] Top Items sold by volume, count
+
+### Item Sniper Tab
+
 - [ ]
 
 ### Per Item Page
