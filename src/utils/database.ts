@@ -2,12 +2,18 @@ import { MongoClient } from 'mongodb'
 
 var uri = `${process.env.DB_URI}`
 
-var _db: any
+declare global {
+  namespace globalThis {
+    var _db: Promise<MongoClient>
+  }
+}
+
+// var _db: any
 
 export default async function getDb() {
-  if (_db) {
+  if (global._db) {
     // callback(null, _db);
-    return _db
+    return global._db
   } else {
     console.log('Connecting to MongoDB...')
     console.log(uri)
@@ -20,10 +26,10 @@ export default async function getDb() {
 
       let db: any = await client.db(process.env.DB_NAME)
 
-      _db = db
+      global._db = db
       console.log('Connected to DB')
       // callback(null, _db);
-      return _db
+      return global._db
     } catch (error) {
       throw error
     }

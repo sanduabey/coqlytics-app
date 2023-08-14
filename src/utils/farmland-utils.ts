@@ -227,10 +227,10 @@ export const startFarmlandDataCron = async () => {
           // console.dir(docToSave);
 
           let result = await saveSaleToDb(docToSave)
-          //immediate break while loop
+          //break for loop
           if (result === 'MAX_SKIP_REACHED') {
             console.log(
-              `Max skip depth ${maxSkipsToBreak} reached. Breaking WHILE loop.`
+              `Max skip depth ${maxSkipsToBreak} reached. Breaking FOR loop.`
             )
             break
           }
@@ -243,8 +243,6 @@ export const startFarmlandDataCron = async () => {
     }
 
     cursor = transfers.cursor
-
-    console.log(transfers.result[1].block_timestamp)
 
     //BREAKING WHILE LOOP
     if (cursor == null) {
