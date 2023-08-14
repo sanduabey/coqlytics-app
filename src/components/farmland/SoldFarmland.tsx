@@ -48,11 +48,18 @@ const SoldFarmland = React.forwardRef<Ref, SoldFarmlandProps>((props, ref) => {
       <div className="flex grow pl-4 pr-4">
         <div className="flex flex-col gap-2 justify-center text-xl w-1/2">
           <div className="">
-            Farmland #{props.soldFarmlandData.tokenId} (
-            {props.soldFarmlandData.rarity})
+            Farmland #{props.soldFarmlandData.tokenId}
+            {props.soldFarmlandData.rarity &&
+              ` (${props.soldFarmlandData.rarity})`}{' '}
+            - {props.soldFarmlandData.bigness}
           </div>
-          <div className=""> Size {props.soldFarmlandData.size}</div>
           <div className=""> {props.soldFarmlandData.price} AVAX</div>
+          <div className="">
+            {' '}
+            bigness: {props.soldFarmlandData.size} (
+            {props.soldFarmlandData.multiplier}x)
+          </div>
+          <div className=""> score: {props.soldFarmlandData.score} </div>
           <div className="text-xs">
             Sold on {soldDate} @ {soldTime} UTC
           </div>
