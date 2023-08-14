@@ -8,11 +8,8 @@ declare global {
   }
 }
 
-// var _db: any
-
 export default async function getDb() {
   if (global._db) {
-    // callback(null, _db);
     return global._db
   } else {
     console.log('Connecting to MongoDB...')
@@ -28,7 +25,7 @@ export default async function getDb() {
 
       global._db = db
       console.log('Connected to DB')
-      // callback(null, _db);
+
       return global._db
     } catch (error) {
       throw error
