@@ -27,7 +27,7 @@ const SoldFarmland = React.forwardRef<Ref, SoldFarmlandProps>((props, ref) => {
   )
 
   const imageClickHandler = (tokenId: number) => {
-    window.open(`https://chikn.farm/roostr/${tokenId}`)
+    window.open(`https://chikn.farm/farm/${tokenId}`)
   }
 
   return (
