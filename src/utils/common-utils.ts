@@ -1,4 +1,9 @@
+import { getBlueprintSalesByDate } from './blueprint-utils'
+import { getChiknSalesByDate } from './chikn-utils'
 import getDb from './database'
+import { getFarmlandSalesByDate } from './farmland-utils'
+import { getItemSalesByDate } from './item-utils'
+import { getRoostrSalesByDate } from './roostr-utils'
 
 export const updateOutlierConfig = async (key: string, value: any) => {
   try {
@@ -53,4 +58,68 @@ export function getOutlierBoundary(array: number[]): {
   let minValue = q1 - iqr * OUTLIER_FACTOR
 
   return { minBoundary: minValue, maxBoundary: maxValue }
+}
+
+const sleep = async (milliseconds: number) => {
+  await new Promise((resolve) => {
+    return setTimeout(resolve, milliseconds)
+  })
+}
+
+export const getAllCollectionSalesByDate = async (from: Date, to: Date) => {
+  try {
+    // const chiknSales = await getChiknSalesByDate(from, to)
+    // const roostrSales = await getRoostrSalesByDate(from, to)
+    // const farmlandSales = await getFarmlandSalesByDate(from, to)
+    // const blueprintSales = await getBlueprintSalesByDate(from, to)
+    // const itemSales = await getItemSalesByDate(from, to)
+
+    let results = await Promise.all([
+      getChiknSalesByDate(from, to),
+      getRoostrSalesByDate(from, to),
+    ])
+
+    // const results = await Promise.all([getChiknSalesByDate(from, to)])
+
+    console.log(results)
+
+    // const dateLabelsArr = chiknSales.dateLabels
+
+    // let totalVolumeArr = []
+    // let totalCountArr = []
+
+    // for (let i = 0; i < dateLabelsArr.length; i++) {
+    //   totalVolumeArr[i] =
+    //     chiknSales.volumes[i] +
+    //     roostrSales.volumes[i] +
+    //     farmlandSales.volumes[i] +
+    //     blueprintSales.volumes[i] +
+    //     itemSales.volumes[i]
+    //   totalCountArr[i] =
+    //     chiknSales.counts[i] +
+    //     roostrSales.counts[i] +
+    //     farmlandSales.counts[i] +
+    //     blueprintSales.counts[i] +
+    //     itemSales.counts[i]
+    // }
+
+    // let totalSales = {
+    //   dateLabels: dateLabelsArr,
+    //   counts: totalCountArr,
+    //   volumes: totalVolumeArr,
+    // }
+
+    // const result = {
+    //   chiknSales,
+    //   roostrSales,
+    //   farmlandSales,
+    //   blueprintSales,
+    //   itemSales,
+    //   totalSales,
+    // }
+
+    return 1
+  } catch (error) {
+    throw error
+  }
 }
