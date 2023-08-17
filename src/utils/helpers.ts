@@ -96,7 +96,7 @@ export function numberWithCommas(x: number) {
   return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
 }
 
-const PRICE_OUTLIER_FACTOR: number = 0.8
+const OUTLIER_FACTOR: number = 0.8
 export function getOutlierBoundary(array: number[]): {
   minBoundary: number
   maxBoundary: number
@@ -112,8 +112,8 @@ export function getOutlierBoundary(array: number[]): {
   //inter quartile range
   let iqr = q3 - q1
 
-  let maxValue = q3 + iqr * PRICE_OUTLIER_FACTOR
-  let minValue = q1 - iqr * PRICE_OUTLIER_FACTOR
+  let maxValue = q3 + iqr * OUTLIER_FACTOR
+  let minValue = q1 - iqr * OUTLIER_FACTOR
 
   return { minBoundary: minValue, maxBoundary: maxValue }
 }
