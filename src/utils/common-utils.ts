@@ -32,3 +32,25 @@ export const updateOutlierConfig = async (key: string, value: any) => {
     throw error
   }
 }
+
+const OUTLIER_FACTOR: number = 0.8
+export function getOutlierBoundary(array: number[]): {
+  minBoundary: number
+  maxBoundary: number
+} {
+  let values = array.concat()
+
+  //sort
+  values.sort((a, b) => a - b)
+
+  let q1 = values[Math.floor(values.length / 4)]
+  let q3 = values[Math.ceil(values.length * (3 / 4))]
+
+  //inter quartile range
+  let iqr = q3 - q1
+
+  let maxValue = q3 + iqr * OUTLIER_FACTOR
+  let minValue = q1 - iqr * OUTLIER_FACTOR
+
+  return { minBoundary: minValue, maxBoundary: maxValue }
+}

@@ -1,6 +1,5 @@
 import { getLastNDaysChiknSalePrices } from '@/utils/chikn-utils'
-import { updateOutlierConfig } from '@/utils/common-utils'
-import { getOutlierBoundary } from '@/utils/helpers'
+import { getOutlierBoundary, updateOutlierConfig } from '@/utils/common-utils'
 import { NextRequest, NextResponse } from 'next/server'
 
 const DAYS_FOR_BOUNDARY_CALCULATION: number = 30

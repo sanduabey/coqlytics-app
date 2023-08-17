@@ -9,7 +9,7 @@ export const GET = async (request: NextRequest) => {
       key: 'chiknPriceOutlierBoundary',
     })
 
-    console.log(result)
+    // console.log(result)
 
     if (result) {
       return NextResponse.json(
@@ -21,7 +21,7 @@ export const GET = async (request: NextRequest) => {
     } else {
       return NextResponse.json(
         {
-          error: 'Price Outlier boundary cannot be fetched',
+          error: 'Price outlier boundary cannot be fetched',
         },
         { status: 500 }
       )
