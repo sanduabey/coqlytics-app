@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react'
 import SoldChikn from './SoldChikn'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
 type chiknSaleDoc = {
   id: string
@@ -32,7 +32,30 @@ async function getChiknSales(pageNumber: number) {
   return _response.data
 }
 
+const getChiknPriceBoundary = async () => {
+  const response = await fetch(`${process.env.HOST}/api/chikn/price-boundary`)
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch price boundary')
+  }
+
+  const _response = await response.json()
+
+  return _response.data
+}
+
 const RecentChiknSalesList = () => {
+  //query price boundary
+
+  const boundaryResponse = useQuery({
+    queryKey: ['chiknPriceBoundary'],
+    queryFn: () => getChiknPriceBoundary(),
+  })
+
+  // if (boundaryResponse.isError) return <div>failed to load boundary</div>
+  // if (boundaryResponse.isLoading) return <div>loading boundary...</div>
+
+  //query recent chikn sales
   const {
     fetchNextPage,
     hasNextPage,
@@ -99,10 +122,17 @@ const RecentChiknSalesList = () => {
             ref={lastSoldItemRef}
             key={item.id}
             soldChiknData={soldChiknData}
+            priceBoundary={boundaryResponse.data}
           />
         )
       }
-      return <SoldChikn key={item.id} soldChiknData={soldChiknData} />
+      return (
+        <SoldChikn
+          key={item.id}
+          soldChiknData={soldChiknData}
+          priceBoundary={boundaryResponse.data}
+        />
+      )
     })
   })
 

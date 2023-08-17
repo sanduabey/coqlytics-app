@@ -20,6 +20,10 @@ type SoldChiknProps = {
     background: string
     numOfTraits: number
   }
+  priceBoundary: {
+    minBoundaryAVAX: number
+    maxBoundaryAVAX: number
+  }
   children?: React.ReactNode
 }
 
@@ -40,7 +44,11 @@ const SoldChikn = React.forwardRef<Ref, SoldChiknProps>((props, ref) => {
 
   return (
     <li
-      className="flex text-white p-3 bg-chiknpurple-dark rounded-md m-2 max-w-5xl ml-auto mr-auto"
+      className={`flex text-white p-3 bg-chiknpurple-dark rounded-md m-2 max-w-5xl ml-auto mr-auto ${
+        props.soldChiknData.price >= props.priceBoundary.maxBoundaryAVAX
+          ? 'border-solid border-2 border-chikngold'
+          : ''
+      }`}
       ref={ref}
     >
       <div className="cursor-pointer">
