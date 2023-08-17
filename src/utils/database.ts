@@ -1,10 +1,10 @@
-import { MongoClient } from 'mongodb'
+import { Db, MongoClient } from 'mongodb'
 
 var uri = `${process.env.DB_URI}`
 
 declare global {
   namespace globalThis {
-    var _db: Promise<MongoClient>
+    var _db: Promise<Db>
   }
 }
 

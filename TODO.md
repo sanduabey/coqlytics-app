@@ -42,7 +42,8 @@
 ### Market Stats Tab
 
 - [x] Daily Chikn sales volume, sales count chart
-- [x] Latest 100 Chikns sold feed
+- [x] Latest Chikns sold feed
+- [ ] Highlight anomaly sales
 
 ### Chikn Sniper Tab
 
@@ -52,6 +53,10 @@
 - [x] Sort by fastest breakeven full price
 - [x] Sort by fastest breakeven base price
 - [ ] Max sale price dropdown
+
+### Chikn Investment Strategy Tab
+
+- [ ] Optimal Chikns to buy and feed from market for highest returns
 
 ## Roostrs Page
 
@@ -77,7 +82,7 @@
 
 - [x] Daily FarmLand sales volume, count chart
 - [x] Latest FL sold feed
-- [ ]
+- [x] Highlight high score FL sales
 
 ### Farmland Sniper Tab
 
