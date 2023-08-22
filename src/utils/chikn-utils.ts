@@ -17,7 +17,7 @@ export const getChiknSalesByDate = async (from: Date, to: Date) => {
 
     // console.log(from, to)
 
-    let result = await db
+    const result = await db
       .collection(collName)
       .aggregate([
         {

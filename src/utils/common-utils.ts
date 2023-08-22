@@ -60,28 +60,21 @@ export function getOutlierBoundary(array: number[]): {
   return { minBoundary: minValue, maxBoundary: maxValue }
 }
 
-const sleep = async (milliseconds: number) => {
-  await new Promise((resolve) => {
-    return setTimeout(resolve, milliseconds)
-  })
-}
-
 export const getAllCollectionSalesByDate = async (from: Date, to: Date) => {
   try {
-    // const chiknSales = await getChiknSalesByDate(from, to)
-    // const roostrSales = await getRoostrSalesByDate(from, to)
+    const roostrSales = getRoostrSalesByDate(from, to)
+    const chiknSales = getChiknSalesByDate(from, to)
+
     // const farmlandSales = await getFarmlandSalesByDate(from, to)
     // const blueprintSales = await getBlueprintSalesByDate(from, to)
     // const itemSales = await getItemSalesByDate(from, to)
 
-    let results = await Promise.all([
-      getChiknSalesByDate(from, to),
-      getRoostrSalesByDate(from, to),
-    ])
+    let results = await Promise.all([chiknSales, roostrSales])
 
     // const results = await Promise.all([getChiknSalesByDate(from, to)])
 
     console.log(results)
+    // console.log(roostrSales)
 
     // const dateLabelsArr = chiknSales.dateLabels
 

@@ -14,9 +14,9 @@ export const getRoostrSalesByDate = async (from: Date, to: Date) => {
   try {
     const db = await getDb()
 
-    // console.log(from, to)
+    console.log(from, to, collName)
 
-    let result = await db
+    const result = await db
       .collection(collName)
       .aggregate([
         {
@@ -26,7 +26,7 @@ export const getRoostrSalesByDate = async (from: Date, to: Date) => {
                 dateString: '$block_timestamp',
               },
             },
-            token_id: 1,
+            // token_id: 1,
             soldPrice: { $multiply: [{ $toDouble: '$value' }, 1e-18] },
           },
         },
@@ -62,6 +62,8 @@ export const getRoostrSalesByDate = async (from: Date, to: Date) => {
       ])
       .toArray()
 
+    // console.log(result)
+
     // console.dir(result, { maxArrayLength: null })
 
     //data transformation
@@ -69,6 +71,7 @@ export const getRoostrSalesByDate = async (from: Date, to: Date) => {
     const timeZeroed = result.map((dailyData: any) => {
       let timezerodDate = new Date(dailyData.lastBlockTimestamp)
       timezerodDate.setUTCHours(0, 0, 0)
+
       return {
         date: timezerodDate,
         count: dailyData.count,
