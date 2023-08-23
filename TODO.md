@@ -25,7 +25,7 @@
 
 ## Home Page
 
-- [ ] Sales volume by NFT collection graph
+- [x] Sales volume by NFT collection graph
 - [ ] Top buyers
 - [ ] Top sellers
 - [ ] Top Chikn sales
