@@ -14,8 +14,6 @@ export const getRoostrSalesByDate = async (from: Date, to: Date) => {
   try {
     const db = await getDb()
 
-    console.log(from, to, collName)
-
     const result = await db
       .collection(collName)
       .aggregate([
