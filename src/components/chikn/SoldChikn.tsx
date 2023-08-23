@@ -34,10 +34,6 @@ const SoldChikn = React.forwardRef<Ref, SoldChiknProps>((props, ref) => {
     props.soldChiknData.soldAt
   )
 
-  // function chiknClickHandler(id:number):void {
-
-  // }
-
   const chiknClickHandler = (chiknId: number) => {
     window.open(`https://chikn.farm/chikn/${chiknId}`)
   }

@@ -34,7 +34,7 @@ const SoldRoostr = React.forwardRef<Ref, SoldRoostrProps>((props, ref) => {
     props.soldRoostrData.soldAt
   )
 
-  const chiknClickHandler = (tokenId: number) => {
+  const roostrClickHandler = (tokenId: number) => {
     window.open(`https://chikn.farm/roostr/${tokenId}`)
   }
 
@@ -53,7 +53,7 @@ const SoldRoostr = React.forwardRef<Ref, SoldRoostrProps>((props, ref) => {
           alt="Image of sold NFT"
           width={200}
           height={200}
-          onClick={chiknClickHandler.bind(null, props.soldRoostrData.tokenId)}
+          onClick={roostrClickHandler.bind(null, props.soldRoostrData.tokenId)}
           className="rounded-md"
         />
       </div>
