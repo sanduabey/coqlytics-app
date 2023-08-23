@@ -1,11 +1,6 @@
-import { getBlueprintSalesByDate } from './blueprint-utils'
-import { getChiknSalesByDate } from './chikn-utils'
 import getDb from './database'
-import { getFarmlandSalesByDate } from './farmland-utils'
-import { getItemSalesByDate } from './item-utils'
-import { getRoostrSalesByDate } from './roostr-utils'
 
-export const updateOutlierConfig = async (key: string, value: any) => {
+export const updateConfig = async (key: string, value: any) => {
   try {
     const db = await getDb()
 

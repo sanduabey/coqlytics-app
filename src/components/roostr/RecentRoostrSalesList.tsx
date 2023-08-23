@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import SoldRoostr from './SoldRoostr'
 
 type roostrSaleDoc = {
@@ -32,7 +32,24 @@ async function getRoostrSales(pageNumber: number) {
   return _response.data
 }
 
+const getRoostrPriceBoundary = async () => {
+  const response = await fetch(`${process.env.HOST}/api/roostr/price-boundary`)
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch price boundary')
+  }
+
+  const _response = await response.json()
+
+  return _response.data
+}
+
 const RecentRoostrSalesList = () => {
+  const boundaryResponse = useQuery({
+    queryKey: ['roostrPriceBoundary'],
+    queryFn: () => getRoostrPriceBoundary(),
+  })
+
   const {
     fetchNextPage,
     hasNextPage,
@@ -99,10 +116,17 @@ const RecentRoostrSalesList = () => {
             ref={lastSoldItemRef}
             key={item.id}
             soldRoostrData={soldRoostrData}
+            priceBoundary={boundaryResponse.data}
           />
         )
       }
-      return <SoldRoostr key={item.id} soldRoostrData={soldRoostrData} />
+      return (
+        <SoldRoostr
+          key={item.id}
+          soldRoostrData={soldRoostrData}
+          priceBoundary={boundaryResponse.data}
+        />
+      )
     })
   })
 

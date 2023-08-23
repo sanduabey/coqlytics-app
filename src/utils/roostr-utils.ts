@@ -255,3 +255,54 @@ async function saveSaleToDb(nftTransferData: any) {
     throw error
   }
 }
+
+export const getLastNDaysRoostrSalePrices = async (nDays: number) => {
+  let toDate = new Date()
+  let fromDate = new Date()
+  fromDate.setDate(toDate.getDate() - nDays)
+
+  // console.log('HERE', fromDate, toDate)
+
+  try {
+    const db = await getDb()
+
+    let result = await db
+      .collection(collName)
+      .aggregate([
+        {
+          $project: {
+            block_timestamp: {
+              $dateFromString: {
+                dateString: '$block_timestamp',
+              },
+            },
+
+            soldPrice: { $multiply: [{ $toDouble: '$value' }, 1e-18] },
+          },
+        },
+        {
+          $match: {
+            $and: [
+              {
+                block_timestamp: { $lte: toDate },
+              },
+              {
+                block_timestamp: { $gte: fromDate },
+              },
+            ],
+          },
+        },
+      ])
+      .toArray()
+
+    // console.log(result)
+
+    let priceArray = result.map((sold: any) => sold.soldPrice)
+
+    // console.log(priceArray)
+
+    return priceArray
+  } catch (error) {
+    throw error
+  }
+}

@@ -20,6 +20,10 @@ type SoldRoostrProps = {
     background: string
     numOfTraits: number
   }
+  priceBoundary: {
+    minBoundaryAVAX: number
+    maxBoundaryAVAX: number
+  }
   children?: React.ReactNode
 }
 
@@ -30,17 +34,17 @@ const SoldRoostr = React.forwardRef<Ref, SoldRoostrProps>((props, ref) => {
     props.soldRoostrData.soldAt
   )
 
-  // function chiknClickHandler(id:number):void {
-
-  // }
-
   const chiknClickHandler = (tokenId: number) => {
     window.open(`https://chikn.farm/roostr/${tokenId}`)
   }
 
   return (
     <li
-      className="flex text-white p-3 bg-chiknpurple-dark rounded-md m-2 max-w-5xl ml-auto mr-auto"
+      className={`flex text-white p-3 bg-chiknpurple-dark rounded-md m-2 max-w-5xl ml-auto mr-auto ${
+        props.soldRoostrData.price >= props.priceBoundary?.maxBoundaryAVAX
+          ? 'border-solid border-2 border-chikngold'
+          : ''
+      }`}
       ref={ref}
     >
       <div className="cursor-pointer">

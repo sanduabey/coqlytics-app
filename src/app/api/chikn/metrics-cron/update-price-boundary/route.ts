@@ -1,5 +1,5 @@
 import { getLastNDaysChiknSalePrices } from '@/utils/chikn-utils'
-import { getOutlierBoundary, updateOutlierConfig } from '@/utils/common-utils'
+import { getOutlierBoundary, updateConfig } from '@/utils/common-utils'
 import { NextRequest, NextResponse } from 'next/server'
 
 const DAYS_FOR_BOUNDARY_CALCULATION: number = 30
@@ -25,16 +25,19 @@ export async function POST(request: NextRequest) {
     maxBoundaryAVAX: boundary.maxBoundary,
   }
 
-  const result = await updateOutlierConfig(
+  const result = await updateConfig(
     'chiknPriceOutlierBoundary',
     configValueToSave
   )
 
   if (result.acknowledged) {
-    return NextResponse.json({ message: 'Outliers updated' }, { status: 200 })
+    return NextResponse.json(
+      { message: 'Chikn Outlier Boundary config updated' },
+      { status: 200 }
+    )
   } else {
     return NextResponse.json(
-      { error: 'Could not update quartiles. Internal error' },
+      { error: 'Could not update Chikn boundaries. Internal error' },
       { status: 500 }
     )
   }
