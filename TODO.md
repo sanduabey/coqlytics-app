@@ -43,7 +43,7 @@
 
 - [x] Daily Chikn sales volume, sales count chart
 - [x] Latest Chikns sold feed
-- [ ] Highlight anomaly sales
+- [x] Highlight anomaly sales
 
 ### Chikn Sniper Tab
 
@@ -52,7 +52,7 @@
 - [x] Sort by AVAXperKG
 - [x] Sort by fastest breakeven full price
 - [x] Sort by fastest breakeven base price
-- [ ] Max sale price dropdown
+- [x] Max sale price dropdown
 
 ### Chikn Investment Strategy Tab
 
@@ -66,7 +66,7 @@
 
 - [x] Daily Roostr sales volume, count chart
 - [x] Latest Roostrs sold feed
-- [ ]
+- [x] Highlight anomaly sales
 
 ### Roostr Sniper Tab
 
