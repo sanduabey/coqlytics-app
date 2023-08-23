@@ -156,6 +156,10 @@ const AllCollectionVolChart = (props: VolChartProps) => {
 
   const series = [
     {
+      name: 'Total',
+      data: data.totalSales.volumes,
+    },
+    {
       name: 'Chikn',
       data: data.chiknSales.volumes,
     },
@@ -175,22 +179,17 @@ const AllCollectionVolChart = (props: VolChartProps) => {
       name: 'Item',
       data: data.itemSales.volumes,
     },
-    {
-      name: 'Total',
-      data: data.totalSales.volumes,
-    },
   ]
   const options: ApexOptions = {
     chart: {
       height: 350,
-      type: 'line',
     },
     stroke: {
       curve: 'smooth',
-      width: [2, 2, 2, 2, 2, 4],
-      dashArray: [2, 2, 2, 2, 2, 0],
+      width: [4, 2, 2, 2, 2, 2],
+      dashArray: [0, 3, 3, 3, 3, 3],
     },
-    colors: ['#44CCFF', '#B744B8', '#4D8B31', '#3423A6', '#FED18C', '#F44336'],
+    colors: ['#2a2c54', '#df3f3d', '#446DF6', '#23CE6B', '#3423A6', '#DE369D'],
     title: {
       text: 'Marketplace Volume (AVAX)',
     },
@@ -204,7 +203,7 @@ const AllCollectionVolChart = (props: VolChartProps) => {
           val +
           ' - ' +
           opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
-          ''
+          ' AVAX'
         )
       },
     },

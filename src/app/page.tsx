@@ -14,7 +14,7 @@ export default function Home() {
       <QueryClientProvider client={queryClient}>
         <main className="">
           <h1 className="text-red-500"></h1>
-          <PageHeading>AVAX Volume on all Chikn.farm Marketplaces</PageHeading>
+          <PageHeading>Volume across all Coq Marketplaces (AVAX)</PageHeading>
 
           <AllCollectionVolChartSection />
         </main>

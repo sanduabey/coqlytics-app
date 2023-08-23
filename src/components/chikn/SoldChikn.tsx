@@ -45,7 +45,7 @@ const SoldChikn = React.forwardRef<Ref, SoldChiknProps>((props, ref) => {
   return (
     <li
       className={`flex text-white p-3 bg-chiknpurple-dark rounded-md m-2 max-w-5xl ml-auto mr-auto ${
-        props.soldChiknData.price >= props.priceBoundary.maxBoundaryAVAX
+        props.soldChiknData.price >= props.priceBoundary?.maxBoundaryAVAX
           ? 'border-solid border-2 border-chikngold'
           : ''
       }`}
