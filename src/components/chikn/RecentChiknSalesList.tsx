@@ -10,6 +10,7 @@ type chiknSaleDoc = {
   soldAt: string
   tokenId: number
   rarity: string
+  rank: string
   head: string
   neck: string
   torso: string
@@ -98,13 +99,21 @@ const RecentChiknSalesList = () => {
 
   const chiknSalesContent = data?.pages.map((page) => {
     return page.map((item: chiknSaleDoc, index: number) => {
+      //Rarity first letter capitalization
+      const rarityWord = item.rarity
+      const firstLetter = rarityWord.charAt(0)
+      const firstLetterCap = firstLetter.toUpperCase()
+      const remainingLetters = rarityWord.slice(1)
+      const capitalizedRarityWord = firstLetterCap + remainingLetters
+
       const soldChiknData = {
         image: `https://api.chikn.farm/api/chikn/thumb/${item.chiknId}`,
         tokenId: item.chiknId,
         price: Math.round(item.price * 100) / 100,
         kg: item.kg,
         soldAt: item.soldAt,
-        rarity: item.rarity,
+        rarity: capitalizedRarityWord,
+        rank: item.rank,
         head: item.head,
         neck: item.neck,
         torso: item.torso,

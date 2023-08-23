@@ -66,13 +66,20 @@ const SniperChiknList = (props: SniperChiknListPropsType) => {
 
   const forSaleChiknContent = data.map(
     (item: ChiknForSaleType, index: number) => {
+      //Rarity first letter capitalization
+      const rarityWord = item.rarity
+      const firstLetter = rarityWord.charAt(0)
+      const firstLetterCap = firstLetter.toUpperCase()
+      const remainingLetters = rarityWord.slice(1)
+      const capitalizedRarityWord = firstLetterCap + remainingLetters
+
       const forSaleChiknData = {
         index: index + 1,
         image: `https://api.chikn.farm/api/chikn/thumb/${item.token}`,
         tokenId: item.token,
         price: item.salePrice,
         kg: item.kg,
-        rarity: item.rarity,
+        rarity: capitalizedRarityWord,
         head: item.head,
         neck: item.neck,
         torso: item.torso,

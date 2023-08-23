@@ -69,8 +69,9 @@ const ForSaleChikn = (props: ForSaleChiknProps) => {
             [{props.chiknData.kg} Kg - {props.chiknData.eggPerDay} $EGG / day]
           </span>
         </div>
-
-        <div>Rank: {props.chiknData.rank}</div>
+        <div>
+          Rank: {props.chiknData.rank} [{props.chiknData.rarity}]
+        </div>
         <div>
           FEED fed: {props.chiknData.feedAccumulated} (
           {props.chiknData.feedAccumulatedInAVAX} AVAX)

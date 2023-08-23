@@ -1,4 +1,5 @@
 import { ISODateToDateAndTime } from '@/utils/helpers'
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image'
 import React from 'react'
 
@@ -10,6 +11,7 @@ type SoldChiknProps = {
     soldAt: string
     price: number
     rarity: string
+    rank: string
     head: string
     neck: string
     torso: string
@@ -47,7 +49,7 @@ const SoldChikn = React.forwardRef<Ref, SoldChiknProps>((props, ref) => {
       }`}
       ref={ref}
     >
-      <div className="cursor-pointer">
+      <div className="cursor-pointer relative">
         <Image
           src={props.soldChiknData.image}
           alt="Image of sold NFT"
@@ -56,16 +58,25 @@ const SoldChikn = React.forwardRef<Ref, SoldChiknProps>((props, ref) => {
           onClick={chiknClickHandler.bind(null, props.soldChiknData.tokenId)}
           className="rounded-md"
         />
+
+        <div className="absolute top-0 right-0">
+          <ArrowTopRightOnSquareIcon className="h-6 w-6 text-chiknpurple-dark m-1 " />
+        </div>
       </div>
       <div className="flex grow pl-4 pr-4">
-        <div className="flex flex-col gap-2 justify-center text-xl w-1/2">
-          <div className="">
-            Chikn #{props.soldChiknData.tokenId} ({props.soldChiknData.rarity})
+        <div className="flex flex-col gap-2 justify-center text-l w-1/2">
+          <div className="text-2xl">
+            Chikn #{props.soldChiknData.tokenId} [{props.soldChiknData.kg} Kg]
           </div>
-          <div className=""> {props.soldChiknData.kg} Kg</div>
-          <div className=""> {props.soldChiknData.price} AVAX</div>
+          <div>
+            Rank: {props.soldChiknData.rank} [{props.soldChiknData.rarity}]
+          </div>
+
+          <div className="">Sold for {props.soldChiknData.price} AVAX</div>
+          <div></div>
+          <div></div>
           <div className="text-xs">
-            Sold on {soldDate} @ {soldTime} UTC
+            On {soldDate} @ {soldTime} UTC
           </div>
         </div>
         <div className="flex grow text-md pt-2 justify-start">
