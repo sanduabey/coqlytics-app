@@ -190,7 +190,7 @@ const AllCollectionVolChart = (props: VolChartProps) => {
       width: [2, 2, 2, 2, 2, 4],
       dashArray: [2, 2, 2, 2, 2, 0],
     },
-    colors: ['#FE654F', '#B744B8', '#1EA896', '#3423A6', '#FED18C', '#000000'],
+    colors: ['#44CCFF', '#B744B8', '#4D8B31', '#3423A6', '#FED18C', '#F44336'],
     title: {
       text: 'Marketplace Volume (AVAX)',
     },
@@ -274,7 +274,6 @@ const AllCollectionVolChart = (props: VolChartProps) => {
 
   return (
     <>
-      <div>All Collection Chart </div>
       <div className="grow p-6 max-w-6xl">
         <Chart options={options} series={series} type="line" width="100%" />
       </div>

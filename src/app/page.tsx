@@ -1,5 +1,6 @@
 'use client'
 import AllCollectionVolChartSection from '@/components/home/AllCollectionVolChartSection'
+import PageHeading from '@/components/util-components/PageHeading'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 const queryClient = new QueryClient()
 
@@ -12,7 +13,8 @@ export default function Home() {
     <>
       <QueryClientProvider client={queryClient}>
         <main className="">
-          <h1 className="text-red-500">coqlytics.xyz</h1>
+          <h1 className="text-red-500"></h1>
+          <PageHeading>AVAX Volume on all Chikn.farm Marketplaces</PageHeading>
 
           <AllCollectionVolChartSection />
         </main>
