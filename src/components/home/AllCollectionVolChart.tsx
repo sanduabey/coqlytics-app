@@ -99,11 +99,15 @@ const getAllCollectionSalesByDate = async (from: Date, to: Date) => {
 
     for (let i = 0; i < dateLabelsArr.length; i++) {
       totalVolumeArr[i] =
-        results[0].volumes[i] +
-        results[1].volumes[i] +
-        results[2].volumes[i] +
-        results[3].volumes[i] +
-        results[4].volumes[i]
+        Math.round(
+          (results[0].volumes[i] +
+            results[1].volumes[i] +
+            results[2].volumes[i] +
+            results[3].volumes[i] +
+            results[4].volumes[i]) *
+            100
+        ) / 100
+
       totalCountArr[i] =
         results[0].counts[i] +
         results[1].counts[i] +
@@ -127,7 +131,7 @@ const getAllCollectionSalesByDate = async (from: Date, to: Date) => {
       totalSales: totalSales,
     }
 
-    console.log(result)
+    // console.log(result)
 
     return result
   } catch (error) {
@@ -153,7 +157,6 @@ const AllCollectionVolChart = (props: VolChartProps) => {
   const series = [
     {
       name: 'Chikn',
-      type: 'line',
       data: data.chiknSales.volumes,
     },
     {
@@ -183,9 +186,11 @@ const AllCollectionVolChart = (props: VolChartProps) => {
       type: 'line',
     },
     stroke: {
+      curve: 'smooth',
       width: [2, 2, 2, 2, 2, 4],
       dashArray: [2, 2, 2, 2, 2, 0],
     },
+    colors: ['#FE654F', '#B744B8', '#1EA896', '#3423A6', '#FED18C', '#000000'],
     title: {
       text: 'Marketplace Volume (AVAX)',
     },
@@ -219,6 +224,52 @@ const AllCollectionVolChart = (props: VolChartProps) => {
         decimalsInFloat: 0,
       },
     ],
+    tooltip: {
+      y: [
+        {
+          title: {
+            formatter: function (val) {
+              return val + ' Vol. (AVAX)'
+            },
+          },
+        },
+        {
+          title: {
+            formatter: function (val) {
+              return val + ' Vol. (AVAX)'
+            },
+          },
+        },
+        {
+          title: {
+            formatter: function (val) {
+              return val + ' Vol. (AVAX)'
+            },
+          },
+        },
+        {
+          title: {
+            formatter: function (val) {
+              return val + ' Vol. (AVAX)'
+            },
+          },
+        },
+        {
+          title: {
+            formatter: function (val) {
+              return val + ' Vol. (AVAX)'
+            },
+          },
+        },
+        {
+          title: {
+            formatter: function (val) {
+              return val + ' Vol. (AVAX)'
+            },
+          },
+        },
+      ],
+    },
   }
 
   return (

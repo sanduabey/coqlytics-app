@@ -87,7 +87,7 @@ export const getItemSalesByDate = async (from: Date, to: Date) => {
       )
 
       if (found) {
-        return found.volumeAVAX
+        return Math.round(found.volumeAVAX * 100) / 100
       } else {
         // console.log('NOT FOUND:', found)
         return 0
