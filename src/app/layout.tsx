@@ -20,7 +20,7 @@ export default function RootLayout({
           <NavBar />
         </header>
         <main className="py-4 grow">{children}</main>
-        <footer className="border-t py-3 text-xs text-center">
+        <footer className="border-t py-3 text-xs ">
           <Footer />
         </footer>
       </body>
