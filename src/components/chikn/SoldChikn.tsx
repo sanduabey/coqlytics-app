@@ -68,13 +68,13 @@ const SoldChikn = React.forwardRef<Ref, SoldChiknProps>((props, ref) => {
           <div className="text-2xl">
             Chikn #{props.soldChiknData.tokenId} [{props.soldChiknData.kg} Kg]
           </div>
+          <div className="">Sold for {props.soldChiknData.price} AVAX</div>
           <div>
             Rank: {props.soldChiknData.rank} [{props.soldChiknData.rarity}]
           </div>
 
-          <div className="">Sold for {props.soldChiknData.price} AVAX</div>
           <div></div>
-          <div></div>
+
           <div className="text-xs">
             On {soldDate} @ {soldTime} UTC
           </div>
