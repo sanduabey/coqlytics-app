@@ -74,6 +74,9 @@ const getBestVauleChikensForSale = async (sort: string, maxPrice: string) => {
       .collection('configs')
       .findOne({ key: 'cumalativeFEEDBurnedAtChiknKG' })
 
+    if (feedBurnedArrayRes === null) {
+      throw { error: 'FeedBurned Array could not be retrieved' }
+    }
     const FEED_BURNED_PER_KG = feedBurnedArrayRes.value
 
     //get feed/AVAX and egg/AVAX prices
@@ -155,7 +158,12 @@ const getBestVauleChikensForSale = async (sort: string, maxPrice: string) => {
 
       //egg unclamied
       let now = new Date()
-      let lastClaimedEgg = new Date(chiknsForSale[i].lastClaimedEgg)
+      let lastClaimedEgg = new Date()
+      if (chiknsForSale[i].lastClaimedEgg !== null) {
+        lastClaimedEgg = new Date(chiknsForSale[i].lastClaimedEgg)
+      } else {
+        lastClaimedEgg = new Date('11/12/2021') //chikn mint date
+      }
       let diffTime = now.getTime() - lastClaimedEgg.getTime()
       let diffDays = diffTime / (1000 * 3600 * 24)
 
