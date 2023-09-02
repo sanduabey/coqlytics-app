@@ -12,7 +12,7 @@ export default function ChiknSniperPage() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <PageHeading>Chikn Sniper Page</PageHeading>
+        <PageHeading>Chikn Sniper Tool</PageHeading>
 
         <ChiknSniperSection />
       </QueryClientProvider>
