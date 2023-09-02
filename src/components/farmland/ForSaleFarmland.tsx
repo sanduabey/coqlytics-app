@@ -1,3 +1,4 @@
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image'
 
 type ForSaleFarmlandProps = {
@@ -17,17 +18,30 @@ type ForSaleFarmlandProps = {
 }
 
 const ForSaleFarmland = (props: ForSaleFarmlandProps) => {
+  const imageClickHandler = (tokenId: number) => {
+    window.open(`https://chikn.farm/farm/${tokenId}`)
+  }
+
   return (
     <li className="flex text-white p-3 bg-chiknpurple-dark rounded-md m-2 max-w-5xl ml-auto mr-auto">
-      <div className="cursor-pointer">
+      <div className="flex flex-wrap content-center pr-3">
+        {props.farmlandData.index}
+      </div>
+      <div className="cursor-pointer relative">
         <Image
           src={props.farmlandData.image}
           alt="Image of sold NFT"
           width={200}
           height={200}
-          // onClick={imageClickHandler.bind(null, props.farmlandData.tokenId)}
+          onClick={imageClickHandler.bind(null, props.farmlandData.tokenId)}
           className="rounded-md"
         />
+        <div className="absolute bottom-0 bg-chiknpurple-dark rounded-md p-1 m-2">
+          {props.farmlandData.price} AVAX
+        </div>
+        <div className="absolute top-0 right-0">
+          <ArrowTopRightOnSquareIcon className="h-6 w-6 text-chiknpurple-dark m-1 " />
+        </div>
       </div>
       <div className="flex grow pl-4 pr-4">
         <div className="flex flex-col gap-2 justify-center text-xl w-1/2">
