@@ -18,7 +18,7 @@ type ForSaleFarmlandProps = {
 
 const ForSaleFarmland = (props: ForSaleFarmlandProps) => {
   return (
-    <li>
+    <li className="flex text-white p-3 bg-chiknpurple-dark rounded-md m-2 max-w-5xl ml-auto mr-auto">
       <div className="cursor-pointer">
         <Image
           src={props.farmlandData.image}
