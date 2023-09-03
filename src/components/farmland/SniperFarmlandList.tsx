@@ -5,6 +5,8 @@ type SniperFarmlandListPropsType = {
   sortStrategy: string
   maxPriceAVAX: string
   minSize: string
+  filterTileType: string
+  minFilterTileTypeCount: number
 }
 
 type FarmlandForSaleType = {
@@ -22,10 +24,13 @@ type FarmlandForSaleType = {
 const getBestForSaleFarmlands = async (
   sortStrategy: string,
   maxPriceAVAX: string,
-  minSize: string
+  minSize: string,
+  filterTileType: string,
+  minFilterTileTypeCount: number
 ) => {
   const response = await fetch(
-    `${process.env.HOST}/api/farmland/sniper?sort=${sortStrategy}&maxPrice=${maxPriceAVAX}&minSize=${minSize}`
+    `${process.env.HOST}/api/farmland/sniper?sort=${sortStrategy}&maxPrice=${maxPriceAVAX}&minSize=${minSize}
+    &filterTileType=${filterTileType}&minFilterTileTypeCount=${minFilterTileTypeCount}`
   )
 
   if (!response.ok) {
@@ -51,7 +56,9 @@ const SniperFarmlandList = (props: SniperFarmlandListPropsType) => {
       getBestForSaleFarmlands(
         props.sortStrategy,
         props.maxPriceAVAX,
-        props.minSize
+        props.minSize,
+        props.filterTileType,
+        props.minFilterTileTypeCount
       ),
   })
 

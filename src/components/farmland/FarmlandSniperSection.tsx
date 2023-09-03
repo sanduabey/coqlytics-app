@@ -7,6 +7,8 @@ const FarmlandSniperSection = () => {
 
   const [selectedMaxPrice, setSelectedMaxPrice] = useState('any')
   const [selectedMinSize, setSelectedMinSize] = useState('N/A')
+  const [selectedTileType, setSelectedTileType] = useState('any')
+  const [minResourceTileCount, setMinResourceTileCount] = useState(0)
 
   const sortStrategyChangeHandler = (event: BaseSyntheticEvent) => {
     let selectedOption = event.target.value
@@ -25,6 +27,22 @@ const FarmlandSniperSection = () => {
     let newSelectedMinSize = event.target.value
 
     setSelectedMinSize(newSelectedMinSize)
+  }
+
+  const resourceTypeChangeHandler = (event: BaseSyntheticEvent) => {
+    let newTileTypeSelected = event.target.value
+    setSelectedTileType(newTileTypeSelected)
+  }
+
+  const minResouceTileCountChangeHandler = (event: BaseSyntheticEvent) => {
+    // console.log(event.target.value)
+    let newTileCount = event.target.value
+
+    if (Number(newTileCount) >= 0 && Number(newTileCount) <= 25) {
+      setMinResourceTileCount(newTileCount)
+    } else {
+      event.target.value = minResourceTileCount
+    }
   }
 
   return (
@@ -62,7 +80,7 @@ const FarmlandSniperSection = () => {
                     <option value="150">150 AVAX</option>
                     <option value="200">200 AVAX</option>
                     <option value="300">300 AVAX</option>
-                    <option value="any">any</option>
+                    <option value="any">ANY</option>
                   </select>
                 </label>
               </div>
@@ -70,7 +88,7 @@ const FarmlandSniperSection = () => {
                 <label>
                   <span className="text-white">min size : </span>
                   <select
-                    name="maxPrice"
+                    name="minSize"
                     className="rounded-md pl-4 pr-2 text-left"
                     value={selectedMinSize}
                     onChange={minSizeChangeHandler}
@@ -105,6 +123,42 @@ const FarmlandSniperSection = () => {
                   </select>
                 </label>
               </div>
+              <div className="">
+                <label>
+                  <span className="text-white">with: </span>
+                  <input
+                    name="minResourceCount"
+                    defaultValue={minResourceTileCount}
+                    type="number"
+                    max={25}
+                    min={0}
+                    onChange={minResouceTileCountChangeHandler}
+                    className="m-2 rounded-md"
+                  ></input>
+                  <span className="text-white">or more </span>
+                  <select
+                    name="resourceType"
+                    className="rounded-md pl-4 pr-2 text-left"
+                    value={selectedTileType}
+                    onChange={resourceTypeChangeHandler}
+                  >
+                    <option value="nonEmpty">Non-Empty </option>
+                    <option value="empty">Empty</option>
+                    <option value="avaxium">Avaxium </option>
+                    <option value="darkMatter">Dark Matter </option>
+                    <option value="gold">Gold</option>
+                    <option value="liquidium">Liquidium</option>
+                    <option value="lumber">Lumber</option>
+                    <option value="mana">Mana</option>
+                    <option value="mech">Mech</option>
+                    <option value="stone">Stone</option>
+                    <option value="tungsten">Tungsten</option>
+                    <option value="veg">Veg</option>
+                  </select>
+
+                  <span className="text-white"> tiles </span>
+                </label>
+              </div>
             </div>
           </div>
           <div className="flex-1 flex justify-end p-6 max-w-6xl">
@@ -137,6 +191,8 @@ const FarmlandSniperSection = () => {
           sortStrategy={selectedSortStrategy}
           maxPriceAVAX={selectedMaxPrice}
           minSize={selectedMinSize}
+          filterTileType={selectedTileType}
+          minFilterTileTypeCount={minResourceTileCount}
         />
       </div>
     </section>

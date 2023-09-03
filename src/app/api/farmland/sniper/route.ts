@@ -16,7 +16,9 @@ let farmlandsForSale: FarmlandForSaleType[]
 const getBestFarmlandsForSale = async (
   sort: string,
   maxPrice: string,
-  minSize: string
+  minSize: string,
+  filterTileType: string,
+  minFilterTileTypeCount: string
 ) => {
   const projections: string[] = [
     'token',
@@ -66,6 +68,8 @@ const getBestFarmlandsForSale = async (
     farmlandsForSale = sizeFilteredResults
   }
 
+  //Tile Type Filter
+
   //sorting
   // console.log(sort)
   switch (sort) {
@@ -110,19 +114,35 @@ export async function GET(request: NextRequest) {
   const sort: string | null = searchParams.get('sort')
   const maxPrice: string | null = searchParams.get('maxPrice')
   const minSize: string | null = searchParams.get('minSize')
+  const filterTileType: string | null = searchParams.get('filterTileType')
+  const minFilterTileTypeCount: string | null = searchParams.get(
+    'minFilterTileTypeCount'
+  )
 
-  if (sort === null || maxPrice === null || minSize === null) {
+  if (
+    sort === null ||
+    maxPrice === null ||
+    minSize === null ||
+    filterTileType === null ||
+    minFilterTileTypeCount === null
+  ) {
     return NextResponse.json(
       {
         error:
-          'Bad Request! query parameters (sort , maxPrice, minSize) cannot be null',
+          'Bad Request! query parameters (sort , maxPrice, minSize, filterTileType, minFilterTileTypeCount) cannot be null',
       },
       { status: 400 }
     )
   }
 
   try {
-    let result = await getBestFarmlandsForSale(sort, maxPrice, minSize)
+    let result = await getBestFarmlandsForSale(
+      sort,
+      maxPrice,
+      minSize,
+      filterTileType,
+      minFilterTileTypeCount
+    )
     return NextResponse.json({ data: result }, { status: 200 })
   } catch (error) {
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 })
