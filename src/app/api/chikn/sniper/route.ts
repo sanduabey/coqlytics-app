@@ -231,11 +231,11 @@ const getBestVauleChikensForSale = async (sort: string, maxPrice: string) => {
   }
 
   //slite first 100 items
-  let best100ChiknForSale = chiknsForSale.slice(0, 25)
+  let bestChiknForSale = chiknsForSale.slice(0, 100)
   // console.log(best100ChiknForSale.length)
 
   // console.log('RESULT', best100ChiknForSale)
-  return best100ChiknForSale
+  return bestChiknForSale
 }
 
 export async function GET(request: NextRequest) {
