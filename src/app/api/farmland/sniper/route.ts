@@ -54,7 +54,7 @@ const getBestFarmlandsForSale = async (sort: string, maxPrice: string) => {
     farmlandsForSale = filteredResults
   }
 
-  console.log(sort)
+  // console.log(sort)
   switch (sort) {
     case 'lowestPrice':
       farmlandsForSale.sort((a, b) => (a.salePrice > b.salePrice ? 1 : -1))

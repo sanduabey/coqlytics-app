@@ -33,8 +33,17 @@ const FarmlandSniperSection = () => {
                 value={selectedMaxPrice}
                 onChange={maxPriceChangeHandler}
               >
+                <option value="3">3 AVAX</option>
+                <option value="4">4 AVAX</option>
+                <option value="5">5 AVAX</option>
+                <option value="10">10 AVAX</option>
+                <option value="15">15 AVAX</option>
+                <option value="20">20 AVAX</option>
+                <option value="25">25 AVAX</option>
                 <option value="30">30 AVAX</option>
+                <option value="35">35 AVAX</option>
                 <option value="40">40 AVAX</option>
+                <option value="45">45 AVAX</option>
                 <option value="50">50 AVAX</option>
                 <option value="60">60 AVAX</option>
                 <option value="70">70 AVAX</option>

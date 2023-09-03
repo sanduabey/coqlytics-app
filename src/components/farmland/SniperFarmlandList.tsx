@@ -39,7 +39,7 @@ const getBestForSaleFarmlands = async (
 
 const SniperFarmlandList = (props: SniperFarmlandListPropsType) => {
   const { isLoading, isError, data, error, refetch } = useQuery({
-    queryKey: ['chiknSniper', props.sortStrategy, props.maxPriceAVAX],
+    queryKey: ['farmlandSniper', props.sortStrategy, props.maxPriceAVAX],
     queryFn: () =>
       getBestForSaleFarmlands(props.sortStrategy, props.maxPriceAVAX),
   })
