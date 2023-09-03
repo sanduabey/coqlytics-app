@@ -51,6 +51,8 @@ const SniperFarmlandList = (props: SniperFarmlandListPropsType) => {
       props.sortStrategy,
       props.maxPriceAVAX,
       props.minSize,
+      props.filterTileType,
+      props.minFilterTileTypeCount,
     ],
     queryFn: () =>
       getBestForSaleFarmlands(

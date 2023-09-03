@@ -6,7 +6,7 @@ const FarmlandSniperSection = () => {
     useState('lowestPrice')
 
   const [selectedMaxPrice, setSelectedMaxPrice] = useState('any')
-  const [selectedMinSize, setSelectedMinSize] = useState('N/A')
+  const [selectedMinSize, setSelectedMinSize] = useState('NA')
   const [selectedTileType, setSelectedTileType] = useState('any')
   const [minResourceTileCount, setMinResourceTileCount] = useState(0)
 
@@ -119,7 +119,7 @@ const FarmlandSniperSection = () => {
                     <option value="115">115 bigness</option>
                     <option value="120">120 bigness</option>
                     <option value="125">125 bigness</option>
-                    <option value="N/A">N/A</option>
+                    <option value="NA">N/A</option>
                   </select>
                 </label>
               </div>

@@ -10,7 +10,33 @@ type FarmlandForSaleType = {
   size: string
   rarity: string
   tiles: Object[]
+  resorceSummary: {
+    avaxium: number
+    darkMatter: number
+    gold: number
+    liquidium: number
+    lumber: number
+    mana: number
+    mech: number
+    stone: number
+    tungsten: number
+    veg: number
+    nonEmpty: number
+    empty: number
+  }
 }
+
+// type TileType = {
+//   tile: string
+//   variant: string
+//   resource: {
+//     name: string
+//     bonus: number
+//   }
+//   percentile: number
+//   score: number
+//   rarity: string
+// }
 
 let farmlandsForSale: FarmlandForSaleType[]
 const getBestFarmlandsForSale = async (
@@ -60,15 +86,115 @@ const getBestFarmlandsForSale = async (
     farmlandsForSale = filteredResults
   }
 
+  console.log(minSize)
   //min size filter
-  if (minSize !== 'N/A') {
+  if (minSize.trim() !== 'NA') {
     let sizeFilteredResults = farmlandsForSale.filter(
       (farm) => Number(farm.size) >= Number(minSize)
     )
     farmlandsForSale = sizeFilteredResults
   }
 
-  //Tile Type Filter
+  //create resource summary
+  for (let i = 0; i < farmlandsForSale.length; i++) {
+    // console.log('INSIDE FOR LOOP', i)
+    let resourceSummary = {
+      avaxium: 0,
+      darkMatter: 0,
+      gold: 0,
+      liquidium: 0,
+      lumber: 0,
+      mana: 0,
+      mech: 0,
+      stone: 0,
+      tungsten: 0,
+      veg: 0,
+      nonEmpty: 0,
+      empty: 1,
+    }
+
+    let farm = farmlandsForSale[i]
+
+    for (let j = 0; j < farm.tiles.length; j++) {
+      let tile: any = farm.tiles[j]
+      let resource = tile.resource.name
+
+      switch (resource) {
+        case 'None':
+          resourceSummary.empty += 1
+          break
+
+        case 'Avaxium':
+          resourceSummary.avaxium += 1
+          resourceSummary.nonEmpty += 1
+          break
+
+        case 'Dark Matter':
+          resourceSummary.darkMatter += 1
+          resourceSummary.nonEmpty += 1
+          break
+
+        case 'Gold':
+          resourceSummary.gold += 1
+          resourceSummary.nonEmpty += 1
+          break
+
+        case 'Liquidium':
+          resourceSummary.liquidium += 1
+          resourceSummary.nonEmpty += 1
+          break
+
+        case 'Lumber':
+          resourceSummary.lumber += 1
+          resourceSummary.nonEmpty += 1
+          break
+
+        case 'Mana':
+          resourceSummary.mana += 1
+          resourceSummary.nonEmpty += 1
+          break
+
+        case 'Mech':
+          resourceSummary.mech += 1
+          resourceSummary.nonEmpty += 1
+          break
+
+        case 'Stone':
+          resourceSummary.stone += 1
+          resourceSummary.nonEmpty += 1
+          break
+
+        case 'Tungsten':
+          resourceSummary.tungsten += 1
+          resourceSummary.nonEmpty += 1
+          break
+
+        case 'Veg':
+          resourceSummary.veg += 1
+          resourceSummary.nonEmpty += 1
+          break
+      }
+    }
+
+    // console.log(farm.token, tileSummary)
+    farmlandsForSale[i].resorceSummary = resourceSummary
+  }
+
+  //tile type filter : WIP
+
+  switch (filterTileType) {
+    case 'nonEmpty':
+      farmlandsForSale = farmlandsForSale.filter(
+        (farm) => farm.resorceSummary.nonEmpty >= Number(minFilterTileTypeCount)
+      )
+      break
+
+    case 'empty':
+      farmlandsForSale = farmlandsForSale.filter(
+        (farm) => farm.resorceSummary.empty >= Number(minFilterTileTypeCount)
+      )
+      break
+  }
 
   //sorting
   // console.log(sort)
