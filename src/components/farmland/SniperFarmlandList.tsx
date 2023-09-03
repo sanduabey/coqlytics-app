@@ -4,6 +4,7 @@ import ForSaleFarmland from './ForSaleFarmland'
 type SniperFarmlandListPropsType = {
   sortStrategy: string
   maxPriceAVAX: string
+  minSize: string
 }
 
 type FarmlandForSaleType = {
@@ -20,10 +21,11 @@ type FarmlandForSaleType = {
 
 const getBestForSaleFarmlands = async (
   sortStrategy: string,
-  maxPriceAVAX: string
+  maxPriceAVAX: string,
+  minSize: string
 ) => {
   const response = await fetch(
-    `${process.env.HOST}/api/farmland/sniper?sort=${sortStrategy}&maxPrice=${maxPriceAVAX}`
+    `${process.env.HOST}/api/farmland/sniper?sort=${sortStrategy}&maxPrice=${maxPriceAVAX}&minSize=${minSize}`
   )
 
   if (!response.ok) {
@@ -39,9 +41,18 @@ const getBestForSaleFarmlands = async (
 
 const SniperFarmlandList = (props: SniperFarmlandListPropsType) => {
   const { isLoading, isError, data, error, refetch } = useQuery({
-    queryKey: ['farmlandSniper', props.sortStrategy, props.maxPriceAVAX],
+    queryKey: [
+      'farmlandSniper',
+      props.sortStrategy,
+      props.maxPriceAVAX,
+      props.minSize,
+    ],
     queryFn: () =>
-      getBestForSaleFarmlands(props.sortStrategy, props.maxPriceAVAX),
+      getBestForSaleFarmlands(
+        props.sortStrategy,
+        props.maxPriceAVAX,
+        props.minSize
+      ),
   })
 
   if (isError) return <div>failed to load</div>

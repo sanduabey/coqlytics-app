@@ -13,7 +13,11 @@ type FarmlandForSaleType = {
 }
 
 let farmlandsForSale: FarmlandForSaleType[]
-const getBestFarmlandsForSale = async (sort: string, maxPrice: string) => {
+const getBestFarmlandsForSale = async (
+  sort: string,
+  maxPrice: string,
+  minSize: string
+) => {
   const projections: string[] = [
     'token',
     'previousPrice',
@@ -54,6 +58,15 @@ const getBestFarmlandsForSale = async (sort: string, maxPrice: string) => {
     farmlandsForSale = filteredResults
   }
 
+  //min size filter
+  if (minSize !== 'N/A') {
+    let sizeFilteredResults = farmlandsForSale.filter(
+      (farm) => Number(farm.size) >= Number(minSize)
+    )
+    farmlandsForSale = sizeFilteredResults
+  }
+
+  //sorting
   // console.log(sort)
   switch (sort) {
     case 'lowestPrice':
@@ -96,18 +109,20 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const sort: string | null = searchParams.get('sort')
   const maxPrice: string | null = searchParams.get('maxPrice')
+  const minSize: string | null = searchParams.get('minSize')
 
-  if (sort === null || maxPrice === null) {
+  if (sort === null || maxPrice === null || minSize === null) {
     return NextResponse.json(
       {
-        error: 'Bad Request! query parameters (sort , maxPrice) cannot be null',
+        error:
+          'Bad Request! query parameters (sort , maxPrice, minSize) cannot be null',
       },
       { status: 400 }
     )
   }
 
   try {
-    let result = await getBestFarmlandsForSale(sort, maxPrice)
+    let result = await getBestFarmlandsForSale(sort, maxPrice, minSize)
     return NextResponse.json({ data: result }, { status: 200 })
   } catch (error) {
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 })
