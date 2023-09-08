@@ -126,3 +126,7 @@
 ### Per Item Page
 
 - [ ] Daily price, sales volume, counts chart
+
+## Bugs Found
+
+- [ ] api > recent-sales route query parameter validations have not being implemented

@@ -1,9 +1,13 @@
 import PageHeading from '@/components/util-components/PageHeading'
 
-const DynamicWalletItemActivityPage = () => {
+const DynamicWalletItemActivityPage = ({
+  params,
+}: {
+  params: { walletAddress: string }
+}) => {
   return (
     <>
-      <PageHeading> Wallet ID: Page</PageHeading>
+      <PageHeading> Wallet ID: {params.walletAddress} Page</PageHeading>
     </>
   )
 }

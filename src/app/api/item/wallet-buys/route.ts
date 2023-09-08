@@ -2,10 +2,11 @@ import getDb from '@/utils/database'
 import { NextRequest, NextResponse } from 'next/server'
 
 const collName: string = 'item-sales'
-
-const maxPagesLimit: number = 50
-
-async function getLatestItemSold(pageNumber: number = 0) {
+const maxPagesLimit = 10
+const getLatestItemBuysFromWallet = async (
+  walletAddress: string,
+  pageNumber: number = 0
+) => {
   if (pageNumber > maxPagesLimit) return []
 
   try {
@@ -18,7 +19,9 @@ async function getLatestItemSold(pageNumber: number = 0) {
     let result = await db
       .collection(collName)
       .find(
-        {},
+        {
+          to_address: walletAddress,
+        },
         {
           sort: { block_timestamp: -1 },
           skip: skip,
@@ -32,12 +35,12 @@ async function getLatestItemSold(pageNumber: number = 0) {
             description: 1,
             thumbnail: 1,
             properties: 1,
+            from_address: 1,
+            to_address: 1,
           },
         }
       )
       .toArray()
-
-    // console.log(result)
 
     let transformedResults = result.map((item: any) => ({
       id: item._id,
@@ -47,9 +50,12 @@ async function getLatestItemSold(pageNumber: number = 0) {
       price: item.salePrice,
       soldAt: item.block_timestamp,
       thumbnail: item.thumbnail,
+      seller: item.from_address,
+      buyer: item.to_address,
       properties: item.properties,
     }))
 
+    // console.log(transformedResults)
     return transformedResults
   } catch (error) {
     throw error
@@ -58,12 +64,17 @@ async function getLatestItemSold(pageNumber: number = 0) {
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
+  const walletAddress = searchParams.get('walletAddress')
   const pageNo = searchParams.get('pageNo')
 
-  // console.log('pageNumber:', pageNo)
+  if (walletAddress === null || pageNo === null) {
+    return NextResponse.json(
+      { error: 'Parameters not valid.' },
+      { status: 400 }
+    )
+  }
 
-  let result = await getLatestItemSold(Number(pageNo))
+  let result = await getLatestItemBuysFromWallet(walletAddress, Number(pageNo))
 
-  // return new Response(JSON.stringify({ data: result }))
   return NextResponse.json({ data: result }, { status: 200 })
 }

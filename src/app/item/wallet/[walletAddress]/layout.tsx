@@ -1,12 +1,13 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import React from 'react'
 
 const ItemWalletActivityLayout = ({
   children,
   params,
 }: {
-  children: React.ReactNode
+  children: any
   params: {
     walletAddress: string
   }
@@ -58,7 +59,9 @@ const ItemWalletActivityLayout = ({
           })}
         </ul>
       </nav>
-      {children}
+      {React.cloneElement(children, {
+        walletAddress: params.walletAddress,
+      })}
     </>
   )
 }
