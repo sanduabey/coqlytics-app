@@ -3,7 +3,7 @@ import RecentItemBuysByWalletList from '@/components/item/RecentItemBuysByWallet
 import PageHeading from '@/components/util-components/PageHeading'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 const queryClient = new QueryClient()
-const ItemWalletBuysPage = ({
+const ItemBuysByWalletPage = ({
   params,
 }: {
   params: { walletAddress: string }
@@ -18,4 +18,4 @@ const ItemWalletBuysPage = ({
   )
 }
 
-export default ItemWalletBuysPage
+export default ItemBuysByWalletPage
