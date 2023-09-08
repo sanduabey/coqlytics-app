@@ -3,7 +3,7 @@ import PageHeading from '@/components/util-components/PageHeading'
 const ItemWalletSellsPage = () => {
   return (
     <>
-      <PageHeading>Item Buys</PageHeading>
+      <PageHeading>Item Sells</PageHeading>
     </>
   )
 }

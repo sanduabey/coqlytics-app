@@ -2,7 +2,7 @@
 import PageHeading from '@/components/util-components/PageHeading'
 import { useRouter } from 'next/navigation'
 
-const ItemWalletPage = () => {
+const ItemWalletFormPage = () => {
   const router = useRouter()
 
   const submitHandler = (event: React.BaseSyntheticEvent) => {
@@ -11,7 +11,7 @@ const ItemWalletPage = () => {
     const walletAddress: string = event.target[0].value
     console.log(walletAddress)
 
-    router.push(`wallet/${walletAddress}`)
+    router.push(`wallet/${walletAddress}/buys`)
   }
   return (
     <>
@@ -40,4 +40,4 @@ const ItemWalletPage = () => {
   )
 }
 
-export default ItemWalletPage
+export default ItemWalletFormPage

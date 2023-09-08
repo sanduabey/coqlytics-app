@@ -24,11 +24,8 @@ const ItemWalletActivityLayout = ({
     },
   ]
 
-  console.log('HERE', params)
-
   return (
     <>
-      {children}
       <div className="text-white w-full flex justify-center ">
         {/* <label className="">
           Wallet Address:{' '}
@@ -41,7 +38,7 @@ const ItemWalletActivityLayout = ({
         Wallet Address : {params.walletAddress}
       </div>
       <nav>
-        <ul>
+        <ul className="flex gap-4 justify-center">
           {itemWalletActivityNavLinks.map((link) => {
             const isActive = pathname.endsWith(link.href)
 
@@ -61,6 +58,7 @@ const ItemWalletActivityLayout = ({
           })}
         </ul>
       </nav>
+      {children}
     </>
   )
 }
