@@ -19,6 +19,10 @@ export default function ItemLayout({
       name: 'Item Sniper',
       href: '/item/sniper',
     },
+    {
+      name: 'Wallet Activity',
+      href: '/item/wallet',
+    },
   ]
 
   return (
