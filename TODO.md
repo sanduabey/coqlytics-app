@@ -120,8 +120,8 @@
 
 ### Wallet Item Activity Tab
 
-- [ ] Items Bought
-- [ ] Items Sold
+- [x] Items Bought
+- [x] Items Sold
 
 ### Per Item Page
 
