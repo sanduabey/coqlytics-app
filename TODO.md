@@ -118,6 +118,11 @@
 
 - [ ]
 
+### Wallet Item Activity Tab
+
+- [ ] Items Bought
+- [ ] Items Sold
+
 ### Per Item Page
 
 - [ ] Daily price, sales volume, counts chart
