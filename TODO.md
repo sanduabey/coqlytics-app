@@ -26,6 +26,7 @@
 ## Home Page
 
 - [x] Sales volume by NFT collection graph
+- [ ] Sales volume AVAX data cards
 - [ ] Top buyers
 - [ ] Top sellers
 - [ ] Top Chikn sales
