@@ -107,7 +107,7 @@ const RecentItemBuysByWalletList = (props: { walletAddress: string }) => {
     })
   })
 
-  return <ul className="p-3"> {itemSalesContent} </ul>
+  return <ul className="p-3 "> {itemSalesContent} </ul>
 }
 
 export default RecentItemBuysByWalletList

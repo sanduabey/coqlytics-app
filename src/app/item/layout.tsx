@@ -13,7 +13,7 @@ export default function ItemLayout({
   const itemNavLinks = [
     {
       name: 'Item Market',
-      href: '/item',
+      href: '/item/market',
     },
     {
       name: 'Item Sniper',
@@ -30,7 +30,7 @@ export default function ItemLayout({
       <nav className="text-white">
         <ul className="flex gap-4 justify-center">
           {itemNavLinks.map((link) => {
-            const isActive = pathname.endsWith(link.href)
+            const isActive = pathname.includes(link.href)
 
             return (
               <Link
