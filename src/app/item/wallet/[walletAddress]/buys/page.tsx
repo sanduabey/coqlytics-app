@@ -10,7 +10,7 @@ const ItemBuysByWalletPage = ({
 }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <PageHeading>Item Buys</PageHeading>
+      <PageHeading>Item Buys By Wallet: {params.walletAddress}</PageHeading>
       <section className="bg-chiknpurple">
         <RecentItemBuysByWalletList walletAddress={params.walletAddress} />
       </section>

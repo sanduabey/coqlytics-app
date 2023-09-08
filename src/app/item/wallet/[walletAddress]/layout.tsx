@@ -36,10 +36,10 @@ const ItemWalletActivityLayout = ({
             className="w-96 text-black"
           />
         </label> */}
-        Wallet Address : {params.walletAddress}
+        {/* Wallet Address : {params.walletAddress} */}
       </div>
       <nav>
-        <ul className="flex gap-4 justify-center">
+        <ul className="flex gap-4 py-4 justify-center">
           {itemWalletActivityNavLinks.map((link) => {
             const isActive = pathname.endsWith(link.href)
 
