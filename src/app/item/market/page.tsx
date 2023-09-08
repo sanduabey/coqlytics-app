@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const queryClient = new QueryClient()
 
-export default function ItemPage() {
+export default function ItemMarketPage() {
   return (
     <QueryClientProvider client={queryClient}>
       <PageHeading> Item Page </PageHeading>

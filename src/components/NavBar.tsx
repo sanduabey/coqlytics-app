@@ -22,7 +22,7 @@ const navLinks = [
   },
   {
     name: 'Item',
-    href: '/item/market',
+    href: '/item',
   },
 ]
 
@@ -39,7 +39,7 @@ export default function NavBar() {
 
       <ul className="basis-4/5 flex gap-4 justify-end">
         {navLinks.map((link) => {
-          const isActive = pathname.startsWith(link.href)
+          const isActive = pathname.includes(link.href)
 
           return (
             <Link
