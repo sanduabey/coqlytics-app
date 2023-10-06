@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
-import SoldItem from './SoldItem'
 import { useCallback, useRef } from 'react'
+import BoughtItem from './BoughtItem'
 
 type ItemSaleDoc = {
   id: string
@@ -96,14 +96,14 @@ const RecentItemBuysByWalletList = (props: { walletAddress: string }) => {
 
       if (index === page.length - 1) {
         return (
-          <SoldItem
+          <BoughtItem
             ref={lastItemOfPageRef}
             key={item.id}
             soldItemData={soldItemData}
           />
         )
       }
-      return <SoldItem key={item.id} soldItemData={soldItemData} />
+      return <BoughtItem key={item.id} soldItemData={soldItemData} />
     })
   })
 
