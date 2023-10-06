@@ -57,10 +57,12 @@ export function getDatesArray(from: Date, to: Date) {
   to.setUTCHours(0, 0, 0)
 
   let current = from
-  // let depth = 0
 
-  while (current <= to) {
-    // console.log(current)
+  let noOfDates: number = dateDiff(from, to)
+
+  // console.log('dateDiff', noOfDates)
+
+  for (let i = 0; i <= noOfDates; i++) {
     current.setUTCHours(0, 0, 0)
     dateArray.push(new Date(current))
 
@@ -73,15 +75,16 @@ export function getDatesArray(from: Date, to: Date) {
       nextDate = nextDate + 1
       current.setDate(nextDate)
     }
-
-    // depth++
-    // if (depth > 50) break
   }
 
   // console.log(dateArray, dateArray.length)
 
   // process.exit()
   return dateArray
+}
+
+const dateDiff = (from: Date, to: Date) => {
+  return Math.round((to.getTime() - from.getTime()) / (1000 * 60 * 60 * 24))
 }
 
 export function formatDateToDDMMMYYYY(date: Date): string {
