@@ -57,14 +57,30 @@ export function getDatesArray(from: Date, to: Date) {
   to.setUTCHours(0, 0, 0)
 
   let current = from
+  // let depth = 0
 
   while (current <= to) {
+    // console.log(current)
     current.setUTCHours(0, 0, 0)
     dateArray.push(new Date(current))
-    current.setDate(current.getDate() + 1)
+
+    let nextDate = current.getDate() + 1
+    current.setDate(nextDate)
+    current.setUTCHours(0, 0, 0)
+
+    // handling offset for daylight saving change day
+    if (nextDate == current.getDate() + 1) {
+      nextDate = nextDate + 1
+      current.setDate(nextDate)
+    }
+
+    // depth++
+    // if (depth > 50) break
   }
 
   // console.log(dateArray, dateArray.length)
+
+  // process.exit()
   return dateArray
 }
 

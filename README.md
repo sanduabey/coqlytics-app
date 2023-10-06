@@ -24,6 +24,11 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Debug
+
+- If Javascript Heap out of memory error appears, increase heap memory allocation to 4GB
+  - export NODE_OPTIONS=--max-old-space-size=4096
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
