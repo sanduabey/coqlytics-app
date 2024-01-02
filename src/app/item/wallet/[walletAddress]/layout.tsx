@@ -16,12 +16,12 @@ const ItemWalletActivityLayout = ({
 
   const itemWalletActivityNavLinks = [
     {
-      name: 'Buys',
-      href: `/item/wallet/${params.walletAddress}/buys`,
-    },
-    {
       name: 'Sells',
       href: `/item/wallet/${params.walletAddress}/sells`,
+    },
+    {
+      name: 'Buys',
+      href: `/item/wallet/${params.walletAddress}/buys`,
     },
   ]
 
