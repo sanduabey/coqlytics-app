@@ -22,7 +22,7 @@ export const startCoqDataCron = async () => {
   let cursor: any = undefined
   let loopCount: number = 0
   let txnCount: number = 0
-  let toBlock: number = 39856725 // 39851503
+  let toBlock: number = 38932984 // 39851503
   //add min block number from db toBlock to start from that block
 
   while (true) {
@@ -34,7 +34,7 @@ export const startCoqDataCron = async () => {
       chain,
       cursor: cursor,
       limit: 100,
-      toBlock: toBlock,
+      // toBlock: toBlock,
     })
 
     let txns = response.toJSON()
@@ -132,7 +132,7 @@ export const startCoqDataCron = async () => {
         }
       } catch (error) {
         // console.log(error)
-        throw error
+        // throw error
       }
     }
 
